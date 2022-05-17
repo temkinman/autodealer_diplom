@@ -62,8 +62,14 @@
 
 <div class="alert" role="alert" id="result"></div>
 
-<script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
 
+<script>
+    
     $(document).ready(function() {
         //$(".delCompany").click(function (e) {
         //    console.log("deleting car")
@@ -95,12 +101,18 @@
         //        });
         //    }
         //});
+
+        let idCompany = 0;
+        console.log("CompanyIndex ready");
+
         $("#modal-btn-yes").on("click", function() {
+            console.log("clicked modal Yes");
             $("#my-modal").modal('hide');
             deleteCompany(idCompany);
         });
 
         $("#modal-btn-no").on("click", function() {
+            console.log("clicked modal No");
             $("#my-modal").modal('hide');
         });
 
@@ -142,7 +154,7 @@
         });
     });
 
-    let idCompany = 0;
+    
     function onDeleteCompany(id) {
         console.log("deleting car")
         //let id = $(this).attr('id');
@@ -170,8 +182,6 @@
                 //hideSpinner();
             }
         });
-
-        singleTon = false;
     }
 </script>
 

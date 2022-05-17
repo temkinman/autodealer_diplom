@@ -3,8 +3,6 @@
 @{
     IEnumerable<int> years = Enumerable.Range(1980, (DateTime.Now.Year - 1980) + 1).Reverse();
     IEnumerable<float> capacities = Enumerable.Range(5, 56).Select(number => number / 10f);
-
-    
 }
 
 <form id="OwnerForm" asp-action="AddSingleCar" asp-controller="AddingCar" method="post" class="row mw-60 mt-2 mx-auto">

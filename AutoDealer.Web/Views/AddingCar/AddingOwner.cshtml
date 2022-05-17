@@ -1,60 +1,56 @@
 ﻿@model AutoDealer.Web.Models.CarOwner
 
-@*<div class="row">*@
-    @*<div class="col-md-4">*@
-        <form id="OwnerForm" asp-action="AddOwner" asp-controller="AddingCar" method="post" class="row mx-auto">
-            <div class="col-6">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"/>
-            </div>
-            <div class="col-6">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"/>
-            </div>
-            <div class="col-6">
-                <label asp-for="BDay" class="control-label"></label>
-                <input asp-for="BDay" type="date" class="form-control" />
-                <span asp-validation-for="BDay" class="text-danger"/>
-            </div>
-            <div class="col-6">
-                <label asp-for="PassportSeries" class="control-label"></label>
-                <input asp-for="PassportSeries" class="form-control" />
-                <span asp-validation-for="PassportSeries" class="text-danger"/>
-            </div>
-            <div class="col-6">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"/>
-            </div>
-            <div class="col-6">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"/>
-            </div>
-            <div class="col-6">
-                <label asp-for="Street" class="control-label"></label>
-                <input asp-for="Street" class="form-control" />
-                <span asp-validation-for="Street" class="text-danger"/>
-            </div>
-            <div class="col-6">
-                <label asp-for="House" class="control-label"></label>
-                <input asp-for="House" class="form-control" />
-                <span asp-validation-for="House" class="text-danger"/>
-            </div>
-            <div class="col-6">
-                <label asp-for="Flat" class="control-label"></label>
-                <input asp-for="Flat" class="form-control" />
-                <span asp-validation-for="Flat" class="text-danger"/>
-            </div>
-            <div class="col-6 d-flex justify-content-between mx-auto text-center mw-70">
-                <input type="submit" id="btnSubmit" value="Добавить" class="btn btn-primary"/>
-                <a asp-action="Index" asp-controller="Car" class="btn btn-danger">Отмена</a>
-            </div>
-        </form>
-    @*</div>*@
-@*</div>*@
+<form id="OwnerForm" asp-action="AddOwner" asp-controller="AddingCar" method="post" class="row mx-auto">
+    <div class="col-6">
+        <label asp-for="FirstName" class="control-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger" />
+    </div>
+    <div class="col-6">
+        <label asp-for="LastName" class="control-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger" />
+    </div>
+    <div class="col-6">
+        <label asp-for="BDay" class="control-label"></label>
+        <input asp-for="BDay" type="date" class="form-control" />
+        <span asp-validation-for="BDay" class="text-danger" />
+    </div>
+    <div class="col-6">
+        <label asp-for="PassportSeries" class="control-label"></label>
+        <input asp-for="PassportSeries" class="form-control" />
+        <span asp-validation-for="PassportSeries" class="text-danger" />
+    </div>
+    <div class="col-6">
+        <label asp-for="Phone" class="control-label"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger" />
+    </div>
+    <div class="col-6">
+        <label asp-for="City" class="control-label"></label>
+        <input asp-for="City" class="form-control" />
+        <span asp-validation-for="City" class="text-danger" />
+    </div>
+    <div class="col-6">
+        <label asp-for="Street" class="control-label"></label>
+        <input asp-for="Street" class="form-control" />
+        <span asp-validation-for="Street" class="text-danger" />
+    </div>
+    <div class="col-6">
+        <label asp-for="House" class="control-label"></label>
+        <input asp-for="House" class="form-control" />
+        <span asp-validation-for="House" class="text-danger" />
+    </div>
+    <div class="col-6">
+        <label asp-for="Flat" class="control-label"></label>
+        <input asp-for="Flat" class="form-control" />
+        <span asp-validation-for="Flat" class="text-danger" />
+    </div>
+    <div class="col-6 d-flex justify-content-between mx-auto text-center mw-70">
+        <input type="submit" id="btnSubmit" value="Добавить" class="btn btn-primary" />
+        <a asp-action="Index" asp-controller="Car" class="btn btn-danger">Отмена</a>
+    </div>
+</form>
 <div>
     <a asp-action="Index" asp-controller="Car">На главную</a>
 </div>
@@ -75,9 +71,9 @@
         }
 
         //$('#btnSubmit').click(function () {
-  
+
         //    if ($("#OwnerForm").valid()) { //check if form is valid using model annotation
-        //        $('#OwnerForm').submit(); 
+        //        $('#OwnerForm').submit();
         //    }
         //    else {
         //        return false;
@@ -85,7 +81,7 @@
         //});
         //$("#OwnerForm").on("submit", function (event) {
         //    event.preventDefault();
-            
+
         //    console.log("try to send")
 
         //    $('#btnSubmit').attr('disabled', 'disabled');
@@ -100,7 +96,7 @@
         //        type: "POST",
         //        data: formData,
         //        dataType: "json",
-        //        success: function (response) {  
+        //        success: function (response) {
         //            alert('Success! ' + JSON.stringify(response));
         //        },
         //        error: function (response) {

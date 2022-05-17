@@ -10,10 +10,12 @@ namespace AutoDealer.Web.Models
         public int Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Укажите компанию")]
+        [StringLength(30, ErrorMessage = "Имя должно не меньше 2 и не более 30 символов.", MinimumLength = 2)]
         [Display(Name = "Компания")]
         public string Title { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Укажите страну")]
+        [StringLength(30, ErrorMessage = "Имя должно не меньше 2 и не более 30 символов.", MinimumLength = 2)]
         [Display(Name = "Страна")]
         public string Country { get; set; }
 

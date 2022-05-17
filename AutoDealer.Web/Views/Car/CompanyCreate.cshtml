@@ -6,22 +6,48 @@
 
 <h1 class="text-center">Создание марки автомобиля</h1>
 <div class="row">
-    <div class="col">
-        <form asp-controller="Car" asp-action="CreateCompany" enctype="multipart/form-data" method="post" class="col-6 form-group"
-            data-ajax-method="post" data-ajax-update="#resultContent" data-ajax="true" class="form-group">
-            <div class="form-group">
-                <label asp-for="Country" class="control-label"></label>
-                <input asp-for="Country" class="form-control" />
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Создать" class="btn btn-outline-primary" />
-            </div>
-        </form>
-    </div>
+    <form asp-controller="Car" id="companyForm" asp-action="CreateCompany" enctype="multipart/form-data" class="col-6"
+          data-ajax-method="post" data-ajax-update="#resultContent" data-ajax="true" data-ajax-success="onSuccess">
+        <div class="form-group">
+            <label asp-for="Country" class="control-label"></label>
+            <input asp-for="Country" class="form-control" />
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Создать" class="btn btn-outline-primary" />
+        </div>
+    </form>
 </div>
+
+@*@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}*@
+<script>
+    var $form = $('companyForm');
+
+    $('#companyForm').on('submit', function(e){
+        e.preventDefault();
+        this.validate();
+        if (!this.valid()){ return false; }
+    });
+
+   
+
+    var $form = $('form');
+    $form.validate();
+    if (!$form.valid()){ return false; }
+
+    var onSuccess = function () {
+    //    // enable unobtrusive validation for the contents
+    //    // that was injected into the <div id="result"></div> node
+        $.validator.unobtrusive.parse($("#companyForm"));
+    //    $.validator.unobtrusive.parse($("#resultContent"));
+    };
+</script>
