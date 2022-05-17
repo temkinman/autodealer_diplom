@@ -1,0 +1,14 @@
+﻿@model AutoDealer.Web.ViewModel.AddingUsedCarViewModel
+
+@{
+    string selectClass = (bool)ViewBag.Filter == true ? string.Empty : "form-control";
+}
+
+@if (ViewBag.Filter == false)
+{
+    <label asp-for="ModelId" class="control-label"><strong>Модель:</strong></label>
+}
+
+<select asp-for="ModelId" class=@selectClass asp-items="@(new SelectList(Model.Models,"Id","Title"))">
+    <option value="0">Выберите</option>
+</select>

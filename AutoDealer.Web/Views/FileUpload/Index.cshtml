@@ -1,0 +1,45 @@
+﻿
+<form asp-action="UploadFiles" enctype="multipart/form-data" method="post"
+    data-ajax-method="post" data-ajax-update="#results" data-ajax="true">
+    <dl>
+        <dt>
+            <label>Загрузить</label>
+        </dt>
+        <dd>
+            <input type="file" name="FormFile" id="FormFile" multiple>
+        </dd>
+    </dl>
+    <input class="btn" id="loadFile" type="submit" value="Загрузить" />
+</form>
+
+
+<div id="results"></div>
+
+<script>
+    $('document').ready(function(){
+        //console.log('document ready')
+        
+        $("#loadFile").click(function(){ SendFiles(); });
+    })
+
+    function SendFiles() {
+        var file = $("#FormFile").val();
+        console.log('SendFiles')
+            
+        $.ajax({
+                url: "/FileUpload/UploadFiles",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(file),
+                success: function(data) {
+                    console.log("Success");
+                    console.dir(data);
+                    $("#results").html(data);
+                },
+                error: function(ex) {
+                    console.dir("Error " + ex);
+                }
+        });
+    }
+</script>

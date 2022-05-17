@@ -1,0 +1,184 @@
+﻿@model AutoDealer.Web.ViewModel.AddingUsedCarViewModel
+
+@{
+    if(ViewBag.CarSaved == "ok")
+    {
+        <div class="alert alert-success" role="alert">
+            Всё успешно сохранено.
+        </div>
+    }
+}
+<div>
+    <p>
+        Информация о владельце:
+        <br />
+        <span>Фамилия: @Model.CarOwner.FirstName</span>
+        <br />
+        <span>Имя: @Model.CarOwner.LastName</span>
+        <br />
+        <span>Дата рождения: @Model.CarOwner.BDay</span>
+        <br />
+        <span id="passport">Паспорт: @Model.CarOwner.PassportSeries</span>
+        <br />
+        <span>
+            Адрес: город @Model.CarOwner.City ул: @Model.CarOwner.Street д. @Model.CarOwner.House @{
+                if (@Model.CarOwner?.Flat != null)
+                {
+                    <span>кв: @Model.CarOwner.Flat</span>
+                }
+            }
+        </span>
+        <br />
+        <span>Телефон: @Model.CarOwner.Phone</span>
+    </p>
+    <div>
+        Информация о авто:
+        <div >
+            <h4><a href="#">@Model.Auto.Company?.Title @Model.Auto.Model?.Title</a></h4>
+            <p>Цена: @Model.Auto.Price $</p>
+        </div>
+        <div>
+            <span>год: @Model.Auto.ProduceDate</span>
+            <span>цвет: @Model.Auto.Color.Title</span>
+            <span>@Model.Auto.Engine?.Capacity @Model.Auto.Engine?.Type?.Title</span>
+            <span>@Model.Auto.Kilometre km</span>
+        </div>
+        <p>@Model.Auto.Description</p>
+        <p>@Model.Auto.Settings</p>
+    </div>
+</div>
+<div>
+    <a class="btn btn-outline-success" href='@Url.Action("CarDetails", "Car", new { carId = Model.Auto.Id })'>посмотреть авто</a>
+</div>
+
+
+@*<div class="row">
+    <div class="col-md-4">
+        <form id="OwnerForm" asp-action="AddCar" asp-controller="AddingCar" method="post">
+            <input type="hidden" asp-for="CarOwnerId" />
+            <label asp-for="CompanyId" class="control-label"><strong>Марка:</strong></label>
+            <div class="form-group">
+                <select asp-for="CompanyId" class="form-control" asp-items="@(new SelectList(Model.Companies,"Id","Title"))">
+                    <option value="0">Выберите</option>
+                </select>
+            </div>
+            <label asp-for="ModelId" class="control-label"><strong>Модель:</strong></label>
+            <div class="form-group">
+                <select asp-for="ModelId" class="form-control" asp-items="@(new SelectList(Model.Models,"Id","Title"))">
+                    <option value="0">Выберите</option>
+                </select>
+            </div>
+            <label asp-for="EngineTypeId" class="control-label"><strong>Двигатель:</strong></label>
+            <div class="form-group">
+                <select asp-for="EngineTypeId" class="form-control" asp-items="@(new SelectList(Model.EngineTypes,"Id","Title"))">
+                    <option value="0">Выберите</option>
+                </select>
+            </div>
+            <label asp-for="TransmissionId" class="control-label"><strong>Коробка передач:</strong></label>
+            <div class="form-group">
+                <select asp-for="TransmissionId" class="form-control" asp-items="@(new SelectList(Model.Transmissions,"Id","TransmissionType"))">
+                    <option value="0">Выберите</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.Vin" class="control-label"></label>
+                <input asp-for="Auto.Vin" class="form-control" />
+                <span asp-validation-for="Auto.Vin" class="text-danger" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.Kilometre" class="control-label"></label>
+                <input asp-for="Auto.Kilometre" class="form-control" />
+                <span asp-validation-for="Auto.Kilometre" class="text-danger" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.Description" class="control-label"></label>
+                <input asp-for="Auto.Description" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.Price" class="control-label"></label>
+                <input asp-for="Auto.Price" class="form-control" />
+                <span asp-validation-for="Auto.Price" class="text-danger" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.ProduceDate" class="control-label"></label>
+                @Html.DropDownListFor(m=>m.ProduceDate, new SelectList(years),"выберите", new {@class="form-control"})
+                <span asp-validation-for="Auto.ProduceDate" class="text-danger" />
+            </div>
+            <div class="form-group">
+                <input type="submit" id="btnSubmit" value="Добавить" class="btn btn-primary" />
+                <a asp-action="Index" asp-controller="Car" class="btn btn-danger">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>*@
+<div>
+    <a asp-action="Index" asp-controller="Car">На главную</a>
+</div>
+
+@*@Html.Hidden("Owner", (object)ViewBag.OwnerSaved);
+@Html.Hidden("OwnerCreated", (object)ViewBag.OwnerCreated);
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    $(document).ready(function () {
+        console.log("doc ready ");
+        console.log("$('#Owner').val() " + $('#Owner').val());
+
+        if($('#Owner').val() == "ok") {
+            alert("We saved owner");
+        }
+
+        if($('#OwnerCreated').val() == "ok") {
+            alert("Пользователь взят из базы");
+        }
+
+        //$('#btnSubmit').click(function () {
+
+        //    if ($("#OwnerForm").valid()) { //check if form is valid using model annotation
+        //        $('#OwnerForm').submit();
+        //    }
+        //    else {
+        //        return false;
+        //    }
+        //});
+        //$("#OwnerForm").on("submit", function (event) {
+        //    event.preventDefault();
+
+        //    console.log("try to send")
+
+        //    $('#btnSubmit').attr('disabled', 'disabled');
+        //    var url = $(this).attr("action");
+        //    var formData = $(this).serialize();
+
+        //    console.log("url " + url)
+        //    console.log("formData " + formData)
+
+        //    $.ajax({
+        //        url: url,
+        //        type: "POST",
+        //        data: formData,
+        //        dataType: "json",
+        //        success: function (response) {
+        //            alert('Success! ' + JSON.stringify(response));
+        //        },
+        //        error: function (response) {
+        //            alert('Error!');
+        //        },
+        //        complete: function () {
+        //            $('#btnSubmit').removeAttr('disabled');
+        //        }
+        //    })
+        //});
+    });
+    function AddOwner(){
+        console.log('Adding..owner');
+
+    }
+</script>*@

@@ -1,0 +1,170 @@
+﻿@model AutoDealer.Web.ViewModel.CarModelViewModel
+
+<div class="col-2 text-end mb-3">
+    <a class="btn btn-outline-dark" id="CreateModel">Создать</a>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="text-start">
+                @Html.DisplayNameFor(model => model.ModelId)
+            </th>
+            <th class="text-start">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Models)
+        {
+            <tr>
+                <td class="text-start">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td class="text-start">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td class="text-center">
+                    <a class="btn btn-outline-secondary editModel" id=@item.Id>Изменить</a>
+                    <a class="btn btn-outline-danger delModel" id=@item.Id onclick="onDeleteModel(@item.Id)">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="my-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Подтверждение удаления</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Вы действительно хотите удалить марку авто?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" id="modal-btn-yes">Да</button>
+                <button type="button" class="btn btn-outline-success" id="modal-btn-no">Нет</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        //$(".delCompany").click(function (e) {
+        //    console.log("deleting car")
+        //    let id = $(this).attr('id');
+        //    console.log("id: " + id);
+        //    console.log("==============");
+
+        //    if(id > 0) {
+        //        $("#my-modal").modal('show');
+        //        modalConfirm(function(confirm){
+        //            if(confirm){
+        //                console.log("You said YES")
+        //                $.ajax({
+        //                    url: '@Url.Action("DeleteCompany", "car")',
+        //                    type: "POST",
+        //                    data: {
+        //                        companyId: id
+        //                    },
+        //                    success: function (data) {
+        //                        console.log("ok from partial");
+        //                        $('#resultContent').html(data);
+        //                        //hideSpinner();
+        //                    },
+        //                    error: function (ex) {
+        //                        //hideSpinner();
+        //                    }
+        //                });
+        //            }
+        //        });
+        //    }
+        //});
+
+
+        $("#modal-btn-yes").on("click", function() {
+            $("#my-modal").modal('hide');
+            deleteModel(idModel);
+        });
+
+        $("#modal-btn-no").on("click", function() {
+            $("#my-modal").modal('hide');
+        });
+
+        $(".editModel").click(function() {
+            console.log("editing car")
+            let id = $(this).attr('id');
+            console.log("id: " + id);
+
+            if (id > 0) {
+                $.ajax({
+                    url: '@Url.Action("Edit", "Model")',
+                    type: "GET",
+                    data: {
+                        companyId: id
+                    },
+                    success: function(data) {
+                        console.log("ok from partial");
+                        $('#resultContent').html(data);
+                        //hideSpinner();
+                    },
+                    error: function(ex) {
+                        //hideSpinner();
+                    }
+                });
+            }
+        });
+
+        $("#CreateModel").click(function() {
+            $.ajax({
+                url: '@Url.Action("Create", "Model")',
+                type: "GET",
+                data: {},
+                success: function(data) {
+                    $('#resultContent').html(data);
+                },
+                error: function(ex) {
+                }
+            });
+        });
+    });
+
+    let idModel = 0;
+    function onDeleteModel(id) {
+        console.log("deleting car")
+        //let id = $(this).attr('id');
+        console.log("id: " + id);
+
+        if (id > 0) {
+            $("#my-modal").modal('show');
+            idModel = id;
+        }
+    }
+
+    function deleteModel(id) {
+        let companyId = $('#CompanyId').val();
+        $.ajax({
+            url: '@Url.Action("Delete", "Model")',
+            type: "POST",
+            data: {
+                modelId: id,
+                companyId: companyId
+            },
+            success: function(data) {
+                console.log("ok from partial");
+                $('#resultContent').html(data);
+                //hideSpinner();
+            },
+            error: function(ex) {
+                //hideSpinner();
+            }
+        });
+    }
+
+
+</script>

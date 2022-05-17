@@ -1,0 +1,66 @@
+﻿@model AutoDealer.Web.ViewModel.SalesViewModel
+@using AutoDealer.Web.ViewModel;
+
+@{
+    int ind = 1;
+    string numberHead = "Номер";
+}
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @numberHead
+            </th>
+            <th class="text-start">
+                @Html.DisplayNameFor(model => model.CompanyTitle)
+            </th>
+            <th class="text-start">
+                @Html.DisplayNameFor(model => model.ModelTitle)
+            </th>
+            <th class="text-start">
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th class="text-start">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th class="text-start">
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Sales)
+        {
+            <tr>
+                <td class="text-center">
+                    @ind
+                    @{
+                        ind++;
+                    }
+                </td>
+                <td class="text-start">
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td class="text-start">
+                    @Html.DisplayFor(modelItem => item.ModelName)
+                </td>
+                <td class="text-start">
+                    @Html.DisplayFor(modelItem => item.CustomerFullName)
+                </td>
+                <td class="text-start">
+                    @Html.DisplayFor(modelItem => item.Price) $
+                </td>
+                <td class="text-start">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" class="text-end font-weight-bold">Итого:</td>
+            <td class="text-end font-weight-bold">@Model.TotalSum $</td>
+            <td />
+        </tr>
+    </tfoot>
+</table>

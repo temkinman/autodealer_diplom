@@ -1,0 +1,405 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+
+.carInfo {
+    display: flex;
+}
+
+.carImg {
+    margin-right: 10px;
+    max-width: 500px;
+}
+
+.carDetails {
+    display: flex;
+    justify-content: start;
+    max-width: 730px;
+    margin: 0 auto;
+}
+
+.cardetailsInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+#slider {
+    max-width: 600px;
+}
+
+
+
+/*nav buttons*/
+.carousel-wrap {
+    display: flex;
+    justify-content: center;
+    width: 1000px;
+    margin: auto;
+    position: relative;
+}
+
+.owl-carousel .owl-nav {
+    overflow: hidden;
+    height: 0px;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+    background: #2caae1;
+}
+
+
+.owl-carousel .item {
+    text-align: center;
+}
+
+.owl-carousel .nav-btn {
+    height: 60px;
+    position: absolute;
+    width: 30px;
+    cursor: pointer;
+    top: 320px !important;
+}
+
+.owl-carousel .owl-prev.disabled,
+.owl-carousel .owl-next.disabled {
+    pointer-events: none;
+    opacity: 0.2;
+}
+
+.prev-slide {
+    background: url(../images/prev.png) no-repeat scroll 0 0;
+    left: -133px;
+}
+
+.next-slide {
+    background: url(../images/next.png) no-repeat scroll 0 0;
+    right: -33px;
+}
+
+
+span.img-text {
+    text-decoration: none;
+    outline: none;
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    cursor: pointer;
+    width: 100%;
+    font-size: 23px;
+    display: block;
+    text-transform: capitalize;
+}
+
+span.img-text:hover {
+    color: #2caae1;
+}
+
+/*btns*/
+.btn-controls {
+    display: flex;
+    justify-items: center;
+    margin: auto;
+    justify-content: space-between;
+    max-width: 400px;
+}
+
+/*Tab*/
+.current {
+    background-color: #1d242c;
+    color: white !important;
+    text-shadow: 0 -1px 0 #00369f !important;
+}
+
+/*table*/
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #3a38385e;
+}
+
+/*left side navigation panel*/
+
+#adminPanel {
+    min-height: 500px;
+}
+
+#sideBar {
+    background-color: #bababd40;
+    padding: 10px 0;
+}
+
+.leftSide {
+    padding: 0;
+}
+
+.leftSide > a {
+    font-size: 20px;
+}
+
+
+#resultContent {
+    padding: 15px;
+}
+
+/*.sidebar {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 16px;
+}
+
+    .sidebar a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #818181;
+        display: block;
+    }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+.main {
+    margin-left: 160px;*/ /* Same as the width of the sidenav */
+/*padding: 0px 10px;
+}*/
+/*left nav version 2*/
+/*#sidebarCollapse {
+    width: 40px;
+    height: 40px;
+    background: #f5f5f5;
+}
+
+#sidebarCollapse span {
+    width: 80%;
+    height: 2px;
+    margin: 0 auto;
+    display: block;
+    background: #555;
+    transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+}
+
+#sidebarCollapse span:first-of-type {*/
+/* rotate first one */
+/*transform: rotate(45deg) translate(2px, 2px);
+}
+
+#sidebarCollapse span:nth-of-type(2) {*/
+/* second one is not visible */
+/*opacity: 0;
+}
+
+#sidebarCollapse span:last-of-type {*/
+/* rotate third one */
+/*transform: rotate(-45deg) translate(1px, -1px);
+}
+
+#sidebarCollapse.active span {*/
+/* no rotation */
+/*transform: none;*/
+/* all bars are visible */
+/*opacity: 1;
+    margin: 5px auto;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    perspective: 1500px;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #7386D5;
+    color: #fff;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: center left;*/ /* Set the transformed position of sidebar to center left side. */
+/*}
+
+#sidebar.active {
+    margin-left: -250px;
+    transform: rotateY(100deg);*/ /* Rotate sidebar vertically by 100 degrees. */
+/*}
+
+@media (max-width: 768px) {*/
+/* Reversing the behavior of the sidebar: 
+       it'll be rotated vertically and off canvas by default, 
+       collapsing in on toggle button click with removal of 
+       the vertical rotation.   */
+/*#sidebar {
+        margin-left: -250px;
+        transform: rotateY(100deg);
+    }
+
+        #sidebar.active {
+            margin-left: 0;
+            transform: none;
+        }*/
+/* Reversing the behavior of the bars: 
+       Removing the rotation from the first,
+       last bars and reappear the second bar on default state, 
+       and giving them a vertical margin */
+/*#sidebarCollapse span:first-of-type,
+    #sidebarCollapse span:nth-of-type(2),
+    #sidebarCollapse span:last-of-type {
+        transform: none;
+        opacity: 1;
+        margin: 5px auto;
+    }*/
+/* Removing the vertical margin and make the first and last bars rotate again when the sidebar is open, hiding the second bar */
+/*#sidebarCollapse.active span {
+        margin: 0 auto;
+    }
+
+        #sidebarCollapse.active span:first-of-type {
+            transform: rotate(45deg) translate(2px, 2px);
+        }
+
+        #sidebarCollapse.active span:nth-of-type(2) {
+            opacity: 0;
+        }
+
+        #sidebarCollapse.active span:last-of-type {
+            transform: rotate(-45deg) translate(1px, -1px);
+        }
+}
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+
+        .sidebar a {
+            font-size: 18px;
+        }
+}
+
+#green {
+    height: 100%;
+    background: green;
+    text-align: center;
+    color: black;
+    padding: 15px;
+}*/
+/*v3*/
+/*body {
+background-color: #fbfbfb;
+}
+@media (min-width: 991.98px) {
+main {
+padding-left: 240px;
+}
+}*/
+/* Sidebar */
+/*.sidebar {
+position: fixed;
+top: 0;
+bottom: 0;
+left: 0;
+padding: 58px 0 0;*/ /* Height of navbar */
+/*box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+width: 240px;
+z-index: 600;
+}
+
+@media (max-width: 991.98px) {
+.sidebar {
+width: 100%;
+}
+}
+.sidebar .active {
+border-radius: 5px;
+box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}
+
+.sidebar-sticky {
+position: relative;
+top: 0;
+height: calc(100vh - 48px);
+padding-top: 0.5rem;
+overflow-x: hidden;
+overflow-y: auto;*/ /* Scrollable contents if viewport is shorter than content. */
+/*}*/
+@font-face {
+    font-family: "FontAwesome";
+    src: url("../fonts/fontawesome-webfont.eot");
+    src: url("../fonts/fontawesome-webfont.eot") format("embedded-opentype"), url("../fonts/fontawesome-webfont.woff") format("woff"), url("../fonts/fontawesome-webfont.woff2") format("woff2"), url("../fonts/fontawesome-webfont.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}

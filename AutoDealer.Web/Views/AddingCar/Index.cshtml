@@ -1,0 +1,119 @@
+﻿@model AutoDealer.Web.ViewModel.AddingUsedCarViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        @*<form id="OwnerForm" asp-action="AddOwner" asp-controller="AddingCar" method="post">
+            <div class="form-group">
+                <label asp-for="CarOwner.FirstName" class="control-label"></label>
+                <input asp-for="CarOwner.FirstName" class="form-control" />
+                <span asp-validation-for="CarOwner.FirstName" class="text-danger"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarOwner.LastName" class="control-label"></label>
+                <input asp-for="CarOwner.LastName" class="form-control" />
+                <span asp-validation-for="CarOwner.LastName" class="text-danger"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarOwner.BDay" class="control-label"></label>
+                <input asp-for="CarOwner.BDay" type="date" class="form-control" />
+                <span asp-validation-for="CarOwner.BDay" class="text-danger"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarOwner.PassportSeries" class="control-label"></label>
+                <input asp-for="CarOwner.PassportSeries" class="form-control" />
+                <span asp-validation-for="CarOwner.PassportSeries" class="text-danger"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarOwner.Phone" class="control-label"></label>
+                <input asp-for="CarOwner.Phone" class="form-control" />
+                <span asp-validation-for="CarOwner.Phone" class="text-danger"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarOwner.City" class="control-label"></label>
+                <input asp-for="CarOwner.City" class="form-control" />
+                <span asp-validation-for="CarOwner.City" class="text-danger"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarOwner.Street" class="control-label"></label>
+                <input asp-for="CarOwner.Street" class="form-control" />
+                <span asp-validation-for="CarOwner.Street" class="text-danger"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarOwner.House" class="control-label"></label>
+                <input asp-for="CarOwner.House" class="form-control" />
+                <span asp-validation-for="CarOwner.House" class="text-danger"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarOwner.Flat" class="control-label"></label>
+                <input asp-for="CarOwner.Flat" class="form-control" />
+                <span asp-validation-for="CarOwner.Flat" class="text-danger"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="btnSubmit" value="Добавить" class="btn btn-primary"/>
+                <a asp-action="Index" asp-controller="Car" class="btn btn-danger">Отмена</a>
+            </div>
+        </form>*@
+    </div>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Car">На главную</a>
+</div>
+
+@Html.Hidden("Owner", (object)ViewBag.OwnerSaved);
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    $(document).ready(function () {
+
+        if($('#Owner').val() == "ok") {
+            alert("We saved owner");
+        }
+
+        //$('#btnSubmit').click(function () {
+  
+        //    if ($("#OwnerForm").valid()) { //check if form is valid using model annotation
+        //        $('#OwnerForm').submit(); 
+        //    }
+        //    else {
+        //        return false;
+        //    }
+        //});
+        //$("#OwnerForm").on("submit", function (event) {
+        //    event.preventDefault();
+            
+        //    console.log("try to send")
+
+        //    $('#btnSubmit').attr('disabled', 'disabled');
+        //    var url = $(this).attr("action");
+        //    var formData = $(this).serialize();
+
+        //    console.log("url " + url)
+        //    console.log("formData " + formData)
+
+        //    $.ajax({
+        //        url: url,
+        //        type: "POST",
+        //        data: formData,
+        //        dataType: "json",
+        //        success: function (response) {  
+        //            alert('Success! ' + JSON.stringify(response));
+        //        },
+        //        error: function (response) {
+        //            alert('Error!');
+        //        },
+        //        complete: function () {
+        //            $('#btnSubmit').removeAttr('disabled');
+        //        }
+        //    })
+        //});
+    });
+    function AddOwner(){
+        console.log('Adding..owner');
+
+    }
+</script>

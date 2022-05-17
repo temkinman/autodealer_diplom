@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Car>
+
+<ul class="catalog_table">
+    @foreach (Car car in Model)
+    {
+        await Html.RenderPartialAsync("CarInfo", car);
+    }
+</ul>

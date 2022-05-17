@@ -1,0 +1,225 @@
+﻿@model AutoDealer.Web.ViewModel.AddingUsedCarViewModel
+
+@{
+    IEnumerable<int> years = Enumerable.Range(1980, (DateTime.Now.Year - 1980) + 1).Reverse();
+}
+
+@{
+    if (ViewBag.OwnerCreated == "ok")
+    {
+        <div class="alert alert-success" role="alert">
+            Владелец был найден в базе! Можно продолжать.
+        </div>
+    }
+    else if (ViewBag.OwnerSaved == "ok")
+    {
+        <div class="alert alert-success" role="alert">
+            Владелец успешно сохранен!
+        </div>
+    }
+}
+
+<div>
+    <p>
+        Информация о владельце:
+        <br />
+        <span>Фамилия: @Model.CarOwner.FirstName</span>
+        <br />
+        <span>Имя: @Model.CarOwner.LastName</span>
+        <br />
+        <span>Дата рождения: @Model.CarOwner.BDay</span>
+        <br />
+        <span id="passport">Паспорт: @Model.CarOwner.PassportSeries</span>
+        <br />
+        <span>
+            Адрес: город @Model.CarOwner.City ул: @Model.CarOwner.Street д. @Model.CarOwner.House @{
+                if (@Model.CarOwner?.Flat != null)
+                {
+                    <span>кв: @Model.CarOwner.Flat</span>
+                }
+            }
+        </span>
+        <br />
+        <span>Телефон: @Model.CarOwner.Phone</span>
+    </p>
+</div>
+@*<div class="row">*@
+@*<div class="col-md-4">*@
+<form id="OwnerForm" asp-action="AddCar" asp-controller="AddingCar" method="post" class="row mx-auto">
+    <input type="hidden" asp-for="CarOwnerId" />
+    <div class="col-6">
+        <label asp-for="CompanyId" class="control-label"><strong>Марка:</strong></label>
+        <div class="form-group">
+            <select asp-for="CompanyId" class="form-control" asp-items="@(new SelectList(Model.Companies,"Id","Title"))">
+                <option value="0">Выберите</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-6">
+        <label asp-for="ModelId" class="control-label"><strong>Модель:</strong></label>
+    <div class="form-group">
+        <select asp-for="ModelId" class="form-control" asp-items="@(new SelectList(Model.Models,"Id","Title"))">
+            <option value="0">Выберите</option>
+        </select>
+    </div>
+    </div>
+
+    <div class="col-6">
+        <label asp-for="EngineTypeId" class="control-label"><strong>Двигатель:</strong></label>
+    <div class="form-group">
+        <select asp-for="EngineTypeId" class="form-control" asp-items="@(new SelectList(Model.EngineTypes,"Id","Title"))">
+            <option value="0">Выберите</option>
+        </select>
+    </div>
+    </div>
+
+    <div class="col-6">
+        <label asp-for="Auto.Engine.Capacity" class="control-label"><strong>Объем двигателя:</strong></label>
+    <div class="form-group">
+        <input asp-for="Auto.Engine.Capacity" class="form-control" />
+        <span asp-validation-for="Auto.Engine.Capacity" class="text-danger" />
+    </div>
+    </div>
+
+     <div class="col-6">
+         <label asp-for="TransmissionId" class="control-label"><strong>Коробка передач:</strong></label>
+    <div class="form-group">
+        <select asp-for="TransmissionId" class="form-control" asp-items="@(new SelectList(Model.Transmissions,"Id","TransmissionType"))">
+            <option value="0">Выберите</option>
+        </select>
+    </div>
+    </div>
+
+    <div class="col-6">
+        <label asp-for="ColorId" class="control-label"><strong>Цвет:</strong></label>
+    <div class="form-group">
+        <select asp-for="ColorId" class="form-control" asp-items="@(new SelectList(Model.Colors,"Id","Title"))">
+            <option value="0">Выберите</option>
+        </select>
+    </div>
+    </div>
+    
+    <div class="col-6">
+        <div class="form-group">
+        <label asp-for="Auto.Vin" class="control-label"></label>
+        <input asp-for="Auto.Vin" class="form-control" />
+        <span asp-validation-for="Auto.Vin" class="text-danger" />
+    </div>
+    </div>
+
+    <div class="col-6">
+        <div class="form-group">
+        <label asp-for="Auto.Kilometre" class="control-label"></label>
+        <input asp-for="Auto.Kilometre" class="form-control" />
+        <span asp-validation-for="Auto.Kilometre" class="text-danger" />
+    </div>
+    </div>
+
+
+    <div class="col-6">
+        <div class="form-group">
+        <label asp-for="Auto.Description" class="control-label"></label>
+        <input asp-for="Auto.Description" class="form-control" />
+    </div>
+    </div>
+
+    <div class="col-6">
+        <div class="form-group">
+        <label asp-for="Auto.Price" class="control-label"></label>
+        <input asp-for="Auto.Price" class="form-control" />
+        <span asp-validation-for="Auto.Price" class="text-danger" />
+    </div>
+    </div>
+
+    <div class="col-6">
+        <div class="form-check">
+        <label asp-for="Auto.ProduceDate" class="control-label"></label>
+        @Html.DropDownListFor(m=>m.Auto.ProduceDate, new SelectList(years),"выберите", new {@class="form-control"})
+        <span asp-validation-for="Auto.ProduceDate" class="text-danger" />
+    </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="form-check">
+        <label asp-for="Auto.ProduceDate" class="control-label"></label>
+        @Html.DropDownListFor(m=>m.Auto.ProduceDate, new SelectList(years),"выберите", new {@class="form-control"})
+        <span asp-validation-for="Auto.ProduceDate" class="text-danger" />
+    </div>
+    <div class="form-check">
+        <input asp-for="Auto.Settings.Abs" type="checkbox" class="form-check-input" id="abs" />
+        <label asp-for="Auto.Settings.Abs" class="form-check-label"></label>
+    </div>
+    <div class="form-check">
+        <input asp-for="Auto.Settings.Esp" type="checkbox" class="form-check-input" id="esp" />
+        <label asp-for="Auto.Settings.Esp" class="form-check-label"></label>
+    </div>
+    <div class="form-check">
+        <input asp-for="Auto.Settings.ParkSensors" type="checkbox" class="form-check-input" id="parkSensors" />
+        <label asp-for="Auto.Settings.ParkSensors" class="form-check-label"></label>
+    </div>
+    <div class="form-check">
+        <input asp-for="Auto.Settings.Camera" type="checkbox" class="form-check-input" id="camera" />
+        <label asp-for="Auto.Settings.Camera" class="form-check-label"></label>
+    </div>
+    <div class="form-check">
+        <input asp-for="Auto.Settings.Cruiz" type="checkbox" class="form-check-input" id="cruiz" />
+        <label asp-for="Auto.Settings.Cruiz" class="form-check-label"></label>
+    </div>
+    <div class="form-check">
+        <input asp-for="Auto.Settings.AirCondition" type="checkbox" class="form-check-input" id="airCondition" />
+        <label asp-for="Auto.Settings.AirCondition" class="form-check-label"></label>
+    </div>
+    <div class="form-check">
+        <input asp-for="Auto.Settings.ClimatControl" type="checkbox" class="form-check-input" id="climat" />
+        <label asp-for="Auto.Settings.ClimatControl" class="form-check-label"></label>
+    </div>
+    <div class="form-check">
+        <input asp-for="Auto.Settings.Navigation" type="checkbox" class="form-check-input" id="navigation" />
+        <label asp-for="Auto.Settings.Navigation" class="form-check-label"></label>
+    </div>
+    <div class="form-check">
+        <input asp-for="Auto.Settings.Bluetooth" type="checkbox" class="form-check-input" id="bluetooth" />
+        <label asp-for="Auto.Settings.Bluetooth" class="form-check-label"></label>
+    </div>
+    <div class="form-group">
+        <input type="submit" id="btnSubmit" value="Добавить" class="btn btn-primary" />
+        <a asp-action="Index" asp-controller="Car" class="btn btn-danger">Отмена</a>
+    </div>
+</form>
+@*</div>*@
+@*</div>*@
+<div>
+    <a asp-action="Index" asp-controller="Car">На главную</a>
+</div>
+
+@Html.Hidden("Owner", (object)ViewBag.OwnerSaved)
+@Html.Hidden("OwnerCreated", (object)ViewBag.OwnerCreated)
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    $(document).ready(function () {
+        console.log("doc ready ");
+        console.log("$('#Owner').val() " + $('#Owner').val());
+
+        if($('#Owner').val() == "ok") {
+            console.log("We saved owner");
+        }
+
+        if($('#OwnerCreated').val() == "ok") {
+            console.log("Пользователь взят из базы");
+        }
+    });
+</script>

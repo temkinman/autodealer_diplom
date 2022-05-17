@@ -1,0 +1,136 @@
+﻿@model AutoDealer.Web.ViewModel.CarsListViewModel
+@using AutoDealer.Web.Filters;
+
+@{
+    ViewData["Title"] = "АвтоДилер";
+    ViewBag.CurrentPage = 0;
+}
+
+<div id="content">
+    <div class="content">
+        <div class="breadcrumbs">
+            <a href="#">Home</a>
+            @*<img src="images/marker_2.gif" alt="" />*@
+            <span>Cars</span>
+        </div>
+        <div class="main_wrapper">
+            <div class="cars_categories">
+                <span>Все авто</span>
+                <a href="#"><span>новые</span></a>
+                <a href="#"><span>б/у</span></a>
+            </div>
+            <h1><strong>Количество</strong> (@Model.PagingInfo.TotalItems)</h1>
+            <div class="catalog_sidebar">
+                @{
+                    await Html.RenderPartialAsync("CarFilterView", @Model?.CarFilter ?? new CarFilter());
+                }
+            </div>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.KilometreSort)" class="nav-link">Kilometre</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.PriceSort)" class="nav-link">Price</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.YearSort)" class="nav-link">Year</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortViewModel.DateSort)" class="nav-link">Date</a>
+                </li>
+            </ul>
+            <div class="main_catalog" id="auto">
+                @{
+                    await Html.RenderPartialAsync("CarsResult", @Model.Cars);
+                }
+            </div>
+            <div page-model="@Model" page-classes-enabled="true" action="Index"
+                 page-class="btn" page-class-normal="btn-outline-dark"
+                 page-class-selected="btn-primary" class="btn-group m-1">
+            </div>
+            @*<div class="bottom_catalog_box">
+                <div class="pagination">
+                <ul>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li class="space">...</li>
+                <li><a href="#">8</a></li>
+                <li class="next"><a href="#"><img src="images/page_next.gif" alt="" /></a></li>
+                </ul>
+                </div>
+                <div class="clear"></div>
+                </div>*@
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+@Html.Hidden("CurrentTab", (object)ViewBag.CurrentPage);
+
+<script src="/js/pagination.js"></script>
+
+<script type="text/javascript">
+    console.log('jssss');
+    $('document').ready(function(){
+        //console.log('document ready')
+        //$("[id*='page']").click(function() { 
+        //    var id = $(this).attr('id');
+        //    console.log(id);
+        //}
+        $("a[tabindex='0']").addClass('current');
+    })
+
+    function SendStudent() {
+            var name = $("#nameId").val();
+            var address = $("#addressId").val();
+            var age = $("#ageId").val();
+
+            var studentJson = {
+                fullname: name,
+                address: address,
+                age: age
+            }
+            //url: "student/studentsadd"
+            $.ajax({
+                    url: "student/CreateStudentView",
+                    type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(studentJson),
+                    success: function(data) {
+                        console.log("Success");
+                        console.dir(data);
+                        $("#Result").html(data);
+                    },
+                    error: function(ex) {
+                        console.dir("Error " + ex);
+                    }
+                });
+        }
+
+    //const sendPage = (e) => {
+    //    e.stopPropagation(); //чтобы не всплывало событие
+
+    //    console.log(e);
+    //    //const chx = e.currentTarget;
+
+    //    //if(chx.checked) {
+    //    //    userSettings.push(chx.name);
+    //    //}
+    //    //else {
+    //    //    const ind = userSettings.indexOf(chx.name);
+
+    //    //    if(ind > -1) userSettings.splice(ind, 1);
+    //    //}
+    //}
+
+    //const passBtn = document.getElementById("passBtn");
+    //const allCheckBoxes = document.querySelectorAll("input[type=checkbox]");
+    //const paginationBtns = $("[id*='page']")
+    //paginationBtns.forEach((item) => item.addEventListener('click', (e) => changeSettings(e)));
+</script>

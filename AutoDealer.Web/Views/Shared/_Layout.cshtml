@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AutoDealer</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/style980.css" />
+    <link rel="stylesheet" href="~/css/lightbox.css" />
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<body>
+
+    <header>
+        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AutoDealer.Web</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Privacy">Privacy</a>
+            </li>
+            </ul>
+            <partial name="_LoginPartial" />
+            </div>
+            </div>
+            </nav>*@
+        <div id="header">
+            <div class="top_info">
+                <div class="logo">
+                    <a class="navbar-brand" asp-area="" asp-controller="Car" asp-action="Index">
+                        <img src="~/images/logo.png" alt="logo">
+                    </a>
+
+                    <a href="#">Auto<span>Dealer</span></a>
+                </div>
+                <div class="header_contacts">
+                    <div class="phone">+375 (29) 455-55-95</div>
+                    <div>Беларусь г.Гомель ул.Советская д.59</div>
+                </div>
+            </div>
+            <div class="bg_navigation">
+                <div class="navigation_wrapper">
+                    <div id="navigation">
+                        <span>Home</span>
+                        <ul>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index" tabindex="0">авто</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Sale" asp-action="Index" tabindex="1">продажи</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="AddingCar" asp-action="Index" tabindex="2">приемка авто</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index" tabindex="3">о нас</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index" tabindex="4">админка</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="AddingCar" asp-action="AddSingleCar" tabindex="5">принять авто</a></li>
+                            @*<li class="current"><a href="#">авто</a></li>
+                                <li><a href="#">продажи</a></li>
+                                <li><a href="#">приемка авто</a></li>
+                                <li><a href="#">о нас</a></li>
+                                <li><a href="#">админка</a></li>*@
+                            @{
+                                var x = "";
+                            }
+                        </ul>
+                        @*<partial name="_LoginPartial" />*@
+                    </div>
+                </div>
+            </div>
+            @*<div id="categories" class="col-3" style="background-color:white">
+                <vc:navigation-menu/>
+                </div>*@
+        </div>
+    </header>
+    <div class="container">
+        @*<main role="main" class="pb-3">*@
+            @RenderBody()
+        @*</main>*@
+    </div>
+    <footer id="footer">
+        <div class="bg_top_footer">
+            <div class="top_footer">
+                <div class="f_widget first">
+                    <h3><strong>About</strong> us</h3>
+                    <a href="#" class="footer_logo">AutoDealer</a>
+                    <p>
+                        Lorem ipsum dolor sit amet, cons ectetur adipisicing elit, sed do eiusmod tempor.
+                        Lorem ipsum dolor sit amet, con sectetur adipisicing elit, sed do eius  mod tempor incididunt ut.
+                    </p>
+                </div>
+                <div class="f_widget divide second">
+                    <h3><strong>Open</strong> hours</h3>
+                    <ul class="schedule">
+                        <li>
+                            <strong>Monday</strong>
+                            <span>9:30 am - 6:00 pm</span>
+                        </li>
+                        <li>
+                            <strong>Tuesday</strong>
+                            <span>9:30 am - 6:00 pm</span>
+                        </li>
+                        <li>
+                            <strong>Wednesday</strong>
+                            <span>9:30 am - 6:00 pm</span>
+                        </li>
+                        <li>
+                            <strong>Thursday</strong>
+                            <span>9:30 am - 6:00 pm</span>
+                        </li>
+                        <li>
+                            <strong>Friday</strong>
+                            <span>9:30 am - 6:00 pm</span>
+                        </li>
+                        <li>
+                            <strong>Saturday</strong>
+                            <span>9:30 am - 4:00 pm</span>
+                        </li>
+                        <li>
+                            <strong>Sunday</strong>
+                            <span>closed</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="fwidget_separator"></div>
+                <div class="f_widget third">
+                    <h3><strong>Our</strong> contacts</h3>
+                    <div class="f_contact f_contact_1"><strong>Address Info:<br /></strong>Lorem ipsum Dolor sit amet, 658 Consectetur, Adipisicing 56 D</div>
+                    <div class="f_contact f_contact_2"><strong>Phone:</strong> +1 (234) 567-8901 <br /><strong>FAX:</strong> +1 (234) 567-8902</div>
+                    <div class="f_contact f_contact_3"><strong>Email:</strong> <a href="mailto:#">testmail@sitename.com</a></div>
+                </div>
+                <div class="f_widget divide last frame_wrapper">
+                </div>
+            </div>
+        </div>
+        <div class="bottom_footer">
+            <div class="f_widget ">
+                <h3><strong>About</strong> us</h3>
+                <ul>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Our Partners</a></li>
+                    <li><a href="#">Advertising Online</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+            <div class="f_widget divide">
+                <h3><strong>Need</strong> help?</h3>
+                <ul>
+                    <li><a href="#">How do I add an offer?</a></li>
+                    <li><a href="#">How do I find a vehicle</a></li>
+                    <li><a href="#">Price list</a></li>
+                    <li><a href="#">Office for car dealers</a></li>
+                </ul>
+            </div>
+            <div class="fwidget_separator"></div>
+            <div class="f_widget">
+                <h3><strong>User</strong> area</h3>
+                <ul>
+                    <li><a href="#">Add an offer</a></li>
+                    <li><a href="#">Register dealder</a></li>
+                    <li><a href="#">Login Dealer</a></li>
+                    <li><a href="#">News</a></li>
+                </ul>
+            </div>
+            <div class="f_widget divide last">
+                <h3><strong>Find</strong> us here</h3>
+                <ul class="horizontal">
+                    @*<li><a href="#"><img src="images/fb_icon.png" alt=""></a></li>
+                        <li><a href="#"><img src="images/twitter_icon.png" alt=""></a></li>
+                        <li><a href="#"><img src="images/in_icon.png" alt=""></a></li>
+                        </ul>*@
+            </div>
+        </div>
+        <div class="copyright_wrapper">
+            <div class="copyright">&copy; 2013 Auto Sale. All Rights Reserved.</div>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/lightbox.js"></script>
+
+    <script src="~/js/owl.carousel.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
