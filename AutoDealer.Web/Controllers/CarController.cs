@@ -13,6 +13,7 @@ using AutoDealer.Web.Core.DB.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using AutoDealer.Web.Enums;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoDealer.Web.Controllers
 {
@@ -56,8 +57,15 @@ namespace AutoDealer.Web.Controllers
 
         private CarFilter _cf = null;
 
+        [Authorize]
         public IActionResult Index(int currentPage = 1, CarFilter carFilter = null, SortState sortOrder = SortState.ModelAsc)
         {
+
+            if(!User.Identity.IsAuthenticated) {
+                return Content(User.Identity.Name);
+                //return View("~/views/account/login.cshtml");
+            }
+
             if (currentPage < 1)
             {
                 return NotFound();

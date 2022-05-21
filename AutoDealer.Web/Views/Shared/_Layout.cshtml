@@ -67,16 +67,26 @@
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index" tabindex="3">о нас</a></li>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index" tabindex="4">админка</a></li>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="AddingCar" asp-action="AddSingleCar" tabindex="5">принять авто</a></li>
+                            @*<li><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" tabindex="5">залогинится</a></li>*@
                             @*<li class="current"><a href="#">авто</a></li>
                                 <li><a href="#">продажи</a></li>
                                 <li><a href="#">приемка авто</a></li>
                                 <li><a href="#">о нас</a></li>
                                 <li><a href="#">админка</a></li>*@
-                            @{
-                                var x = "";
+                            @*<partial name="_LoginPartial" />*@
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>
+                                    <a>@(User.Identity.Name == "admin@admin.com" ? User.Identity.Name : "")</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout" tabindex="5">выйти</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" tabindex="5">войти</a></li>
                             }
                         </ul>
-                        @*<partial name="_LoginPartial" />*@
+
                     </div>
                 </div>
             </div>
@@ -87,7 +97,7 @@
     </header>
     <div class="container">
         @*<main role="main" class="pb-3">*@
-            @RenderBody()
+        @RenderBody()
         @*</main>*@
     </div>
     <footer id="footer">
