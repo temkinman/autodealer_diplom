@@ -1,13 +1,19 @@
-﻿@model AutoDealer.Web.ViewModel.CarModelViewModel
+﻿@model IEnumerable<AutoDealer.Web.Models.Color>
 
-<div class="col-2 text-end mb-3">
-    <a class="btn btn-outline-dark" id="CreateModel">Создать</a>
+
+<h1>Автомобильные цвета</h1>
+@{
+   await Html.PartialAsync("Notification");
+}
+
+<div class="col-2 text-end mb-2">
+    <a class="btn btn-outline-dark" id="CreateColor">Создать</a>
 </div>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th class="text-start">
-                @Html.DisplayNameFor(model => model.ModelId)
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th class="text-start">
                 @Html.DisplayNameFor(model => model.Title)
@@ -15,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Models)
+        @foreach (var item in Model)
         {
             <tr>
                 <td class="text-start">
@@ -25,8 +31,8 @@
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td class="text-center">
-                    <a class="btn btn-outline-secondary editModel" id=@item.Id>Изменить</a>
-                    <a class="btn btn-outline-danger delModel" id=@item.Id onclick="onDeleteModel(@item.Id)">Удалить</a>
+                    <a class="btn-sm btn-outline-secondary editColor" id=@item.Id>Изменить</a>
+                    <a class="btn-sm btn-outline-danger" id=@item.Id onclick="onDeleteColor(@item.Id)">Удалить</a>
                 </td>
             </tr>
         }
@@ -43,70 +49,50 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Вы действительно хотите удалить марку авто?</p>
+                <p>Вы действительно хотите удалить цвет авто?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" id="modal-btn-yes">Да</button>
-                <button type="button" class="btn btn-outline-success" id="modal-btn-no">Нет</button>
+                <button type="button" class="btn-sm btn-outline-danger" id="modal-btn-yes">Да</button>
+                <button type="button" class="btn-sm btn-outline-success" id="modal-btn-no">Нет</button>
             </div>
         </div>
     </div>
 </div>
 
+<div class="alert" role="alert" id="result"></div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
 <script>
+    
     $(document).ready(function() {
-        //$(".delCompany").click(function (e) {
-        //    console.log("deleting car")
-        //    let id = $(this).attr('id');
-        //    console.log("id: " + id);
-        //    console.log("==============");
-
-        //    if(id > 0) {
-        //        $("#my-modal").modal('show');
-        //        modalConfirm(function(confirm){
-        //            if(confirm){
-        //                console.log("You said YES")
-        //                $.ajax({
-        //                    url: '@Url.Action("DeleteCompany", "car")',
-        //                    type: "POST",
-        //                    data: {
-        //                        companyId: id
-        //                    },
-        //                    success: function (data) {
-        //                        console.log("ok from partial");
-        //                        $('#resultContent').html(data);
-        //                        //hideSpinner();
-        //                    },
-        //                    error: function (ex) {
-        //                        //hideSpinner();
-        //                    }
-        //                });
-        //            }
-        //        });
-        //    }
-        //});
-
+        let idColor = 0;
 
         $("#modal-btn-yes").on("click", function() {
+            console.log("clicked modal Yes");
             $("#my-modal").modal('hide');
-            deleteModel(idModel);
+            deleteColor();
         });
 
         $("#modal-btn-no").on("click", function() {
+            console.log("clicked modal No");
             $("#my-modal").modal('hide');
         });
 
-        $(".editModel").click(function() {
-            console.log("editing car")
+        $(".editColor").click(function() {
             let id = $(this).attr('id');
             console.log("id: " + id);
 
             if (id > 0) {
                 $.ajax({
-                    url: '@Url.Action("Edit", "Model")',
+                    url: '@Url.Action("Edit", "Color")',
                     type: "GET",
                     data: {
-                        companyId: id
+                        colorId: id
                     },
                     success: function(data) {
                         console.log("ok from partial");
@@ -120,9 +106,9 @@
             }
         });
 
-        $("#CreateModel").click(function() {
+        $("#CreateColor").click(function() {
             $.ajax({
-                url: '@Url.Action("Create", "Model")',
+                url: '@Url.Action("Create", "Color")',
                 type: "GET",
                 data: {},
                 success: function(data) {
@@ -134,26 +120,20 @@
         });
     });
 
-    let idModel = 0;
-    function onDeleteModel(id) {
-        console.log("deleting car")
-        //let id = $(this).attr('id');
-        console.log("id: " + id);
-
+    
+    function onDeleteColor(id) {
         if (id > 0) {
             $("#my-modal").modal('show');
-            idModel = id;
+            idColor = id;
         }
     }
 
-    function deleteModel(id) {
-        let companyId = $('#CompanyId').val();
+    function deleteColor() {
         $.ajax({
-            url: '@Url.Action("Delete", "Model")',
+            url: '@Url.Action("DeleteCompany", "car")',
             type: "POST",
             data: {
-                modelId: id,
-                companyId: companyId
+                colorId: idColor
             },
             success: function(data) {
                 console.log("ok from partial");
@@ -165,6 +145,4 @@
             }
         });
     }
-
-
 </script>

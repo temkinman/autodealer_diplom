@@ -276,10 +276,12 @@ namespace AutoDealer.Web.Controllers
                 _companyRepository.Create(company);
                 IQueryable<Company> companies = _datasource.Companies.OrderBy(car => car.Id);
 
+                ViewBag.Success = "created";
+
                 return PartialView("CompanyIndex", companies);
             }
 
-            return NotFound();
+            return PartialView("CompanyCreate", company);
         }
 
         [HttpGet]
@@ -302,12 +304,14 @@ namespace AutoDealer.Web.Controllers
             if (ModelState.IsValid)
             {
                 _companyRepository.Update(company);
+
+                IQueryable<Company> companies = _datasource.Companies.OrderBy(car => car.Id);
+                ViewBag.Success = "edited";
+
+                return PartialView("CompanyIndex", companies);
             }
 
-            IQueryable<Company> companies = _datasource.Companies.OrderBy(car => car.Id);
-            ViewBag.Success = "ok";
-
-            return PartialView("CompanyIndex", companies);
+            return PartialView("CompanyEdit", company);
         }
 
         [HttpPost]
@@ -321,7 +325,7 @@ namespace AutoDealer.Web.Controllers
             }
 
             List<Company> companies = _datasource.Companies.OrderBy(car => car.Id).ToList();
-            ViewBag.Success = "ok";
+            ViewBag.Success = "deleted";
 
             return PartialView("CompanyIndex", companies);
         }

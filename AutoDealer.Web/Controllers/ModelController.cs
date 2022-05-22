@@ -30,13 +30,14 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult FilterByCompany(int companyId)
+        public IActionResult Models(int companyId)
         {
             IQueryable<Model> models = _modelRepository.Models.Where(m => m.Company.Id == companyId);
 
             CarModelViewModel viewModel = new()
             {
-                Models = models
+                Models = models,
+                CompanyId = companyId
             };
 
             return PartialView(viewModel);
@@ -45,63 +46,88 @@ namespace AutoDealer.Web.Controllers
         [HttpGet]
         public IActionResult Create(int companyId)
         {
-            CarModelViewModel model = new()
+            if (companyId > 0)
             {
-                CompanyId = companyId
+                Company company = _companyRepository.GetById(companyId);
+
+                Model viewModel = new()
+                {
+                    Company = company
+                };
+                return PartialView(viewModel);
+            }
+
+            IQueryable<Model> models = _modelRepository.Models.Where(m => m.Company.Id == companyId);
+
+            CarModelViewModel viewModels = new()
+            {
+                Models = models
             };
-            return PartialView("Create", model);
+
+            return PartialView("Models", viewModels);
         }
 
         [HttpPost]
-        public IActionResult Create(CarModelViewModel viewModel)
+        public IActionResult Create(Model model)
         {
-            if (ModelState.IsValid)
+            if (model.Company.Id > 0)
             {
-                Company company = _companyRepository.GetById(viewModel.CompanyId);
+                Company company = _companyRepository.GetById(model.Company.Id);
 
-                viewModel.Model.Company = company;
-                _modelRepository.Create(viewModel.Model);
+                model.Company = company;
+                _modelRepository.Create(model);
 
-                //IQueryable<Model> companies = _datasource.Companies.OrderBy(car => car.Id);
+                IQueryable<Model> models = _modelRepository.Models.Where(m => m.Company.Id == model.Company.Id);
 
-                //return PartialView("Index", companies);
+                CarModelViewModel viewModel = new()
+                {
+                    Models = models
+                };
+
+                ViewBag.Success = "created";
+
+                return PartialView("Models", viewModel);
             }
 
-            return NotFound();
+            return PartialView(model);
         }
 
-        [HttpGet]
-        public IActionResult Edit(int companyId)
-        {
-            //Company companyUpdated = _datasource.Companies.Where(c => c.Id == companyId).FirstOrDefault();
 
-            //if (companyUpdated == null)
-            //{
-            //    return NotFound();
-            //}
-            return View();
-            //return PartialView("CompanyEdit", companyUpdated);
+        [HttpGet]
+        public IActionResult Edit(int modelId)
+        {
+            Model model = _modelRepository.GetById(modelId);
+
+            return PartialView(model);
         }
 
         [HttpPost]
         public IActionResult Edit(Model model)
         {
+            if(model.Id > 0)
+            {
+                Company company = _companyRepository.GetById(model.Company.Id);
 
-            //if (ModelState.IsValid)
-            //{
-            //    _companyRepository.Update(company);
-            //}
+                model.Company = company;
+                _modelRepository.Update(model);
 
-            //IQueryable<Company> companies = _datasource.Companies.OrderBy(car => car.Id);
-            //ViewBag.Success = "ok";
+                IQueryable<Model> models = _modelRepository.Models.Where(m => m.Company.Id == model.Company.Id);
 
-            //return PartialView("CompanyIndex", companies);
+                CarModelViewModel viewModels = new()
+                {
+                    Models = models
+                };
+
+                ViewBag.Success = "edited";
+
+                return PartialView("Models", viewModels);
+            }
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult Delete(int modelId, int companyId)
+        public IActionResult Delete(int modelId)
         {
             Model model = _modelRepository.GetById(modelId);
 
@@ -110,14 +136,16 @@ namespace AutoDealer.Web.Controllers
                 _modelRepository.Delete(model);
             }
 
-            IQueryable<Model> models = _modelRepository.Models.Where(m => m.Company.Id == companyId);
+            IQueryable<Model> models = _modelRepository.Models.Where(m => m.Company.Id == model.Company.Id);
 
             CarModelViewModel viewModel = new()
             {
                 Models = models
             };
 
-            return PartialView("Index", viewModel);
+            ViewBag.Success = "deleted";
+
+            return PartialView("Models", viewModel);
         }
     }
 }

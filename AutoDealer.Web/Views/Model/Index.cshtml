@@ -19,7 +19,7 @@
 
             if (companyId > 0) {
                 $.ajax({
-                    url: '@Url.Action("FilterByCompany", "model")',
+                    url: '@Url.Action("Models", "model")',
                     type: "GET",
                     data: {
                         companyId:  companyId

@@ -1,0 +1,18 @@
+﻿
+@{
+    string partMessage = string.Empty;
+    switch (ViewBag.Success)
+    {
+        case "created": partMessage = "создана";
+            break;
+        case "deleted": partMessage = "удалена";
+            break;
+        case "edited": partMessage = "изменена";
+            break;
+    }
+
+    if(partMessage != string.Empty)
+    {
+        <div class="alert alert-success" role="alert">Запись успешно @partMessage</div>   
+    }
+}

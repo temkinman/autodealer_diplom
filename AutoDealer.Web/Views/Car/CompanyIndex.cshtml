@@ -1,6 +1,24 @@
 ﻿@model IEnumerable<AutoDealer.Web.Models.Company>
 
 <h1>Админ панель для марок авто</h1>
+@{
+    string partMessage = string.Empty;
+    switch (ViewBag.Success)
+    {
+        case "created": partMessage = "создана";
+            break;
+        case "deleted": partMessage = "удалена";
+            break;
+        case "edited": partMessage = "изменена";
+            break;
+    }
+
+    if(partMessage != string.Empty)
+    {
+        <div class="alert alert-success" role="alert">Запись успешно @partMessage</div>   
+    }
+}
+
 <div class="col-2 text-end mb-2">
     <a class="btn btn-outline-dark" id="CreateCompany">Создать</a>
 </div>
@@ -101,9 +119,7 @@
         //        });
         //    }
         //});
-
         let idCompany = 0;
-        console.log("CompanyIndex ready");
 
         $("#modal-btn-yes").on("click", function() {
             console.log("clicked modal Yes");
@@ -156,22 +172,19 @@
 
     
     function onDeleteCompany(id) {
-        console.log("deleting car")
-        //let id = $(this).attr('id');
-        console.log("id: " + id);
-
         if (id > 0) {
             $("#my-modal").modal('show');
             idCompany = id;
         }
     }
 
-    function deleteCompany(id) {
+    function deleteCompany() {
+        console.log('deleteCompany  idCompany ' + idCompany);
         $.ajax({
             url: '@Url.Action("DeleteCompany", "car")',
             type: "POST",
             data: {
-                companyId: id
+                companyId: idCompany
             },
             success: function(data) {
                 console.log("ok from partial");

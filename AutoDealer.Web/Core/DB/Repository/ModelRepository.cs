@@ -30,7 +30,7 @@ namespace AutoDealer.Web.Core.DB.Repository
             return _dbContext.SaveChanges() > 0;
         }
 
-        public Model GetById(int modelId) => _dbContext.Models.FirstOrDefault(m => m.Id == modelId);
+        public Model GetById(int modelId) => _dbContext.Models.Include(m => m.Company).FirstOrDefault(m => m.Id == modelId);
 
 
         public bool Update(Model model)

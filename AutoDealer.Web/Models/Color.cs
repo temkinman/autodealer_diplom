@@ -9,9 +9,6 @@ namespace AutoDealer.Web.Models
         [Key]
         public int Id { get; set; }
 
-        [NotMapped]
-        public ColorType ColorTitle { get; set; }
-
         [Required(AllowEmptyStrings = false, ErrorMessage = "Укажите цвет")]
         [StringLength(30, ErrorMessage = "Цвет должен быть не меньше 2 и не более 30 символов.", MinimumLength = 2)]
         [Display(Name = "Цвет")]

@@ -7,7 +7,7 @@
 <h1 class="text-center">Создание марки автомобиля</h1>
 <div class="row">
     <form asp-controller="Car" id="companyForm" asp-action="CreateCompany" enctype="multipart/form-data" class="col-6"
-          data-ajax-method="post" data-ajax-update="#resultContent" data-ajax="true" data-ajax-success="onSuccess">
+          data-ajax-method="post" data-ajax-update="#resultContent" data-ajax="true" >
         <div class="form-group">
             <label asp-for="Country" class="control-label"></label>
             <input asp-for="Country" class="form-control" />
@@ -24,12 +24,12 @@
     </form>
 </div>
 
-@*@section Scripts {
+@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}*@
-<script>
+}
+@*<script>
     var $form = $('companyForm');
 
     $('#companyForm').on('submit', function(e){
@@ -50,4 +50,4 @@
         $.validator.unobtrusive.parse($("#companyForm"));
     //    $.validator.unobtrusive.parse($("#resultContent"));
     };
-</script>
+</script>*@
