@@ -68,9 +68,15 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Model model)
+        public IActionResult Create([FromForm] Model model)
         {
             if (model.Company.Id > 0)
+            {
+                Company company = _companyRepository.GetById(model.Company.Id);
+                model.Company = company;
+            }
+            
+            if (ModelState.IsValid)
             {
                 Company company = _companyRepository.GetById(model.Company.Id);
 
@@ -104,7 +110,7 @@ namespace AutoDealer.Web.Controllers
         [HttpPost]
         public IActionResult Edit(Model model)
         {
-            if(model.Id > 0)
+            if (ModelState.IsValid)
             {
                 Company company = _companyRepository.GetById(model.Company.Id);
 
@@ -123,7 +129,7 @@ namespace AutoDealer.Web.Controllers
                 return PartialView("Models", viewModels);
             }
 
-            return View();
+            return PartialView(model);
         }
 
         [HttpPost]

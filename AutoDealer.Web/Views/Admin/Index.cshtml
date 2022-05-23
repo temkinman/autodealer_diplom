@@ -1,6 +1,4 @@
 ﻿<div class="container-fluid bg-light" id="adminPanel">
-    <!-- h-100 takes the full height
-            of the container-->
     <div class="row h-100">
         <div class="col-2" id="sideBar">
             <nav class ="navbar">
@@ -24,13 +22,7 @@
             </nav>
             
         </div>
-        <div id="resultContent" class="col-9" style="padding: 0;">
-            <!-- Contains the main content of the webpage-->
-            <p style="padding: 15px; text-align: justify;">
-                content!!!!!
-            </p>
-
-        </div>
+        <div id="resultContent" class="col-9" style="padding: 0;"></div>
     </div>
 </div>
 
@@ -40,55 +32,4 @@
     }
 }
 
-<script>
-    $("#company").click(function() {
-        $.ajax({
-            url: '@Url.Action("CompanyIndex", "Car")',
-            type: "GET",
-            data: {},
-            success: function (data) {
-                $("#resultContent").html(data);
-                console.log("ok from partial");
-                //hideSpinner();
-            },
-            error: function (ex) {
-                //hideSpinner();
-            }
-        });
-    });
-
-    $("#model").click(function() {
-        $.ajax({
-            url: '@Url.Action("Index", "Model")',
-            type: "GET",
-            data: {
-            },
-            success: function(data) {
-                $("#resultContent").html(data);
-                console.log("ok from partial");
-                //hideSpinner();
-            },
-            error: function(ex) {
-                //hideSpinner();
-            }
-        });
-    });
-
-    $("#color").click(function() {
-        $.ajax({
-            url: '@Url.Action("Index", "Color")',
-            type: "GET",
-            data: {
-            },
-            success: function(data) {
-                $("#resultContent").html(data);
-                console.log("ok from partial");
-                console.log("resultContent" + data);
-                //hideSpinner();
-            },
-            error: function(ex) {
-                //hideSpinner();
-            }
-        });
-    });
-</script>
+<script type="text/javascript" src="./js/adminPanel.js"></script>

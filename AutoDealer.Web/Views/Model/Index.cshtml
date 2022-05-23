@@ -1,9 +1,13 @@
 ﻿@model AutoDealer.Web.ViewModel.CarModelViewModel
 
 <h1>Админ панель для моделей авто</h1>
+@{
+   await Html.PartialAsync("Notification");
+}
+
 <div class="row">
     <div class=" col-6 d-flex align-items-center justify-content-between">
-        <label asp-for="@Model.CompanyId"></label>
+        <label>Компания</label>
         <select asp-for="@Model.CompanyId" class="form-control" asp-items="@(new SelectList(@Model.Companies,"Id","Title"))">
             <option value="0">Выберите</option>
         </select>
@@ -12,25 +16,4 @@
 </div>
 <div id="modelContent"></div>
 
-<script>
-    $(document).ready(function() {
-        $("#filterBtn").on("click", function() {
-            let companyId = $("#CompanyId").val();
-
-            if (companyId > 0) {
-                $.ajax({
-                    url: '@Url.Action("Models", "model")',
-                    type: "GET",
-                    data: {
-                        companyId:  companyId
-                    },
-                    success: function(data) {
-                        $('#modelContent').html(data);
-                    },
-                    error: function(ex) {
-                    }
-                });
-            }
-        });
-    });
-</script>
+<script type="text/javascript" src="./js/carModel.js"></script>

@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
             <input type="submit" value="Сохранить" class="btn btn-outline-primary" />
-            <a id="cancelBtn" type="button" value="Отмена" class="btn btn-outline-danger" >Отмена</a>
+            <a id="cancelBtn" value="Отмена" class="btn btn-outline-danger" >Отмена</a>
         </div>
     </form>
 </div>
@@ -29,19 +29,4 @@
     }
 }
 
-<script>
-$('#cancelBtn').click(function() {
-    $.ajax({
-        url: '@Url.Action("Index", "Model")',
-        type: "GET",
-        data: { },
-        success: function(data) {
-            $('#resultContent').html(data);
-            //hideSpinner();
-        },
-        error: function(ex) {
-            //hideSpinner();
-        }
-    });
-})
-</script>
+<script type="text/javascript" src="./js/carModel.js"></script>

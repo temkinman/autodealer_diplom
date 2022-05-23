@@ -26,19 +26,4 @@
     }
 }
 
-<script>
-    $('#cancelBtn').click(function() {
-        $.ajax({
-            url: '@Url.Action("Index", "Color")',
-            type: "GET",
-            data: {},
-            success: function(data) {
-                $('#resultContent').html(data);
-                //hideSpinner();
-            },
-            error: function(ex) {
-                //hideSpinner();
-            }
-        });
-    })
-</script>
+<script type="text/javascript" src="./js/carColor.js"></script>

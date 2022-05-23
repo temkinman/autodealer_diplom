@@ -28,7 +28,7 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromForm] Color model)
+        public IActionResult Create(Color model)
         {
             if (ModelState.IsValid)
             {

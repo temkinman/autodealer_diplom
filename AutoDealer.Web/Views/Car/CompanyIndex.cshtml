@@ -88,113 +88,113 @@
 
 <script>
     
-    $(document).ready(function() {
-        //$(".delCompany").click(function (e) {
-        //    console.log("deleting car")
-        //    let id = $(this).attr('id');
-        //    console.log("id: " + id);
-        //    console.log("==============");
+    //$(document).ready(function() {
+    //    //$(".delCompany").click(function (e) {
+    //    //    console.log("deleting car")
+    //    //    let id = $(this).attr('id');
+    //    //    console.log("id: " + id);
+    //    //    console.log("==============");
 
-        //    if(id > 0) {
-        //        $("#my-modal").modal('show');
-        //        modalConfirm(function(confirm){
-        //            if(confirm){
-        //                console.log("You said YES")
-        //                $.ajax({
-        //                    url: '@Url.Action("DeleteCompany", "car")',
-        //                    type: "POST",
-        //                    data: {
-        //                        companyId: id
-        //                    },
-        //                    success: function (data) {
-        //                        console.log("ok from partial");
-        //                        $('#resultContent').html(data);
-        //                        //hideSpinner();
-        //                    },
-        //                    error: function (ex) {
-        //                        //hideSpinner();
-        //                    }
-        //                });
-        //            }
-        //        });
-        //    }
-        //});
-        let idCompany = 0;
+    //    //    if(id > 0) {
+    //    //        $("#my-modal").modal('show');
+    //    //        modalConfirm(function(confirm){
+    //    //            if(confirm){
+    //    //                console.log("You said YES")
+    //    //                $.ajax({
+    //    //                    url: '@Url.Action("DeleteCompany", "car")',
+    //    //                    type: "POST",
+    //    //                    data: {
+    //    //                        companyId: id
+    //    //                    },
+    //    //                    success: function (data) {
+    //    //                        console.log("ok from partial");
+    //    //                        $('#resultContent').html(data);
+    //    //                        //hideSpinner();
+    //    //                    },
+    //    //                    error: function (ex) {
+    //    //                        //hideSpinner();
+    //    //                    }
+    //    //                });
+    //    //            }
+    //    //        });
+    //    //    }
+    //    //});
+    //    let idCompany = 0;
 
-        $("#modal-btn-yes").on("click", function() {
-            console.log("clicked modal Yes");
-            $("#my-modal").modal('hide');
-            deleteCompany(idCompany);
-        });
+    //    $("#modal-btn-yes").on("click", function() {
+    //        console.log("clicked modal Yes");
+    //        $("#my-modal").modal('hide');
+    //        deleteCompany(idCompany);
+    //    });
 
-        $("#modal-btn-no").on("click", function() {
-            console.log("clicked modal No");
-            $("#my-modal").modal('hide');
-        });
+    //    $("#modal-btn-no").on("click", function() {
+    //        console.log("clicked modal No");
+    //        $("#my-modal").modal('hide');
+    //    });
 
-        $(".editCompany").click(function() {
-            console.log("editing car")
-            let id = $(this).attr('id');
-            console.log("id: " + id);
+    //    $(".editCompany").click(function() {
+    //        console.log("editing car")
+    //        let id = $(this).attr('id');
+    //        console.log("id: " + id);
 
-            if (id > 0) {
-                $.ajax({
-                    url: '@Url.Action("EditCompany", "car")',
-                    type: "GET",
-                    data: {
-                        companyId: id
-                    },
-                    success: function(data) {
-                        console.log("ok from partial");
-                        $('#resultContent').html(data);
-                        //hideSpinner();
-                    },
-                    error: function(ex) {
-                        //hideSpinner();
-                    }
-                });
-            }
-        });
+    //        if (id > 0) {
+    //            $.ajax({
+    //                url: '@Url.Action("EditCompany", "car")',
+    //                type: "GET",
+    //                data: {
+    //                    companyId: id
+    //                },
+    //                success: function(data) {
+    //                    console.log("ok from partial");
+    //                    $('#resultContent').html(data);
+    //                    //hideSpinner();
+    //                },
+    //                error: function(ex) {
+    //                    //hideSpinner();
+    //                }
+    //            });
+    //        }
+    //    });
 
-        $("#CreateCompany").click(function() {
-            $.ajax({
-                url: '@Url.Action("CreateCompany", "car")',
-                type: "GET",
-                data: {},
-                success: function(data) {
-                    $('#resultContent').html(data);
-                },
-                error: function(ex) {
-                }
-            });
-        });
-    });
+    //    $("#CreateCompany").click(function() {
+    //        $.ajax({
+    //            url: '@Url.Action("CreateCompany", "car")',
+    //            type: "GET",
+    //            data: {},
+    //            success: function(data) {
+    //                $('#resultContent').html(data);
+    //            },
+    //            error: function(ex) {
+    //            }
+    //        });
+    //    });
+    //});
 
     
-    function onDeleteCompany(id) {
-        if (id > 0) {
-            $("#my-modal").modal('show');
-            idCompany = id;
-        }
-    }
+    //function onDeleteCompany(id) {
+    //    if (id > 0) {
+    //        $("#my-modal").modal('show');
+    //        idCompany = id;
+    //    }
+    //}
 
-    function deleteCompany() {
-        console.log('deleteCompany  idCompany ' + idCompany);
-        $.ajax({
-            url: '@Url.Action("DeleteCompany", "car")',
-            type: "POST",
-            data: {
-                companyId: idCompany
-            },
-            success: function(data) {
-                console.log("ok from partial");
-                $('#resultContent').html(data);
-                //hideSpinner();
-            },
-            error: function(ex) {
-                //hideSpinner();
-            }
-        });
-    }
+    //function deleteCompany() {
+    //    console.log('deleteCompany  idCompany ' + idCompany);
+    //    $.ajax({
+    //        url: '@Url.Action("DeleteCompany", "car")',
+    //        type: "POST",
+    //        data: {
+    //            companyId: idCompany
+    //        },
+    //        success: function(data) {
+    //            console.log("ok from partial");
+    //            $('#resultContent').html(data);
+    //            //hideSpinner();
+    //        },
+    //        error: function(ex) {
+    //            //hideSpinner();
+    //        }
+    //    });
+    //}
 </script>
 
