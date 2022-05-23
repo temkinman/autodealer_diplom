@@ -14,7 +14,7 @@
     </div>
     <div class="col-6 form-group" id="SelectModels">
         <label asp-for="ModelId" class="control-label"><strong>Модель:</strong></label>
-        <select asp-for="ModelId" class="form-control" asp-items="@(new SelectList(Model.Models,"Id","Title"))">
+        <select asp-for="ModelId" class="form-control" id="Model" asp-items="@(new SelectList(Model.Models,"Id","Title"))">
             <option value="0">Выберите</option>
         </select>
     </div>
@@ -118,7 +118,7 @@
 
 <div class="row">
     <form asp-action="UploadFiles" asp-controller="FileUpload" enctype="multipart/form-data" method="post" class="col-6 form-group"
-            data-ajax-method="post" data-ajax-update="#photos" data-ajax="true" class="form-group" data-ajax-success="onSuccess" data-ajax-failure="onFailed">
+          data-ajax-method="post" data-ajax-update="#photos" data-ajax="true" class="form-group" data-ajax-success="onSuccess" data-ajax-failure="onFailed">
         <input type="hidden" class="" name="company" id="companyFile" multiple>
         <input type="hidden" class="" name="model" id="modelFile" multiple>
         <input type="file" class="" name="photoFile" id="photoFile" multiple accept="image/*">
@@ -134,76 +134,83 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+    }
 
-@Html.Hidden("Models", (object)ViewBag.Models);
+    @Html.Hidden("Models", (object)ViewBag.Models);
 
-<script>
-    $(document).ready(function(){
-        console.log("doc ready carfilter");
+    <script>
+        $(document).ready(function() {
+            console.log("doc ready carfilter");
 
-        let companyValue = $("#CompanyId").val();
+            let companyValue = $("#CompanyId").val();
 
-        if(companyValue > 0) {
-            $("#ModelId").prop("disabled", false);
-        }
-    });
+            if (companyValue > 0) {
+                $("#ModelId").prop("disabled", false);
+            }
 
-    $("#Company").on("change" , function() {
-        let selection = $(this).find("option:selected").text();
-        let value = $(this).val();
 
-        $("#companyFile").val(selection);
-    
-        if(value > 0) {
-            $.ajax({
-                url: '@Url.Action("getmodelsbycompany", "car")',
-                type: "GET",
-                data: {
-                    companyId: value,
-                    filter: false
-                },
-                success: function (data) {
-                    $("#SelectModels").html(data);
-                    console.log("ok from partial");
-                    //hideSpinner();
-                },
-                error: function (ex) {
-                    //hideSpinner();
+            $("#Company").on("change", function() {
+                let selection = $(this).find("option:selected").text();
+                let value = $(this).val();
+
+                $("#companyFile").val(selection);
+                console.log('company_value: ' + selection)
+
+                if (value > 0) {
+                    $.ajax({
+                        url: '@Url.Action("getmodelsbycompany", "car")',
+                        type: "GET",
+                        data: {
+                            companyId: value,
+                            filter: false
+                        },
+                        success: function(data) {
+                            $("#SelectModels").html(data);
+                            console.log("ok from partial");
+                            updateModels();
+                            //hideSpinner();
+                        },
+                        error: function(ex) {
+                            //hideSpinner();
+                        }
+                    });
                 }
+
+                if (value == 0) {
+                    $("#ModelId").find('option').remove();
+                    $("#ModelId").append('<option value="0">Выберите</options>');
+                    $("#ModelId").prop("disabled", true);
+                }
+            });
+
+            
+        });
+
+        function updateModels() {
+            $("#ModelId").on("change", function() {
+                let selection = $(this).find("option:selected").text();
+                let value = $(this).val();
+
+                $("#modelFile").val(selection);
+
+                console.log('selection: ' + selection)
+                console.log('model_value: ' + value)
+
+                //modelsResult.find('option').remove();
+
+                //if(value > -1) {
+                //    PopulateModelSelect(selection);
+                //}
             });
         }
 
-        if(value == 0) {
-            $("#ModelId").find('option').remove(); 
-            $("#ModelId").append('<option value="0">Выберите</options>');
-            $("#ModelId").prop("disabled", true);
+        let onFailed = function(context) {
+            console.log(context);
         }
-    });
+        let onSuccess = function(context) {
+            console.log(context);
+            $("#photos").val(context);
+        };
 
-    $("#Model").on("change" , function() {
-        let selection = $(this).find("option:selected").text();
-        let value = $(this).val();
-
-        $("#modelFile").val(selection);
-    
-        console.log('selection: ' + selection)
-        console.log('company_value: ' + value)
-
-        //modelsResult.find('option').remove(); 
-
-        //if(value > -1) {
-        //    PopulateModelSelect(selection);
-        //}
-    });
-
-    let onFailed = function(context){
-        console.log(context);
-    }
-    let onSuccess = function(context){
-        console.log(context);
-         $("#photos").val(context);
-    };
-
-     //$("input:text").val("Glenn Quagmire");
-</script>
+             //$("input:text").val("Glenn Quagmire");
+    </script>
