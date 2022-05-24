@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -40,8 +41,9 @@ namespace AutoDealer.Web.Models
         [Required(ErrorMessage = "Укажите дату первого рабочего дня")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Дата начало работы")]
-        public DateTime StartWorkDay { get; set; }
+        public DateTime StartWorkDay { get; set; } = DateTime.Now;
 
+        [ValidateNever]
         public virtual Role Role { get; set; }
         public string FullName { 
             get => FirstName + " " + LastName;

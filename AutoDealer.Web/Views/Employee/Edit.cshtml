@@ -1,0 +1,55 @@
+﻿@model AutoDealer.Web.Models.Employee
+
+<h1 class="text-center">Изменение марки автомобиля</h1>
+<div class="row">
+    <form asp-controller="Employee" asp-action="Edit" enctype="multipart/form-data" method="post" class="col-6"
+          data-ajax-method="post" data-ajax-update="#resultContent" data-ajax="true">
+        <input asp-for="Id" type="hidden" />
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="control-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div><div class="form-group">
+            <label asp-for="BDay" class="control-label"></label>
+            <input asp-for="BDay" class="form-control" />
+            <span asp-validation-for="BDay" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Role" class="control-label"></label>
+            <input asp-for="Role" class="form-control" />
+            <span asp-validation-for="Role" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Изменить" class="btn btn-out-primary" />
+            <a id="cancelBtn" value="Отмена" class="btn btn-outline-danger">Отмена</a>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Изменить" class="btn btn-out-primary" />
+            <a id="cancelBtn" value="Отмена" class="btn btn-outline-danger">Отмена</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script type="text/javascript" src="./js/employee.js;   "></script>
+
