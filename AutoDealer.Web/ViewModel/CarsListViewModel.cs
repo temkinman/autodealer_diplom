@@ -10,5 +10,7 @@ namespace AutoDealer.Web.ViewModel
         public PagingInfo PagingInfo { get; set; }
         public CarFilter CarFilter { get; set; }
         public SortViewModel SortViewModel { get; set; }
+        public string SelectedCompany { get; set; }
+        public string SelectedModel { get; set; }
     }
 }

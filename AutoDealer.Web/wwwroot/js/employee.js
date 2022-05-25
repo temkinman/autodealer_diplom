@@ -1,26 +1,28 @@
 ﻿$(document).ready(function () {
-    $("#filterBtn").on("click", function () {
-        let companyId = $("#CompanyId").val();
+    //$("#filterBtn").on("click", function () {
+    //    let employeeId = $("#EmployeeId").val();
 
-        if (companyId > 0) {
-            $.ajax({
-                url: 'model/models',
-                type: "GET",
-                data: {
-                    companyId: companyId
-                },
-                success: function (data) {
-                    $('#modelContent').html(data);
-                },
-                error: function (ex) {
-                }
-            });
-        }
-    });
+    //    if (employeeId > 0) {
+    //        $.ajax({
+    //            url: 'employee/index',
+    //            type: "GET",
+    //            data: {
+    //                companyId: employeeId
+    //            },
+    //            success: function (data) {
+    //                $('#modelContent').html(data);
+    //            },
+    //            error: function (ex) {
+    //            }
+    //        });
+    //    }
+    //});
 
-    $("#cancelBtn").click(function () {
+    console.log('Doc ready emplyee...');
+
+    $("#createEmployee").click(function () {
         $.ajax({
-            url: 'model/index',
+            url: '/employee/create',
             type: "GET",
             data: {},
             success: function (data) {
@@ -31,46 +33,12 @@
         });
     });
 
-
-    let idModel = 0;
-    $("#modal-btn-yes").on("click", function () {
-        $("#my-modal").modal('hide');
-        deleteModel(idModel);
-    });
-
-    $("#modal-btn-no").on("click", function () {
-        $("#my-modal").modal('hide');
-    });
-
-    $(".editModel").click(function () {
-        let id = $(this).attr('id');
-
-        if (id > 0) {
-            $.ajax({
-                url: 'model/edit',
-                type: "GET",
-                data: {
-                    modelId: id
-                },
-                success: function (data) {
-                    $('#resultContent').html(data);
-                    //hideSpinner();
-                },
-                error: function (ex) {
-                    //hideSpinner();
-                }
-            });
-        }
-    });
-
-    $("#CreateModel").click(function () {
-        let id = $('#CompanyId').val();
+    $("#cancelBtn").click(function () {
+        console.log('canceling...');
         $.ajax({
-            url: 'model/create',
+            url: '/employee/index',
             type: "GET",
-            data: {
-                companyId: id
-            },
+            data: {},
             success: function (data) {
                 $('#resultContent').html(data);
             },
@@ -78,29 +46,56 @@
             }
         });
     });
+
+    let idEmployee = 0;
+    $("#modal-btn-yes").on("click", function () {
+        $("#my-modal").modal('hide');
+        deleteModel(idEmployee);
+    });
+
+    $("#modal-btn-no").on("click", function () {
+        $("#my-modal").modal('hide');
+    });
+
+    $(".editEmployee").click(function () {
+        console.log('editEmployee...');
+        let id = $(this).attr('id');
+
+        if (id > 0) {
+            $.ajax({
+                url: '/employee/edit',
+                type: "GET",
+                data: {
+                    employeeId: id
+                },
+                success: function (data) {
+                    $('#resultContent').html(data);
+                },
+                error: function (ex) {
+                }
+            });
+        }
+    });
 });
 
-function onDeleteModel(id) {
+function onDeleteEmployee(id) {
     if (id > 0) {
         $("#my-modal").modal('show');
-        idModel = id;
+        idEmployee = id;
     }
 }
 
-function deleteModel() {
-    let companyId = $('#CompanyId').val();
+function deleteEmployee() {
     $.ajax({
-        url: 'model/delete',
+        url: '/model/delete',
         type: "POST",
         data: {
-            modelId: idModel
+            employeeId: idEmployee
         },
         success: function (data) {
             $('#resultContent').html(data);
-            //hideSpinner();
         },
         error: function (ex) {
-            //hideSpinner();
         }
     });
 }

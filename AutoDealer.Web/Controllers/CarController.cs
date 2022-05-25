@@ -21,11 +21,14 @@ namespace AutoDealer.Web.Controllers
     {
         private readonly ILogger<CarController> _logger;
         private readonly ICarRepository _carRepository;
-        //private readonly IColorRepository _colorRepository;
-        //private readonly IModelRepository _modelRepository;
+        private readonly IColorRepository _colorRepository;
+        private readonly IModelRepository _modelRepository;
         private readonly ICompanyRepository _companyRepository;
-        //private readonly IEngineTypeRepository _engineTypeRepository;
-        //private readonly ITransmissionRepository _transmissionRepository;
+        private readonly ICarOwnerRepository _carownerRepository;
+        private readonly IEngineTypeRepository _engineTypeRepository;
+        private readonly ITransmissionRepository _transmissionRepository;
+        private readonly ISettingsRepository _settingsRepository;
+        private readonly IStatusRepository _statusRepository;
 
         private IDataSource _datasource;
         private IFilter _filter;
@@ -33,12 +36,14 @@ namespace AutoDealer.Web.Controllers
         public CarController(
                              ILogger<CarController> logger,
                              ICarRepository carRepository,
-                             //IColorRepository colorRepository,
-                             //IModelRepository modelRepository,
+                             IColorRepository colorRepository,
+                             IModelRepository modelRepository,
                              ICompanyRepository companyRepository,
-                             //IEngineTypeRepository engineTypeRepository,
-                             //ITransmissionRepository transmissionRepository,
-                             IServiceProvider serviceProvider
+                             IEngineTypeRepository engineTypeRepository,
+                             ITransmissionRepository transmissionRepository,
+                             IServiceProvider serviceProvider,
+                             ISettingsRepository settingsRepository,
+                             IStatusRepository statusRepository
                              )
         {
             //Singlon object
@@ -48,11 +53,13 @@ namespace AutoDealer.Web.Controllers
 
             _logger = logger;
             _carRepository = carRepository;
-            //_colorRepository = colorRepository;
-            //_modelRepository = modelRepository;
+            _colorRepository = colorRepository;
+            _modelRepository = modelRepository;
             _companyRepository = companyRepository;
-            //_engineTypeRepository = engineTypeRepository;
-            //_transmissionRepository = transmissionRepository;
+            _engineTypeRepository = engineTypeRepository;
+            _transmissionRepository = transmissionRepository;
+            _settingsRepository = settingsRepository;
+            _statusRepository = statusRepository;
         }
 
         private CarFilter _cf = null;
@@ -61,7 +68,8 @@ namespace AutoDealer.Web.Controllers
         public IActionResult Index(int currentPage = 1, CarFilter carFilter = null, SortState sortOrder = SortState.ModelAsc)
         {
 
-            if(!User.Identity.IsAuthenticated) {
+            if (!User.Identity.IsAuthenticated)
+            {
                 return Content(User.Identity.Name);
                 //return View("~/views/account/login.cshtml");
             }
@@ -78,12 +86,12 @@ namespace AutoDealer.Web.Controllers
             {
                 carFilter = _filter.GetFilter();
             }
-                
+
             if (!carFilter.IsEmpty)
             {
                 _filter.SaveFilter(carFilter);
             }
-                
+
             carFilter.Colors = _datasource.Colors;
             //carFilter.Models = _datasource.Models;
             carFilter.Models = new List<Model>();
@@ -229,15 +237,21 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult CarDetails(int carId)
+        public IActionResult CarDetails(int carId, string admin = "")
         {
             Car car = _carRepository.GetById(carId);
 
-            if(car == null)
+            if (admin == "adminPanel")
+            {
+                ViewBag.Admin = admin;
+                return PartialView("ModalDetails", car);
+            }
+
+            if (car == null)
             {
                 return NotFound();
             }
-            
+
             return View(car);
         }
 
@@ -245,7 +259,7 @@ namespace AutoDealer.Web.Controllers
         public IActionResult GetModelsByCompany(int companyId, bool filter = false)
         {
             ViewBag.Filter = filter;
-            
+
             IQueryable<Model> models = _datasource.Models.Where(m => m.Company.Id == companyId);
 
             AddingUsedCarViewModel viewModel = new AddingUsedCarViewModel { Models = models };
@@ -254,80 +268,230 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult CompanyIndex()
+        public IActionResult CarAdminIndex()
         {
-            IQueryable<Company> companies = _datasource.Companies;
-            ViewBag.Company = "company";
+            List<Car> cars = _carRepository.Cars.Where(c => c.Status.Id != (int)CarStatus.Sold)
+                                                .OrderBy(c => c.Id)
+                                                .ToList();
 
-            return PartialView("CompanyIndex", companies);
+            return PartialView(cars);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int carId)
+        {
+            Car car = _carRepository.GetById(carId);
+
+            if (car != null)
+            {
+                _carRepository.Delete(car);
+                ViewBag.Success = "deleted";
+            }
+
+            List<Car> cars = _carRepository.Cars.OrderBy(c => c.Id).ToList();
+
+            return PartialView("CarAdminIndex", cars);
         }
 
         [HttpGet]
-        public IActionResult CreateCompany()
+        public IActionResult CarAdminList()
         {
-            return PartialView("CompanyCreate");
-        }
+            List<Car> cars = _carRepository.Cars.OrderBy(c => c.Id).ToList();
 
-        [HttpPost]
-        public IActionResult CreateCompany(Company company)
-        {
-            if (ModelState.IsValid)
-            {
-                _companyRepository.Create(company);
-                IQueryable<Company> companies = _datasource.Companies.OrderBy(car => car.Id);
-
-                ViewBag.Success = "created";
-
-                return PartialView("CompanyIndex", companies);
-            }
-
-            return PartialView("CompanyCreate", company);
+            return View(cars);
         }
 
         [HttpGet]
-        public IActionResult EditCompany(int companyId)
+        public IActionResult Edit(int carId)
         {
-            Company companyUpdated = _datasource.Companies.Where(c => c.Id == companyId).FirstOrDefault();
+            Car car = _carRepository.GetById(carId);
 
-            if(companyUpdated == null)
+            CarViewModel viewModel = null;
+
+            if (car != null)
             {
-                return NotFound();
+                viewModel = new CarViewModel()
+                {
+                    Car = car,
+                    //CarOwner = _carownerRepository.GetById(car.CarOwner.Id),
+                    Colors = _datasource.Colors,
+                    Companies = _datasource.Companies,
+                    EngineTypes = _datasource.EngineTypes,
+                    Transmissions = _datasource.Transmissions,
+                    Models = _datasource.Models.Where(m => m.Company.Id == car.Company.Id)
+                };
             }
 
-            return PartialView("CompanyEdit", companyUpdated);
+            return PartialView(viewModel);
         }
 
         [HttpPost]
-        public IActionResult EditCompany(Company company)
+        public IActionResult Edit(CarViewModel model)
         {
+            Company сompany = _companyRepository.GetById(model.Car.Company.Id);
+            Model carModel = _modelRepository.GetById(model.Car.Model.Id);
+            Color color = _colorRepository.GetById(model.Car.Color.Id);
+            Status status = _statusRepository.GetById(3);
+            EngineType engineType = _engineTypeRepository.GetById(model.Car.Engine.Type.Id);
+            Transmission transmission = _transmissionRepository.GetById(model.Car.Transmission.Id);
 
-            if (ModelState.IsValid)
+            Engine engine = new Engine
             {
-                _companyRepository.Update(company);
+                Capacity = model.Car.Engine.Capacity,
+                Type = engineType
+            };
 
-                IQueryable<Company> companies = _datasource.Companies.OrderBy(car => car.Id);
-                ViewBag.Success = "edited";
+            AdvSettings existSettings = _settingsRepository.Settings.FirstOrDefault(set => set.Equals(model.Car.Settings));
 
-                return PartialView("CompanyIndex", companies);
-            }
+            Car updated = model.Car;
+            updated.Company = сompany;
+            updated.Model = carModel;
+            updated.Color = color;
+            updated.Status = status;
+            updated.Engine = engine;
+            updated.Transmission = transmission;
+            //car.CarOwner = carOwner;
+            updated.Settings = existSettings ?? model.Car.Settings;
 
-            return PartialView("CompanyEdit", company);
+            _carRepository.Update(updated);
+            ViewBag.Success = "edited";
+
+            List<Car> cars = _carRepository.Cars.OrderBy(c => c.Id).ToList();
+
+            return PartialView("CarAdminIndex", cars);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            Company defaultSelectedCompany = _datasource.Companies.FirstOrDefault();
+
+            CarViewModel viewModel = new CarViewModel()
+            {
+                Car = new(),
+                Colors = _datasource.Colors,
+                Companies = _datasource.Companies,
+                EngineTypes = _datasource.EngineTypes,
+                Transmissions = _datasource.Transmissions,
+                Models = _datasource.Models.Where(m => m.Company.Id == defaultSelectedCompany.Id)
+            };
+
+            ViewBag.Company = defaultSelectedCompany.Title;
+            ViewBag.Model = _datasource.Models.FirstOrDefault(m => m.Company.Id == defaultSelectedCompany.Id).Title;
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult DeleteCompany(int companyId)
+        public IActionResult Create(CarViewModel model)
         {
-            Company company = _companyRepository.GetById(companyId);
-            
-            if (company != null)
+            Company сompany = _companyRepository.GetById(model.CompanyId);
+            Model carModel = _modelRepository.GetById(model.ModelId);
+            Color color = _colorRepository.GetById(model.ColorId);
+            Status status = _statusRepository.GetById(3);
+            EngineType engineType = _engineTypeRepository.GetById(model.EngineTypeId);
+            Transmission transmission = _transmissionRepository.GetById(model.TransmissionId);
+
+            Engine engine = new Engine
             {
-                _companyRepository.Delete(company);
-            }
+                Capacity = model.Car.Engine.Capacity,
+                Type = engineType
+            };
 
-            List<Company> companies = _datasource.Companies.OrderBy(car => car.Id).ToList();
-            ViewBag.Success = "deleted";
+            AdvSettings existSettings = _settingsRepository.Settings.FirstOrDefault(set => set.Equals(model.Car.Settings));
 
-            return PartialView("CompanyIndex", companies);
+            Car car = model.Car;
+            car.Company = сompany;
+            car.Model = carModel;
+            car.Color = color;
+            car.Status = status;
+            car.Engine = engine;
+            car.Transmission = transmission;
+            car.Settings = existSettings ?? model.Car.Settings;
+
+            bool result = _carRepository.Create(car);
+
+            ViewBag.CarSaved = result ? "ok" : "no";
+
+            return View("CarDetails", car);
         }
+
+
+        //[HttpGet]
+        //public IActionResult CompanyIndex()
+        //{
+        //    IQueryable<Company> companies = _datasource.Companies;
+        //    ViewBag.Company = "company";
+
+        //    return PartialView("CompanyIndex", companies);
+        //}
+
+        //[HttpGet]
+        //public IActionResult CreateCompany()
+        //{
+        //    return PartialView("CompanyCreate");
+        //}
+
+        //[HttpPost]
+        //public IActionResult CreateCompany(Company company)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _companyRepository.Create(company);
+        //        IQueryable<Company> companies = _datasource.Companies.OrderBy(car => car.Id);
+
+        //        ViewBag.Success = "created";
+
+        //        return PartialView("CompanyIndex", companies);
+        //    }
+
+        //    return PartialView("CompanyCreate", company);
+        //}
+
+        //[HttpGet]
+        //public IActionResult EditCompany(int companyId)
+        //{
+        //    Company companyUpdated = _datasource.Companies.Where(c => c.Id == companyId).FirstOrDefault();
+
+        //    if(companyUpdated == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return PartialView("CompanyEdit", companyUpdated);
+        //}
+
+        //[HttpPost]
+        //public IActionResult EditCompany(Company company)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        _companyRepository.Update(company);
+
+        //        IQueryable<Company> companies = _datasource.Companies.OrderBy(car => car.Id);
+        //        ViewBag.Success = "edited";
+
+        //        return PartialView("CompanyIndex", companies);
+        //    }
+
+        //    return PartialView("CompanyEdit", company);
+        //}
+
+        //[HttpPost]
+        //public IActionResult DeleteCompany(int companyId)
+        //{
+        //    Company company = _companyRepository.GetById(companyId);
+
+        //    if (company != null)
+        //    {
+        //        _companyRepository.Delete(company);
+        //    }
+
+        //    List<Company> companies = _datasource.Companies.OrderBy(car => car.Id).ToList();
+        //    ViewBag.Success = "deleted";
+
+        //    return PartialView("CompanyIndex", companies);
+        //}
     }
 }

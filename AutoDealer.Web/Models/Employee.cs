@@ -25,6 +25,7 @@ namespace AutoDealer.Web.Models
         [Display(Name = "Дата рождения")]
         public DateTime BDay { get; set; }
 
+        [Required(ErrorMessage = "Укажите телефон")]
         [Display(Name = "Телефон")]
         public string Phone { get; set; }
 
@@ -38,13 +39,13 @@ namespace AutoDealer.Web.Models
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Укажите дату первого рабочего дня")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Дата начало работы")]
         public DateTime StartWorkDay { get; set; } = DateTime.Now;
 
-        [ValidateNever]
-        public virtual Role Role { get; set; }
+        [Required(ErrorMessage = "Выберите должность")]
+        public string Role { get; set; }
+
         public string FullName { 
             get => FirstName + " " + LastName;
         }

@@ -1,0 +1,146 @@
+﻿@model AutoDealer.Web.Models.Car
+
+<style type="text/css">
+    body {
+        font-family: Arial;
+        font-size: 10pt;
+    }
+
+    table, table td {
+        border: 0px solid #fff;
+    }
+
+    .carImg {
+        max-height: 180px;
+    }
+
+    .carousel-wrap {
+        max-width: 465px;
+    }
+
+    .owl-item .active {
+        /*margin-left: 115px;*/
+    }
+
+    .owl-carousel .owl-item img {
+        width: 50% !important;
+        display: inherit !important;
+    }
+</style>
+
+<div class="carousel-wrap">
+    <div class="owl-carousel owl-theme" id="slider">
+        @{
+            if (@Model?.CarPhotos?.Count() == 0)
+            {
+                <div class="item">
+                    <a href="~/images/car-default.jpg" data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
+                        <img class="demo cursor carImg" src="~/images/car-default.jpg" alt="Car photo">
+                    </a>
+                </div>
+            }
+            else
+            {
+                for (int i = 1; i < @Model?.CarPhotos?.Count(); i++)
+                {
+                    string subPath = @Model.GetCarImagesFolderPath();
+                    string path = $"/CarImages{subPath}/{@Model.CarPhotos[i]}";
+
+                    <div class="item">
+                        <a href=@path data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
+                            <img class="demo cursor carImg" src=@path alt="Picture">
+                        </a>
+                    </div>
+                }
+            }
+
+        }
+    </div>
+</div>
+
+<div class="card card-body">
+    <p class="card-text"><label>Марка:</label> <span>@Model.Company.Title</span></p>
+    <p class="card-text"><label>Модель:</label> <span>@Model.Model.Title</span></p>
+    <p class="card-text"><label>Год:</label> <span>@Model.ProduceDate</span></p>
+    <p class="card-text"><label>Двигатель:</label> <span>@Model.Engine.Capacity л. @Model.Engine.Type.Title</span></p>
+    <p class="card-text"><label>Коробка:</label> <span>@Model.Transmission.TransmissionType</span></p>
+    <p class="card-text"><label>Цвет:</label> <span>@Model.Color.Title</span></p>
+    <p class="card-text"><label>Пробег:</label> <span>@Model.Kilometre</span></p>
+    <p class="card-text"><label>Цена:</label> <span>@Model.Price $</span></p>
+    <p class="card-text"><label>Комплектация:</label> <span>@Model.Settings</span></p>
+    <p class="card-text">
+        <label>Описание:</label> <span>@Model.Description</span>
+    </p>
+</div>
+
+<script>
+    $(document).ready(function(){
+        console.log('document ready...');
+        $('.carImg').click(function(){
+            $('.next-slide').hide();
+            $('.prev-slide').hide();
+        });
+
+        lightbox.option({
+            'resizeDuration': 300,
+            'wrapAround': true,
+            'imageFadeDuration': 400,
+            'fadeDuration': 400,
+            'albumLabel': 'Фото %1 из %2'
+        });
+
+        $('body').click(function(){
+            if ($("#lightbox").not(":visible")) {
+                $('.next-slide').show();
+                $('.prev-slide').show();
+            }
+            else {
+                $('.next-slide').hide();
+                $('.prev-slide').hide();
+            }
+        });
+
+        var owl = $('.owl-carousel');
+        owl.on('initialize.owl.carousel initialized.owl.carousel ' +
+        'initialize.owl.carousel initialize.owl.carousel ' +
+        'resize.owl.carousel resized.owl.carousel ' +
+        'refresh.owl.carousel refreshed.owl.carousel ' +
+        'update.owl.carousel updated.owl.carousel ' +
+        'drag.owl.carousel dragged.owl.carousel ' +
+        'translate.owl.carousel translated.owl.carousel ' +
+        'to.owl.carousel changed.owl.carousel',
+        function(e) {
+            $('.' + e.type)
+            .removeClass('secondary')
+            .addClass('success');
+            window.setTimeout(function() {
+            $('.' + e.type)
+                .removeClass('success')
+                .addClass('secondary');
+            }, 500);
+        });
+        owl.owlCarousel({
+        loop: true,
+        nav: false,
+        lazyLoad: true,
+        margin: 10,
+        video: true,
+        dots: false,
+        navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
+        responsive: {
+            0: {
+            items: 1
+            },
+            600: {
+            items: 1
+            },
+            960: {
+            items: 1,
+            },
+            1200: {
+            items: 1
+            }
+        }
+        });
+    });
+</script>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace AutoDealer.Web.Controllers
@@ -89,7 +90,10 @@ namespace AutoDealer.Web.Controllers
                 }
             }
 
-            return Content(carPhotoPaths); // new PartialViewResult { ViewName = "FileUploaded", ViewData = this.ViewData };
+            var input = Content($"<input name=\"Car.Photos\" type =\"hidden\" id=\"Car_Photos\" value=\"{ carPhotoPaths}\" />");
+            input.ContentType = "text/html; charset=UTF-8";
+
+            return input; // new PartialViewResult { ViewName = "FileUploaded", ViewData = this.ViewData };
         }
     }
 }

@@ -45,7 +45,7 @@
 </table>
 
 @{
-   Html.RenderPartial("ModalDeleteDialog", "марку авто");
+   await Html.RenderPartialAsync("ModalDeleteDialog", "марку авто");
 }
 
 <div class="alert" role="alert" id="result"></div>

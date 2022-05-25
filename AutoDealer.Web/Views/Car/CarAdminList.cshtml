@@ -1,0 +1,139 @@
+﻿@model IEnumerable<AutoDealer.Web.Models.Car>
+
+<div class="container-fluid bg-light" id="adminPanel">
+    <div class="row h-100">
+        <div class="col-2" id="sideBar">
+            <nav class ="navbar">
+                <ul class="navbar-nav nav">
+                    <li class="nav-item leftSide">
+                        <a class="nav-link" id="companies" href="#" ><i class="fa fa-fw fa-home"></i>Марки</a>
+                    </li>
+                    <li class="nav-item leftSide">
+                        <a class="nav-link" id="models" href="#"><i class="fa fa-fw fa-wrench"></i>Модели</a>
+                    </li>
+                    <li class="nav-item leftSide">
+                        <a class="nav-link" id="colors" href="#"><i class="fa fa-fw fa-user"></i>Цвета</a>
+                    </li>
+                    <li class="nav-item leftSide">
+                        <a class="nav-link" id="employees" href="#"><i class="fa fa-fw fa-user"></i>Работники</a>
+                    </li>
+                    <li class="nav-item leftSide">
+                        <a class="nav-link" id="cars" href="#"><i class="fa fa-fw fa-envelope"></i>Авто на складе</a>
+                    </li>
+                </ul>
+            </nav>
+            
+        </div>
+        <div id="resultContent" class="col-9" style="padding: 0;"></div>
+    </div>
+</div>
+
+<div id="resultContent">
+    <h1>Авто на складе</h1>
+    @{
+        await Html.PartialAsync("Notification");
+    }
+
+    <div class="col-2 text-end mb-2">
+        <a class="btn btn-outline-dark" id="createCar">Добавить</a>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Company.Title)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Model.Title)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.ProduceDate)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Engine.Capacity)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Engine.Type.Title)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Transmission.TransmissionType)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Company.Title)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Model.Title)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.ProduceDate)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Engine.Capacity)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Engine.Type.Title)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Transmission.TransmissionType)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td class="text-center">
+                        <a class="btn btn-outline-primary" asp-controller="Car" asp-action="CarDetails"
+                       asp-all-route-data=@(new Dictionary<string, string> { { "admin", "adminPanel" },{"carId", @item.Id.ToString()} })>Детали</a>
+                        <a class="btn btn-outline-secondary" asp-controller="Car" asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
+                        <a class="btn btn-outline-danger" onclick="onDeleteCar(@item.Id)">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{
+    await Html.RenderPartialAsync("ModalDeleteDialog", "запись автомобиля");
+}
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: 'CarAdminIndex',
+            type: "GET",
+            data: {
+            },
+            success: function (data) {
+                $("#resultContent").html(data);
+            },
+            error: function (ex) {
+            }
+        });
+        $("#companies").click(function () {
+    $.ajax({
+        url: '/company/index',
+        type: "GET",
+        data: {},
+        success: function (data) {
+            $("#resultContent").html(data);
+        },
+        error: function (ex) {
+        }
+    });
+});
+
+</script>

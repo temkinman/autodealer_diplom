@@ -10,25 +10,34 @@
     <div class="carousel-wrap">
         <div class="owl-carousel owl-theme" id="slider">
             @{
-                for (int i = 1; i < @Model.CarPhotos?.Count(); i++)
+                if (@Model?.CarPhotos?.Count() == 0)
                 {
-                    string subPath = @Model.GetCarImagesFolderPath();
-                    string path = $"/CarImages{subPath}/{@Model.CarPhotos[i]}";
-
-                    //<a href=@path data-lightbox="roadtrip"><img src=@path alt="car's' photo" class="carImg" /></a>
                     <div class="item">
-                        <a href=@path data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
-                            <img class="demo cursor carImg" src=@path alt="Picture">
+                        <a href="~/images/car-default.jpg" data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
+                            <img class="demo cursor carImg" src="~/images/car-default.jpg" alt="Car photo">
                         </a>
-                        @*<img src=@path alt="car's' photo" class="carImg" />*@
                     </div>
+                }
+                else
+                {
+                    for (int i = 1; i < @Model?.CarPhotos?.Count(); i++)
+                    {
+                        string subPath = @Model.GetCarImagesFolderPath();
+                        string path = $"/CarImages{subPath}/{@Model.CarPhotos[i]}";
+
+                        <div class="item">
+                            <a href=@path data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
+                                <img class="demo cursor carImg" src=@path alt="Picture">
+                            </a>
+                        </div>
+                    }
                 }
             }
         </div>
     </div>
     <div class="cardetailsInfo">
         <div class="title_box">
-            <h4><a href="#">@Model.Company?.Title @Model.Model?.Title</a></h4>
+            <h4><a href="#">@Model?.Company?.Title @Model.Model?.Title</a></h4>
             <div class="price">Цена: @Model.Price $</div>
         </div>
         <div>
@@ -44,15 +53,24 @@
                 var settings = @Model.Settings.GetType().GetProperties().Where(p => p.PropertyType == typeof(bool) && ((bool)p.GetValue(@Model.Settings, null)));
                 foreach (var p in settings)
                 {
-                    <p>@p.Name</p>
+                <p>@p.Name</p>
                 }
-            }*@
+                }*@
         </div>
     </div>
 </div>
 <div class="btn-controls">
-    <a asp-action="Index" asp-controller="Car" class="btn btn-outline-primary">назад</a>
-    <a class="btn btn-outline-success" onclick="location.href='@Url.Action("Create", "Order", new { carId = Model.Id })'">оформить</a>
+    @{
+        if (ViewBag.Admin == "adminPanel")
+        {
+            <a asp-action="CarAdminList" asp-controller="car" class="btn btn-outline-primary">назад</a>
+        }
+        else
+        {
+            <a asp-action="Index" asp-controller="Car" class="btn btn-outline-primary">назад</a>
+            <a class="btn btn-outline-success" onclick="location.href='@Url.Action("Create", "Order", new { carId = Model.Id })'">оформить</a>
+        }
+    }
 </div>
 
 <script>
@@ -62,14 +80,14 @@
             $('.next-slide').hide();
             $('.prev-slide').hide();
         });
-        
+
         lightbox.option({
-      		'resizeDuration': 300,
-      		'wrapAround': true,
-			'imageFadeDuration': 400,
-			'fadeDuration': 400,
-			'albumLabel': 'Фото %1 из %2'
-    	});
+            'resizeDuration': 300,
+            'wrapAround': true,
+            'imageFadeDuration': 400,
+            'fadeDuration': 400,
+            'albumLabel': 'Фото %1 из %2'
+        });
 
         $('body').click(function(){
             if ($("#lightbox").not(":visible")) {

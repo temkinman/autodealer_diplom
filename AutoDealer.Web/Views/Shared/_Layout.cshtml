@@ -13,10 +13,13 @@
     <link rel="stylesheet" href="~/css/owl.theme.default.min.css" />
     <link rel="stylesheet" href="~/css/font-awesome.min.css" />
 
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+
+    
 
 </head>
 <body>
@@ -63,10 +66,10 @@
                         <ul>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index" tabindex="0">авто</a></li>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Sale" asp-action="Index" tabindex="1">продажи</a></li>
-                            <li><a class="nav-link text-dark" asp-area="" asp-controller="AddingCar" asp-action="Index" tabindex="2">приемка авто</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="AddingCar" asp-action="AddSingleCar" tabindex="2">приемка авто</a></li>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index" tabindex="3">о нас</a></li>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index" tabindex="4">админка</a></li>
-                            <li><a class="nav-link text-dark" asp-area="" asp-controller="AddingCar" asp-action="AddSingleCar" tabindex="5">принять авто</a></li>
+                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Create" tabindex="5">принять авто new</a></li>
                             @*<li><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" tabindex="5">залогинится</a></li>*@
                             @*<li class="current"><a href="#">авто</a></li>
                                 <li><a href="#">продажи</a></li>
@@ -95,6 +98,18 @@
                 </div>*@
         </div>
     </header>
+
+    @*@{
+        if(ViewBag.Admin != null)
+        {
+            if(ViewBag.Admin == "admin_panel")
+            {
+                await Html.RenderPartialAsync("AdminPanel");    
+            }    
+        }
+        
+     }*@
+
     <div class="container">
         @*<main role="main" class="pb-3">*@
         @RenderBody()

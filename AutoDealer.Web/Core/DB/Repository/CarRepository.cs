@@ -44,7 +44,7 @@ namespace AutoDealer.Web.Core.DB.Repository
 
         public bool Delete(Car car)
         {
-            _dbContext.Remove(car);
+            _dbContext.Cars.Remove(car);
             return _dbContext.SaveChanges() > 0;
         }
 

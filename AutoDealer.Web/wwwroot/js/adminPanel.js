@@ -1,4 +1,4 @@
-﻿$("#company").click(function () {
+﻿$("#companies").click(function () {
     $.ajax({
         url: 'company/index',
         type: "GET",
@@ -11,7 +11,7 @@
     });
 });
 
-$("#model").click(function () {
+$("#models").click(function () {
     $.ajax({
         url: 'model/index',
         type: "GET",
@@ -19,15 +19,13 @@ $("#model").click(function () {
         },
         success: function (data) {
             $("#resultContent").html(data);
-            //hideSpinner();
         },
         error: function (ex) {
-            //hideSpinner();
         }
     });
 });
 
-$("#color").click(function () {
+$("#colors").click(function () {
     $.ajax({
         url: 'color/index',
         type: "GET",
@@ -35,10 +33,36 @@ $("#color").click(function () {
         },
         success: function (data) {
             $("#resultContent").html(data);
-            //hideSpinner();
         },
         error: function (ex) {
-            //hideSpinner();
+        }
+    });
+});
+
+$("#employees").click(function () {
+    $.ajax({
+        url: 'employee/index',
+        type: "GET",
+        data: {
+        },
+        success: function (data) {
+            $("#resultContent").html(data);
+        },
+        error: function (ex) {
+        }
+    });
+});
+
+$("#cars").click(function () {
+    $.ajax({
+        url: 'car/CarAdminIndex',
+        type: "GET",
+        data: {
+        },
+        success: function (data) {
+            $("#resultContent").html(data);
+        },
+        error: function (ex) {
         }
     });
 });

@@ -1,0 +1,244 @@
+﻿@model AutoDealer.Web.ViewModel.CarViewModel
+
+@{
+    IEnumerable<int> years = Enumerable.Range(1980, (DateTime.Now.Year - 1980) + 1).Reverse();
+    IEnumerable<float> capacities = Enumerable.Range(5, 56).Select(number => number / 10f);
+}
+
+<form id="OwnerForm" asp-action="Create" asp-controller="Car" method="post" class="row mw-60 mt-2 mx-auto">
+    <div class="col-6 form-group">
+        <label asp-for="CompanyId" class="control-label"><strong>Марка:</strong></label>
+        @Html.DropDownListFor(m=>m.CompanyId, new SelectList(Model.Companies, "Id","Title"), new { @class="form-control", @id="Company" })
+        @*<select asp-for="CompanyId" class="form-control" id="Company" asp-items="@(new SelectList(Model.Companies,"Id","Title"))">
+            <option value="0">Выберите</option>
+        </select>*@
+            
+    </div>
+    <div class="col-6 form-group" id="SelectModels">
+        <label asp-for="ModelId" class="control-label"><strong>Модель:</strong></label>
+        @Html.DropDownListFor(m=>m.ModelId, new SelectList(Model.Models, "Id","Title"), new { @class="form-control", @id="ModelId" })
+        @*<select asp-for="ModelId" class="form-control" id="Model" asp-items="@(new SelectList(Model.Models,"Id","Title"))">
+            <option value="0">Выберите</option>
+            </select>*@
+    </div>
+    <div class="col-6 form-group">
+        <label asp-for="EngineTypeId" class="control-label"><strong>Двигатель:</strong></label>
+        <select asp-for="EngineTypeId" class="form-control" asp-items="@(new SelectList(Model.EngineTypes,"Id","Title"))">
+            <option value="0">Выберите</option>
+        </select>
+    </div>
+    <div class="col-6 form-group">
+        <label asp-for="Car.Engine.Capacity" class="control-label"><strong>Объем двигателя:</strong></label>
+        @Html.DropDownListFor(m=>m.Car.Engine.Capacity, new SelectList(capacities),"выберите", new {@class="form-control"})
+        <span asp-validation-for="Car.Engine.Capacity" class="text-danger" />
+    </div>
+    <div class="col-6 form-group">
+        <label asp-for="TransmissionId" class="control-label"><strong>Коробка передач:</strong></label>
+        <select asp-for="TransmissionId" class="form-control" asp-items="@(new SelectList(Model.Transmissions,"Id","TransmissionType"))">
+            <option value="0">Выберите</option>
+        </select>
+    </div>
+    <div class="col-6 form-group">
+        <label asp-for="ColorId" class="control-label"><strong>Цвет:</strong></label>
+        <select asp-for="ColorId" class="form-control" asp-items="@(new SelectList(Model.Colors,"Id","Title"))">
+            <option value="0">Выберите</option>
+        </select>
+    </div>
+    <div class="col-6 form-group">
+        <label asp-for="Car.Vin" class="control-label"></label>
+        <input asp-for="Car.Vin" class="form-control" />
+        <span asp-validation-for="Car.Vin" class="text-danger" />
+    </div>
+    <div class="col-6 form-group">
+        <label asp-for="Car.Kilometre" class="control-label"></label>
+        <input asp-for="Car.Kilometre" class="form-control" />
+        <span asp-validation-for="Car.Kilometre" class="text-danger" />
+    </div>
+    <div class="col-6 form-group">
+        <label asp-for="Car.Description" class="control-label"></label>
+        <input asp-for="Car.Description" class="form-control" />
+    </div>
+    <div class="col-6 form-group">
+        <label asp-for="Car.Price" class="control-label"></label>
+        <input asp-for="Car.Price" class="form-control" />
+        <span asp-validation-for="Car.Price" class="text-danger" />
+    </div>
+    <div class="col-6 form-group">
+        <label asp-for="Car.ProduceDate" class="control-label"></label>
+        @Html.DropDownListFor(m=>m.Car.ProduceDate, new SelectList(years),"выберите", new {@class="form-control"})
+        <span asp-validation-for="Car.ProduceDate" class="text-danger" />
+    </div>
+    <div class="col-6 form-group">
+        <div class="row mt-2 mb-2">
+            <div class="col-3 form-check ml-3">
+                <input asp-for="Car.Settings.Abs" type="checkbox" class="form-check-input" id="abs" />
+                <label asp-for="Car.Settings.Abs" class="form-check-label"></label>
+            </div>
+            <div class="col-3 form-check">
+                <input asp-for="Car.Settings.Esp" type="checkbox" class="form-check-input" id="esp" />
+                <label asp-for="Car.Settings.Esp" class="form-check-label"></label>
+            </div>
+            <div class="col-3 form-check">
+                <input asp-for="Car.Settings.ParkSensors" type="checkbox" class="form-check-input" id="parkSensors" />
+                <label asp-for="Car.Settings.ParkSensors" class="form-check-label"></label>
+            </div>
+        </div>
+        <div class="row mt-2 mb-2">
+            <div class="col-3 form-check ml-3">
+                <input asp-for="Car.Settings.Camera" type="checkbox" class="form-check-input" id="camera" />
+                <label asp-for="Car.Settings.Camera" class="form-check-label"></label>
+            </div>
+            <div class="col-3 form-check">
+                <input asp-for="Car.Settings.Cruiz" type="checkbox" class="form-check-input" id="cruiz" />
+                <label asp-for="Car.Settings.Cruiz" class="form-check-label"></label>
+            </div>
+            <div class="col-3 form-check">
+                <input asp-for="Car.Settings.AirCondition" type="checkbox" class="form-check-input" id="airCondition" />
+                <label asp-for="Car.Settings.AirCondition" class="form-check-label"></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 form-check">
+                <input asp-for="Car.Settings.ClimatControl" type="checkbox" class="form-check-input" id="climat" />
+                <label asp-for="Car.Settings.ClimatControl" class="form-check-label"></label>
+            </div>
+            <div class="col-4 form-check">
+                <input asp-for="Car.Settings.Navigation" type="checkbox" class="form-check-input" id="navigation" />
+                <label asp-for="Car.Settings.Navigation" class="form-check-label"></label>
+            </div>
+            <div class="col-4 form-check">
+                <input asp-for="Car.Settings.Bluetooth" type="checkbox" class="form-check-input" id="bluetooth" />
+                <label asp-for="Car.Settings.Bluetooth" class="form-check-label"></label>
+            </div>
+        </div>
+    </div>
+    <div id="divPhotos"></div>
+    @*<input asp-for="Car.Photos" type="text" id="photos" />*@
+    <div class="col mx-auto">
+        <input type="submit" id="btnSubmit" value="Добавить" class="btn btn-primary" />
+        <a asp-action="index" asp-controller="car" class="btn btn-danger">Отмена</a>
+    </div>
+</form>
+
+<div class="row">
+    <form asp-action="UploadFiles" asp-controller="FileUpload" id="FormFile" enctype="multipart/form-data" method="post" class="col-6 form-group"
+          data-ajax-method="post" data-ajax-update="#divPhotos" data-ajax="true" data-ajax-success="onSuccess" data-ajax-failure="onFailed">
+        <input type="hidden" class="" name="company" id="companyFile">
+        <input type="hidden" class="" name="model" id="modelFile">
+        <input type="file" class="" name="photoFile" id="photoFile" accept="image/*" multiple>
+        <label class="control-label mt-2">Загрузка фото</label>
+        <input class="btn btn-outline-success mt-2" id="loadFile" type="submit" value="Загрузить" />
+    </form>
+</div>
+<div>
+    <a asp-action="Index" asp-controller="Car" class="btn btn-out-primary">На главную</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
+@Html.Hidden("Models", (object)ViewBag.Models);
+
+@Html.Hidden("CompanyDefault", (object)ViewBag.Company);
+@Html.Hidden("ModelDefault", (object)ViewBag.Model);
+
+<script>
+    $(document).ready(function() {
+        let companyValue = $("#CompanyId").val();
+
+        if (companyValue > 0) {
+            $("#ModelId").prop("disabled", false);
+        }
+
+        $("#companyFile").val($('#CompanyDefault').val());
+        $("#modelFile").val($('#ModelDefault').val());
+
+        $("#Company").on("change", function() {
+            let selection = $(this).find("option:selected").text();
+            let value = $(this).val();
+
+            $("#companyFile").val(selection);
+            console.log('company_value: ' + selection)
+
+            if (value > 0) {
+                $.ajax({
+                    url: '@Url.Action("getmodelsbycompany", "car")',
+                    type: "GET",
+                    data: {
+                        companyId: value,
+                        filter: false
+                    },
+                    success: function(data) {
+                        $("#SelectModels").html(data);
+                        console.log("ok from partial");
+                        //hideSpinner();
+                    },
+                    error: function(ex) {
+                        //hideSpinner();
+                    }
+                });
+            }
+
+            if (value == 0) {
+                $("#ModelId").find('option').remove();
+                $("#ModelId").append('<option value="0">Выберите</options>');
+                $("#ModelId").prop("disabled", true);
+            }
+        });
+
+        $("#ModelId").on("change", function() {
+            let selection = $(this).find("option:selected").text();
+            let value = $(this).val();
+
+            $("#modelFile").val(selection);
+
+            console.log('selection: ' + selection)
+            console.log('model_value: ' + value)
+
+            //modelsResult.find('option').remove();
+
+            //if(value > -1) {
+            //    PopulateModelSelect(selection);
+            //}
+        });
+
+        //var frm = $('#FormFile');
+
+        //frm.submit(function (e) {
+
+        //    e.preventDefault();
+
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: 'FileUpload/UploadFiles',
+        //        data: frm.serialize(),
+        //        success: function (data) {
+        //            $("#photos").val(context);
+        //            console.log('Submission was successful.');
+        //            console.log(data);
+        //        },
+        //        error: function (data) {
+
+        //            console.log('An error occurred.');
+        //            console.log(data);
+        //        },
+        //    });
+        //});
+    });
+
+    let onFailed = function(context) {
+        console.log("failed");
+        console.log(context);
+    }
+    let onSuccess = function(context) {
+        console.log("Okk!");
+        console.log(context);
+        $("#photos").val(context);
+    };
+
+
+    
+</script>

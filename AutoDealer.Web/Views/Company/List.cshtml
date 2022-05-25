@@ -1,13 +1,12 @@
-﻿@model IEnumerable<AutoDealer.Web.Models.Color>
+﻿@model IEnumerable<AutoDealer.Web.Models.Company>
 
-
-<h1>Автомобильные цвета</h1>
+<h1>марки автомобилей</h1>
 @{
    await Html.PartialAsync("Notification");
 }
 
 <div class="col-2 text-end mb-2">
-    <a class="btn btn-outline-dark" id="CreateColor">Создать</a>
+    <a class="btn btn-outline-dark" id="CreateCompany">Создать</a>
 </div>
 <table class="table table-bordered table-striped">
     <thead>
@@ -17,6 +16,9 @@
             </th>
             <th class="text-start">
                 @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th class="text-start">
+                @Html.DisplayNameFor(model => model.Country)
             </th>
         </tr>
     </thead>
@@ -30,9 +32,12 @@
                 <td class="text-start">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
+                <td class="text-start">
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
                 <td class="text-center">
-                    <a class="btn-sm btn-outline-secondary editColor" id=@item.Id>Изменить</a>
-                    <a class="btn-sm btn-outline-danger" id=@item.Id onclick="onDeleteColor(@item.Id)">Удалить</a>
+                    <a class="btn btn-outline-secondary editCompany" id=@item.Id>Изменить</a>
+                    <a class="btn btn-outline-danger delCompany" id=@item.Id onclick="onDeleteCompany(@item.Id)">Удалить</a>
                 </td>
             </tr>
         }
@@ -40,7 +45,7 @@
 </table>
 
 @{
-   await Html.RenderPartialAsync("ModalDeleteDialog", "цвет авто");
+   await Html.RenderPartialAsync("ModalDeleteDialog", "марку авто");
 }
 
 <div class="alert" role="alert" id="result"></div>
@@ -51,4 +56,4 @@
     }
 }
 
-<script type="text/javascript" src="./js/carColor.js"></script>
+<script type="text/javascript" src="./js/carCompany.js"></script>

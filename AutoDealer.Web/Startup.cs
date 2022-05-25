@@ -50,6 +50,8 @@ namespace AutoDealer.Web
                 //options.UseLazyLoadingProxies();
             });
 
+            //services.AddDistributedMemoryCache();
+
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ISaleRepository, SaleRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
@@ -91,6 +93,7 @@ namespace AutoDealer.Web
             });
 
             //app.UseSession();
+            
 
             app.UseRouting();
 

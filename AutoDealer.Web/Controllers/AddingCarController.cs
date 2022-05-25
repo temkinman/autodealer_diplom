@@ -143,7 +143,7 @@ namespace AutoDealer.Web.Controllers
         {
             Dictionary<int, List<Model>> modelsDictionary = new();//_dbContext.Models.GroupBy(m => m.Company.Id).Select(n => n.First()).ToDictionary(c => c.);
 
-            
+
             foreach (Model model in _datasource.Models)
             {
                 if (!modelsDictionary.ContainsKey(model.Company.Id))

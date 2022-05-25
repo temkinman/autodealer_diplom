@@ -1,0 +1,95 @@
+﻿@model IEnumerable<AutoDealer.Web.Models.Car>
+
+<div>
+    <h1>Авто на складе</h1>
+    @{
+        await Html.PartialAsync("Notification");
+    }
+
+    <div class="col-2 text-end mb-2">
+        <a class="btn btn-outline-dark" asp-action="create" asp-controller="car">Добавить</a>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Company.Title)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Model.Title)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.ProduceDate)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Engine.Capacity)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Engine.Type.Title)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Transmission.TransmissionType)
+                </th>
+                <th class="text-start">
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Company.Title)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Model.Title)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.ProduceDate)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Engine.Capacity)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Engine.Type.Title)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Transmission.TransmissionType)
+                    </td>
+                    <td class="text-start">
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td class="text-center">
+                        <a class="btn btn-outline-primary" onclick="showCarDetails(@item.Id)">Детали</a>
+                        <a class="btn btn-outline-secondary editCar" id="@item.Id">Изменить</a>
+                        @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Удалить</a>*@
+                        <a class="btn btn-outline-danger" onclick="onDeleteCar(@item.Id)">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{
+    await Html.RenderPartialAsync("ModalCarDetails");
+}
+
+@{
+    await Html.RenderPartialAsync("ModalDeleteDialog", "запись автомобиля");
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script src="/js/carAdmin.js"></script>
