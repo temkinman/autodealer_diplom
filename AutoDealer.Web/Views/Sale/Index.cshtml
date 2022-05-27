@@ -1,30 +1,40 @@
-﻿@model AutoDealer.Web.ViewModel.SalesViewModel
-@using AutoDealer.Web.ViewModel;
+﻿@model AutoDealer.Web.ViewModel.SalesListViewModel
 
 @{
     int ind = 1;
     string numberHead = "Номер";
 }
+
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th class="text-center">
-                @numberHead
+                <a class="nav-link">@numberHead</a>
             </th>
             <th class="text-start">
-                @Html.DisplayNameFor(model => model.CompanyTitle)
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CompanySort)" class="nav-link">
+                    @Html.DisplayNameFor(model => model.CompanyTitle)
+                </a>
             </th>
             <th class="text-start">
-                @Html.DisplayNameFor(model => model.ModelTitle)
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.ModelSort)" class="nav-link">
+                    @Html.DisplayNameFor(model => model.ModelTitle)
+                </a>
             </th>
             <th class="text-start">
-                @Html.DisplayNameFor(model => model.Customer)
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CustomerSort)" class="nav-link">
+                    @Html.DisplayNameFor(model => model.Customer)
+                </a>
             </th>
             <th class="text-start">
-                @Html.DisplayNameFor(model => model.Price)
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)" class="nav-link">
+                    @Html.DisplayNameFor(model => model.Price)
+                </a>
             </th>
             <th class="text-start">
-                @Html.DisplayNameFor(model => model.Date)
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.DateSort)" class="nav-link">
+                    @Html.DisplayNameFor(model => model.Date)
+                </a>
             </th>
         </tr>
     </thead>
@@ -34,9 +44,7 @@
             <tr>
                 <td class="text-center">
                     @ind
-                    @{
-                        ind++;
-                    }
+                    @{ ind++; }
                 </td>
                 <td class="text-start">
                     @Html.DisplayFor(modelItem => item.CompanyName)
@@ -64,3 +72,15 @@
         </tr>
     </tfoot>
 </table>
+@*<page-link page-sale="Model.PageViewModel" page-action="Index"
+    page-url-company="@(Model.SelectedCompany)"
+    page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>*@
+
+<div page-model="@Model" page-classes-enabled="true" action="Index"
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" class="btn-group m-1">
+</div>
+
+@*<page-link page-model="Model.PageViewModel" page-action="Index"
+    page-url-company="@(Model.SelectedCompany)"
+    page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>*@

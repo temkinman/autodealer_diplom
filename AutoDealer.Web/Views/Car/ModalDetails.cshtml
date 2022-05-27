@@ -31,28 +31,28 @@
 <div class="carousel-wrap">
     <div class="owl-carousel owl-theme" id="slider">
         @{
-            if (@Model?.CarPhotos?.Count() == 0)
-            {
-                <div class="item">
-                    <a href="~/images/car-default.jpg" data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
-                        <img class="demo cursor carImg" src="~/images/car-default.jpg" alt="Car photo">
-                    </a>
-                </div>
-            }
-            else
-            {
-                for (int i = 1; i < @Model?.CarPhotos?.Count(); i++)
+            if (@Model?.CarPhotos?.Count() > 0)
                 {
-                    string subPath = @Model.GetCarImagesFolderPath();
-                    string path = $"/CarImages{subPath}/{@Model.CarPhotos[i]}";
+                    for (int i = 0; i < @Model?.CarPhotos?.Count(); i++)
+                    {
+                        string subPath = @Model.GetCarImagesFolderPath();
+                        string path = i == 0 ? $"/CarImages/{@Model.GetMainPhoto()}" : $"/CarImages{subPath}/{@Model.CarPhotos[i]}";
 
+                        <div class="item">
+                            <a href=@path data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
+                                <img class="demo cursor carImg" src=@path alt="Picture">
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
                     <div class="item">
-                        <a href=@path data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
-                            <img class="demo cursor carImg" src=@path alt="Picture">
+                        <a href="~/images/car-default.jpg" data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
+                            <img class="demo cursor carImg" src="~/images/car-default.jpg" alt="Car photo">
                         </a>
                     </div>
                 }
-            }
 
         }
     </div>

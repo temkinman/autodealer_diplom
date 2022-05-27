@@ -11,6 +11,10 @@
         ModelAsc,
         ModelDesc,
         DateAsc,
-        DateDesc
+        DateDesc,
+        CompanyAsc,
+        CompanyDesc,
+        CustomerAsc,
+        CustomerDesc
     }
 }

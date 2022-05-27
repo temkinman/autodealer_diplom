@@ -9,6 +9,6 @@
     <label asp-for="ModelId" class="control-label"><strong>Модель:</strong></label>
 }
 
-<select asp-for="ModelId" class=@selectClass asp-items="@(new SelectList(Model.Models,"Id","Title"))">
+<select asp-for="ModelId" class=@selectClass id="ModelId" asp-items="@(new SelectList(Model.Models,"Id","Title"))">
     <option value="0">Выберите</option>
 </select>

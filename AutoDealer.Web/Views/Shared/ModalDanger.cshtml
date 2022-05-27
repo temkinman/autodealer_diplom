@@ -1,0 +1,20 @@
+﻿@model string
+
+<div id="modalDanger" class="modal fade">
+    <div class="modal-dialog modal-confirm modal-confirm-danger">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="bi bi-x-lg"></i>
+                </div>
+                <h4 class="modal-title w-100">Извините!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center" id="ErrorId">@if(Model.Length > 0 ){ @Model }</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-block btn-custom-danger" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

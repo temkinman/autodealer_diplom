@@ -373,7 +373,8 @@ namespace AutoDealer.Web.Controllers
                 Companies = _datasource.Companies,
                 EngineTypes = _datasource.EngineTypes,
                 Transmissions = _datasource.Transmissions,
-                Models = _datasource.Models.Where(m => m.Company.Id == defaultSelectedCompany.Id)
+                Models = _datasource.Models.Where(m => m.Company.Id == defaultSelectedCompany.Id),
+                FileUploadModel = new FilePhotoUpload()
             };
 
             ViewBag.Company = defaultSelectedCompany.Title;

@@ -23,7 +23,7 @@ namespace AutoDealer.Web.Infrastructure
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
 
-        public CarsListViewModel PageModel { get; set; }
+        public BaseListViewModel PageModel { get; set; }
 
         public string PageAction { get; set; }
 
@@ -79,7 +79,7 @@ namespace AutoDealer.Web.Infrastructure
                 aBuilder.AddCssClass(number == PageModel.PagingInfo.CurrentPage
                 ? PageClassSelected : PageClassNormal);
             }
-            
+
             string strId = "page_" + number;
             aBuilder.InnerHtml.Append(value);
             aBuilder.Attributes.Add("id", strId);

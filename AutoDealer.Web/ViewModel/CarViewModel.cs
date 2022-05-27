@@ -21,5 +21,6 @@ namespace AutoDealer.Web.ViewModel
         public IEnumerable? EngineTypes { get; set; }
         public int TransmissionId { get; set; } = 0;
         public IEnumerable? Transmissions { get; set; }
+        public FilePhotoUpload FileUploadModel { get; set; }
     }
 }

@@ -6,24 +6,16 @@
 }
 
 <div>
-    <h1>Информация об автомобиле</h1>
-    <div class="carousel-wrap">
+    <h1 class="text-center">Информация об автомобиле</h1>
+    <div class="carousel-wrap carousel-container">
         <div class="owl-carousel owl-theme" id="slider">
             @{
-                if (@Model?.CarPhotos?.Count() == 0)
+                if (@Model?.CarPhotos?.Count() > 0)
                 {
-                    <div class="item">
-                        <a href="~/images/car-default.jpg" data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
-                            <img class="demo cursor carImg" src="~/images/car-default.jpg" alt="Car photo">
-                        </a>
-                    </div>
-                }
-                else
-                {
-                    for (int i = 1; i < @Model?.CarPhotos?.Count(); i++)
+                    for (int i = 0; i < @Model?.CarPhotos?.Count(); i++)
                     {
                         string subPath = @Model.GetCarImagesFolderPath();
-                        string path = $"/CarImages{subPath}/{@Model.CarPhotos[i]}";
+                        string path = i == 0 ? $"/CarImages/{@Model.GetMainPhoto()}" : $"/CarImages{subPath}/{@Model.CarPhotos[i]}";
 
                         <div class="item">
                             <a href=@path data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
@@ -32,32 +24,48 @@
                         </div>
                     }
                 }
+                else
+                {
+                    <div class="item">
+                        <a href="~/images/car-default.jpg" data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
+                            <img class="demo cursor carImg" src="~/images/car-default.jpg" alt="Car photo">
+                        </a>
+                    </div>
+                }
             }
         </div>
     </div>
-    <div class="cardetailsInfo">
+
+
+
+    @*<div class="cardetailsInfo">
         <div class="title_box">
-            <h4><a href="#">@Model?.Company?.Title @Model.Model?.Title</a></h4>
-            <div class="price">Цена: @Model.Price $</div>
+        <h4><a href="#">@Model?.Company?.Title @Model.Model?.Title</a></h4>
+        <div class="price">Цена: @Model.Price $</div>
         </div>
         <div>
-            <span>год: @Model.ProduceDate</span>
-            <span>цвет: @Model.Color?.Title</span>
-            <span>@Model.Engine?.Capacity @Model.Engine?.Type?.Title</span>
-            <span>@Model.Kilometre km</span>
+        <span>год: @Model.ProduceDate</span>
+        <span>цвет: @Model.Color?.Title</span>
+        <span>@Model.Engine?.Capacity @Model.Engine?.Type?.Title</span>
+        <span>@Model.Kilometre km</span>
         </div>
         <p>@Model.Description</p>
         <p>@Model.Settings</p>
-        <div>
-            @*@{
-                var settings = @Model.Settings.GetType().GetProperties().Where(p => p.PropertyType == typeof(bool) && ((bool)p.GetValue(@Model.Settings, null)));
-                foreach (var p in settings)
-                {
-                <p>@p.Name</p>
-                }
-                }*@
-        </div>
-    </div>
+        </div>*@
+</div>
+<div class="card card-body carDetails-container mt-4 mb-4">
+    <p class="card-text"><label>Марка:</label> <span>@Model?.Company?.Title</span></p>
+    <p class="card-text"><label>Модель:</label> <span>@Model.Model?.Title</span></p>
+    <p class="card-text"><label>Год:</label> <span>@Model.ProduceDate</span></p>
+    <p class="card-text"><label>Двигатель:</label> <span>@Model.Engine?.Capacity л. @Model.Engine.Type.Title</span></p>
+    <p class="card-text"><label>Коробка:</label> <span>@Model.Transmission?.TransmissionType</span></p>
+    <p class="card-text"><label>Цвет:</label> <span>@Model.Color?.Title</span></p>
+    <p class="card-text"><label>Пробег:</label> <span>@Model.Kilometre</span></p>
+    <p class="card-text"><label>Цена:</label> <span>@Model.Price $</span></p>
+    <p class="card-text"><label>Комплектация:</label> <span>@Model.Settings</span></p>
+    <p class="card-text">
+        <label>Описание:</label> <span>@Model.Description</span>
+    </p>
 </div>
 <div class="btn-controls">
     @{
@@ -142,12 +150,12 @@
         });
         owl.owlCarousel({
         loop: true,
-        nav: true,
+        nav: false,
         lazyLoad: true,
         margin: 10,
-        video: true,
+        video: false,
         dots: false,
-        navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
+        //navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
         responsive: {
             0: {
             items: 1

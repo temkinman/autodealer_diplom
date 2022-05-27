@@ -17,7 +17,9 @@
     @{
         string mainPhoto = @Model.GetMainPhoto() == string.Empty ? "/images/car-default.jpg" : $"/CarImages/{@Model.GetMainPhoto()}";
     }
-    <a href="@Url.Action("CarDetails", "Car", new {carId = @Model.Id})"><img src=@mainPhoto alt="car's' photo" class="carImg"/></a>
+    <a href="@Url.Action("CarDetails", "Car", new {carId = @Model.Id})">
+        <img src=@mainPhoto alt="car's' photo" class="carImgInfo"/>
+    </a>
     <div class="catalog_desc">
         <div class="location">Location: Berlin, Germany</div>
         <div class="title_box">

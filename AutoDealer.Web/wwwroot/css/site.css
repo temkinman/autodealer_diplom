@@ -2,72 +2,75 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 
@@ -76,8 +79,16 @@ body {
 }
 
 .carImg {
-    margin-right: 10px;
-    max-width: 500px;
+    /*margin-right: 10px;*/
+    max-height: 400px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.carImgInfo {
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: cover;
 }
 
 .carDetails {
@@ -85,6 +96,11 @@ body {
     justify-content: start;
     max-width: 730px;
     margin: 0 auto;
+}
+
+.carDetails-container {
+    max-width: 700px;
+    margin: auto;
 }
 
 .cardetailsInfo {
@@ -96,7 +112,9 @@ body {
     max-width: 600px;
 }
 
-
+.carousel-container {
+    max-height: 400px;
+}
 
 /*nav buttons*/
 .carousel-wrap {
@@ -161,9 +179,9 @@ span.img-text {
     text-transform: capitalize;
 }
 
-span.img-text:hover {
-    color: #2caae1;
-}
+    span.img-text:hover {
+        color: #2caae1;
+    }
 
 /*btns*/
 .btn-controls {
@@ -201,15 +219,182 @@ span.img-text:hover {
     padding: 0;
 }
 
-.leftSide > a {
-    font-size: 20px;
-}
+    .leftSide > a {
+        font-size: 20px;
+    }
 
 
 #resultContent {
     padding: 15px;
 }
 
+/*upload files modal success*/
+.modal-confirm {
+    color: #636363;
+    width: 325px;
+    font-size: 14px;
+}
+
+.modal-confirm .modal-content {
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.modal-confirm .modal-header {
+    border-bottom: none;
+    position: relative;
+}
+
+.modal-confirm h4 {
+    text-align: center;
+    font-size: 26px;
+    margin: 30px 0 -15px;
+}
+
+.modal-confirm .form-control, .modal-confirm .btn {
+    min-height: 40px;
+    border-radius: 3px;
+}
+
+.modal-confirm .close {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+.modal-confirm .modal-footer {
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+.modal-confirm .icon-box {
+    color: #fff;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -70px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    z-index: 9;
+    background: #82ce34;
+    padding: 1px;
+    text-align: center;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.modal-confirm-danger .icon-box {
+    background: #ef513a !important;
+}
+
+.modal-confirm .icon-box i {
+    font-size: 58px;
+    position: relative;
+    top: 3px;
+}
+
+.modal-confirm.modal-dialog {
+    margin-top: 80px;
+}
+
+.modal-confirm .btn {
+    color: #fff;
+    border-radius: 4px;
+    background: #82ce34;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    border: none;
+}
+
+.btn-custom-danger {
+    background: #ef513a !important;
+}
+
+.modal-confirm .btn:hover, .modal-confirm .btn:focus {
+    background: #6fb32b;
+}
+
+.btn-custom-danger :hover, .btn-custom-danger:focus {
+    background: #da2c12 !important;
+}
+
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}
+
+
+/*adding auto form*/
+#OwnerForm {
+    max-width: 800px;
+}
+/*.thank-you-pop {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.thank-you-pop img {
+    width: 76px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 25px;
+}
+
+.thank-you-pop h1 {
+    font-size: 42px;
+    margin-bottom: 25px;
+    color: #5C5C5C;
+}
+
+.thank-you-pop p {
+    font-size: 20px;
+    margin-bottom: 27px;
+    color: #5C5C5C;
+}
+
+.thank-you-pop h3.cupon-pop {
+    font-size: 25px;
+    margin-bottom: 40px;
+    color: #222;
+    display: inline-block;
+    text-align: center;
+    padding: 10px 20px;
+    border: 2px dashed #222;
+    clear: both;
+    font-weight: normal;
+}
+
+.thank-you-pop h3.cupon-pop span {
+    color: #03A9F4;
+}
+
+.thank-you-pop a {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 9px 20px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    background-color: #8BC34A;
+    border-radius: 17px;
+}
+
+.thank-you-pop a i {
+    margin-right: 5px;
+    color: #fff;
+}
+
+#ignismyModal .modal-header {
+    border: 0px;
+}*/
+/*end*/
 /*.sidebar {
     height: 100%;
     width: 160px;

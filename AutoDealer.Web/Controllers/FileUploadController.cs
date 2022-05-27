@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using AutoDealer.Web.ViewModel;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,22 +20,22 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadFiles(List<IFormFile> photoFile, string company, string model)
+        public async Task<IActionResult> UploadFiles(FilePhotoUpload viewModel)
         {
-            if(company == null || model == null || company == string.Empty || model == string.Empty)
+            if (viewModel.Company == null || viewModel.Model == null || viewModel.Company == string.Empty || viewModel.Model == string.Empty)
             {
-                return BadRequest("Не указано компания или модель авто.");
+                return Problem(statusCode: 403, title: "Не указана компания или модель авто");
             }
 
             string delimiter = ";";
             string rootFolder = "E:\\Images";
 
-            string rootPath = @$"{rootFolder}\{company}\{model}\";
+            string rootPath = @$"{rootFolder}\{viewModel.Company}\{viewModel.Model}\";
             string carPhotosFolder = string.Empty;
 
             DirectoryInfo directory = new DirectoryInfo(rootPath);
 
-            if(Directory.Exists(rootPath))
+            if (Directory.Exists(rootPath))
             {
                 if (directory.GetDirectories().Length > 0)
                 {
@@ -54,11 +55,11 @@ namespace AutoDealer.Web.Controllers
             bool result = int.TryParse(carPhotosFolder, out num);
 
             resultFolder = result ? rootPath + (num + 1) : rootPath + 1;
-            
+
             string carPhotoPaths = string.Empty;
 
             bool firstPhoto = true;
-            foreach (var file in photoFile)
+            foreach (var file in viewModel.Files)
             {
                 if (file.Length > 0 && file.Length < 6000000)
                 {
@@ -80,20 +81,30 @@ namespace AutoDealer.Web.Controllers
                     }
                     catch (Exception)
                     {
-
-                        return BadRequest("Ошибка при загрузке файлов.");
+                        return Problem(statusCode: 403, title: "Ошибка при загрузке файлов.");
                     }
                 }
                 else
                 {
-                    return BadRequest($"Фото {file} слишком большое");
+                    return Problem(statusCode: 403, title: $"Фото {file} слишком большое");
                 }
             }
 
-            var input = Content($"<input name=\"Car.Photos\" type =\"hidden\" id=\"Car_Photos\" value=\"{ carPhotoPaths}\" />");
-            input.ContentType = "text/html; charset=UTF-8";
+            //var input = Content($"<input name=\"Car.Photos\" type =\"hidden\" id=\"Car_Photos\" value=\"{ carPhotoPaths}\" />");
+            //var input = Content($"<input name=\"Car.Photos\" type =\"hidden\" id=\"Car_Photos\" value=\"\" />");
+            //input.ContentType = "text/html; charset=UTF-8";
 
-            return input; // new PartialViewResult { ViewName = "FileUploaded", ViewData = this.ViewData };
+            //ViewBag.Success = "Ok";
+            //ViewBag.Success = "No";
+            return Content(carPhotoPaths);
+
+            //return BadRequest("error message"); //input; // new PartialViewResult { ViewName = "FileUploaded", ViewData = this.ViewData };
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(IEnumerable<IFormFile> photoFiles)
+        {
+            return View();
         }
     }
 }
