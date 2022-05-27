@@ -15,20 +15,12 @@
     <link rel="stylesheet" href="~/css/material-design-iconic-font.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-fileinput/css/fileinput.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
-    @*<link rel="stylesheet" href="/lib/nouislider/nouislider.min.css" />*@
-    @*<link rel="stylesheet" href="/css/style_form.css" />*@
+    <link rel="stylesheet" href="~/bootstrap-datepicker/css/bootstrap-datepicker.css" />
 
-   
-
-    @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" crossorigin="anonymous">*@
-
-<!-- alternatively you can use the font awesome icon library if using with `fas` theme (or Bootstrap 4.x) by uncommenting below. -->
-<!-- link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" -->
-
+    <!-- alternatively you can use the font awesome icon library if using with `fas` theme (or Bootstrap 4.x) by uncommenting below. -->
+    <!-- link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" -->
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-   
-
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
@@ -37,32 +29,81 @@
     <script src="~/lib/bootstrap-fileinput/js/fileinput.js"></script>
     <script src="~/lib/bootstrap-fileinput/themes/fa/theme.js"></script>
 
-
+    <script src="~/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/bootstrap-datepicker/locales/bootstrap-datepicker.ru.min.js"></script>
 
 </head>
 <body>
-
-    <header>
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AutoDealer.Web</a>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
+        <div class="container justify-content-center">
+            <a class="navbar-brand menu-link-logo d-none d-md-block d-lg-block d-xl-block" asp-area="" asp-controller="car" asp-action="Index">AutoDealer</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-            <ul class="navbar-nav flex-grow-1">
-            <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Home</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Privacy">Privacy</a>
-            </li>
-            </ul>
-            <partial name="_LoginPartial" />
+            <div class="navbar-collapse collapse d-sm-inline-flex ">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index" tabindex="0">авто</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Sale" asp-action="Index" tabindex="1">продажи</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index" tabindex="3">о нас</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index" tabindex="4">админка</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Create" tabindex="5">принять авто new</a></li>
+                </ul>
             </div>
-            </div>
-            </nav>*@
+        </div>
+    </nav>
+
+    @*<ul class="nav nav-tabs">
+        <li class="nav-item">
+        <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+        <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+        </ul>*@
+    @*<nav class="navbar navbar-expand-lg navbar-light justify-content-center bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+        <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+        </li>
+        </ul>
+        </div>
+        </nav>*@
+    <header>
         <div id="header">
             <div class="top_info">
                 <div class="logo">
@@ -84,16 +125,10 @@
                         <ul>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index" tabindex="0">авто</a></li>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Sale" asp-action="Index" tabindex="1">продажи</a></li>
-                            @*<li><a class="nav-link text-dark" asp-area="" asp-controller="AddingCar" asp-action="AddSingleCar" tabindex="2">приемка авто</a></li>*@
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index" tabindex="3">о нас</a></li>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index" tabindex="4">админка</a></li>
                             <li><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Create" tabindex="5">принять авто new</a></li>
-                            @*<li><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" tabindex="5">залогинится</a></li>*@
-                            @*<li class="current"><a href="#">авто</a></li>
-                                <li><a href="#">продажи</a></li>
-                                <li><a href="#">приемка авто</a></li>
-                                <li><a href="#">о нас</a></li>
-                                <li><a href="#">админка</a></li>*@
+
                             @*<partial name="_LoginPartial" />*@
                             @if (User.Identity.IsAuthenticated)
                             {
@@ -107,13 +142,9 @@
                                 <li><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" tabindex="5">войти</a></li>
                             }
                         </ul>
-
                     </div>
                 </div>
             </div>
-            @*<div id="categories" class="col-3" style="background-color:white">
-                <vc:navigation-menu/>
-                </div>*@
         </div>
     </header>
 
@@ -231,10 +262,10 @@
         </div>
     </footer>
 
-    
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/lightbox.js"></script>
     <script src="~/js/owl.carousel.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>

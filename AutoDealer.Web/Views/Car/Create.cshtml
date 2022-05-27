@@ -7,6 +7,15 @@
 
 <h1 class="mb-2 mt-2 text-center">Добавление автомобиля</h1>
 
+<div class="form-group">
+    <div class='input-group date' id='datetimepicker2'>
+        <input type='text' class="form-control" />
+        <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+</div>
+
 <form id="OwnerForm" asp-action="Create" asp-controller="Car" method="post" class="row mt-3 mb-3 mx-auto">
     <div class="col-6 form-group">
         <label asp-for="CompanyId" class="control-label font-weight-bold"><strong>Марка:</strong></label>
@@ -176,3 +185,17 @@
 }
 
 <script src="/js/carIncome.js"></script>
+
+<script>
+    $(function () {
+             $('#datetimepicker2').datetimepicker({
+                 locale: 'ru'
+             });
+         });
+    //$('#sandbox-container .input-group.date').datepicker({
+    //    startDate: -6570,
+    //    clearBtn: true,
+    //    language: "ru",
+    //    calendarWeeks: true
+    //});
+</script>

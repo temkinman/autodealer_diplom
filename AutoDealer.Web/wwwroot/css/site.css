@@ -30,6 +30,23 @@ html {
     font-size: 14px;
 }
 
+/*nav menu*/
+.menu-link .menu-link-logo {
+    color: #343a40 !important;
+}
+
+.menu-link {
+    border-bottom: none !important;
+}
+
+.menu-link a {
+    font-size: 23px;
+}
+
+.menu-link-logo {
+    font-size: 25px;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;

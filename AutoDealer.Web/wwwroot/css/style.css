@@ -326,7 +326,6 @@ cite{
 */
 #content{
 	width:100%;
-	background: url(../images/bg_content.jpg) repeat-x 0 0;
 	text-align:left;
 	min-width: 980px;
 	margin: 0 auto;
@@ -630,7 +629,7 @@ img.aligncenter {
 	width: 15px;
 	height: 15px;
 	cursor: pointer;
-	background-image: url(../images/carousel_navi.jpg);
+	/*background-image: url(../images/carousel_navi.jpg);*/
 	background-repeat: no-repeat;
 	background-position: 0 0;
 	display: inline-block;
@@ -722,7 +721,7 @@ img.aligncenter {
 .tabs_wrapper ul.tabs{
 	overflow: hidden;
 	padding-bottom: 4px;
-	background: url(../images/tab_border.jpg) repeat-x 0 bottom;
+	/*background: url(../images/tab_border.jpg) repeat-x 0 bottom;*/
 }
 .tabs_wrapper ul.tabs li{
 	float: left;
@@ -743,7 +742,7 @@ img.aligncenter {
 	border-radius: 5px 5px 0 0;
 }
 .tabs_wrapper ul.tabs li.current{
-	background: url(../images/tab_active.jpg) repeat-x 0 0;
+	/*background: url(../images/tab_active.jpg) repeat-x 0 0;*/
 	height: 39px;
 	border:0;
 	line-height: 40px;
@@ -1222,7 +1221,7 @@ img.aligncenter {
 	width: 180px;
 	border:1px solid #DA8500;
 	padding: 12px 19px 21px;
-	background: url(../images/bg_subscribe.jpg) repeat 0 0;
+	/*background: url(../images/bg_subscribe.jpg) repeat 0 0;*/
 	margin: 0 0 20px;
 }
 .get_news_box h3{
@@ -1479,13 +1478,13 @@ img.aligncenter {
 	padding: 18px 15px 25px 18px;
 }
 .banner_1{
-	background: url(../images/banners/bg_banner_1.jpg) repeat-x 0 0 #0C1C30;
+	/*background: url(../images/banners/bg_banner_1.jpg) repeat-x 0 0 #0C1C30;*/
 	border:1px solid #0C1C30;
 	width: 425px;
 	float: left;
 }
 .banner_2{
-	background: url(../images/banners/bg_banner_2.jpg) repeat-x 0 0 #F09000;
+	/*background: url(../images/banners/bg_banner_2.jpg) repeat-x 0 0 #F09000;*/
 	border:1px solid #DA8500;
 	float: right;
 	width: 425px;
@@ -2059,7 +2058,7 @@ img.aligncenter {
 	line-height: 46px;
 	color: #FFFFFF;
 	padding: 0 19px 0 19px;
-	background: url(../images/best_offer_label.jpg) repeat-x 0 0;
+	/*background: url(../images/best_offer_label.jpg) repeat-x 0 0;*/
 }
 .best_offer .description{
 	position: absolute;
@@ -2720,7 +2719,6 @@ ul.personal_list li .grey_area span{
 .steps span,
 .steps a.active{
 	border-radius: 5px;
-	background: url(../images/cars_categories.jpg) repeat-x 0 0;
 	color: #FFFFFF;
 	text-shadow:0 0 0 #FFFFFF;
 	padding: 6px 10px 7px 12px;
