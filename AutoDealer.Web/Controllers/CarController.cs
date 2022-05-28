@@ -155,7 +155,7 @@ namespace AutoDealer.Web.Controllers
                 CarFilter = carFilter
             };
 
-            ViewBag.CurrentPage = 0;
+            ViewBag.CurrentTab = "cars";
 
             return View(viewModel);
         }
@@ -174,20 +174,6 @@ namespace AutoDealer.Web.Controllers
         [HttpGet]
         public IActionResult FilterCar(CarFilter filter, int currentPage = 1)
         {
-
-            //IQueryable<Color> colors = _colorRepository.Colors.OrderBy(color => color.Title);
-            //IQueryable<Model> models = _modelRepository.Models.OrderBy(model => model.Title);
-            //IQueryable<Company> companies = _companyRepository.Companies.OrderBy(company => company.Title);
-            //IQueryable<Engine> engines = _engineRepository.Engines.OrderBy(eng => eng.Title);
-            //IQueryable<Transmission> transmissions = _transmissionRepository.Transmissiones.OrderBy(tran => tran.TransmissionType);
-
-            //IQueryable<Car> allCars = _carRepository.Cars.OrderBy(car => car.Id);
-            //IQueryable<Color> colors = _colorRepository.Colors.OrderBy(color => color.Title);
-            //IQueryable<Model> models = _modelRepository.Models.OrderBy(model => model.Title);
-            //IQueryable<Company> companies = _companyRepository.Companies.OrderBy(company => company.Title);
-            //IQueryable<EngineType> engines = _engineTypeRepository.EngineTypes.OrderBy(eng => eng.Title);
-            //IQueryable<Transmission> transmissions = _transmissionRepository.Transmissiones.OrderBy(tran => tran.TransmissionType);
-
             IQueryable<Color> colors = _datasource.Colors;
             IQueryable<Model> models = _datasource.Models;
             IQueryable<Company> companies = _datasource.Companies;
@@ -199,8 +185,6 @@ namespace AutoDealer.Web.Controllers
             filter.Models = models;
             filter.Companies = companies;
             filter.Transmissions = transmissions;
-
-            //_filter = filter;
 
             List<Car> allCars = _carRepository
                 .GetCarsByFilter(filter)
@@ -379,6 +363,7 @@ namespace AutoDealer.Web.Controllers
 
             ViewBag.Company = defaultSelectedCompany.Title;
             ViewBag.Model = _datasource.Models.FirstOrDefault(m => m.Company.Id == defaultSelectedCompany.Id).Title;
+            ViewBag.CurrentTab = "buyout_car";
 
             return View(viewModel);
         }

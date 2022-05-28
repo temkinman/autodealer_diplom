@@ -34,8 +34,8 @@
     <script src="~/bootstrap-datepicker/locales/bootstrap-datepicker.ru.min.js"></script>
 
 </head>
-<body class="hold-transition theme-primary bg-img" style="background-image: url(/assets/images/auth-bg/bg-1.jpg)">
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
+<body class="hold-transition theme-primary bg-light">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
         <div class="container justify-content-center">
             <a class="navbar-brand menu-link-logo d-none d-md-block d-lg-block d-xl-block" asp-area="" asp-controller="car" asp-action="Index">AutoDealer</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -44,23 +44,23 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex ">
                 <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">авто</a></li>
-                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Sale" asp-action="Index">продажи</a></li>
-                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index">о нас</a></li>
-                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">админка</a></li>
-                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Create">принять авто new</a></li>
+                    <li class="nav-item menu-link "><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "cars"?"active":"")" asp-area="" asp-controller="Car" asp-action="Index">авто</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "sales"?"active":"")" asp-area="" asp-controller="Sale" asp-action="Index">продажи</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "about"?"active":"")" asp-area="" asp-controller="About" asp-action="Index">о нас</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "admin"?"active":"")" asp-area="" asp-controller="Admin" asp-action="Index">админка</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "buyout_car"?"active":"")" asp-area="" asp-controller="Car" asp-action="Create">выкуп авто</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="d-flex align-items-center col-4 account_li">
 							<ul class="navbar-nav flex-grow-1 d-flex justify-content-end align-items-center">
-								<li class="nav-item menu-link"><span>@User.Identity.Name</span></li>
-								<li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right"></i></a></li>
+								<li class="nav-item menu-link nav__link"><span>@User.Identity.Name</span></li>
+								<li class="nav-item menu-link"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right nav_link_icon"></i></a></li>
 							</ul>
 						</li>
                     }
                     else
                     {
-                        <li class="d-flex align-items-center justify-content-end col-4 account_li"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" tabindex="5"><i class="bi bi-box-arrow-in-right"></i></a></li>
+                        <li class="d-flex align-items-center justify-content-end col-4 account_li"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login" tabindex="5"><i class="bi bi-box-arrow-in-right nav_link_icon"></i></a></li>
                     }
                 </ul>
             </div>
@@ -83,7 +83,7 @@
             </div>
         </div>
     </header>
-    <div class="container h-p75">
+    <div class="container h-100">
         @*<main role="main" class="pb-3">*@
         @RenderBody()
         @*</main>*@

@@ -6,6 +6,7 @@ namespace AutoDealer.Web.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.CurrentTab = "about";
             return View();
         }
     }

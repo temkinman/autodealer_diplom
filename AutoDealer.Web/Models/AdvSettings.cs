@@ -15,19 +15,19 @@ namespace AutoDealer.Web.Models
         [Display(Name = "ESP")]
         public bool Esp { get; set; } = false;
 
-        [Display(Name = "Датчики парковки")]
+        [Display(Name = "Парктроники")]
         public bool ParkSensors { get; set; } = false;
 
         [Display(Name = "Камера")]
         public bool Camera { get; set; } = false;
 
-        [Display(Name = "Круиз-контроль")]
+        [Display(Name = "Круиз")]
         public bool Cruiz { get; set; } = false;
 
         [Display(Name = "Кондиционер")]
         public bool AirCondition { get; set; } = false;
 
-        [Display(Name = "Климат-контроль")]
+        [Display(Name = "Климат")]
         public bool ClimatControl { get; set; } = false;
 
         [Display(Name = "Навигация")]

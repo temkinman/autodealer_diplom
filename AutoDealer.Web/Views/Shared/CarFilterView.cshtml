@@ -15,7 +15,7 @@
     string isNavigation = @Model?.Settings?.Navigation == true ? "checked = true" : string.Empty;
     string isBluetooth = @Model?.Settings?.Bluetooth == true ? "checked = true" : string.Empty;
 }
-
+@*
 <div>
     <div class="search_auto">
         <h3><strong>Поиск</strong> авто</h3>
@@ -109,6 +109,146 @@
             <div class="clear"></div>
         </form>
     </div>
+</div>*@
+<div class="px-3 py-2 border border-info rounded">
+    <h3 class="text-center head-title mt-1 mb-1">Поиск авто</h3>
+    <form asp-action="Index" method="get" asp-controller="Car">
+        <label asp-for="CompanyId">Марка:</label>
+        <div id="Company" class="select_box_1">
+            <select asp-for="CompanyId" class="dropdown_item_select checkout_input" asp-items="@(new SelectList(Model.Companies,"Id","Title"))">  
+                <option value="0">Выберите</option>
+            </select>
+        </div>
+        <label asp-for="ModelId">Модель:</label>
+        <div id="SelectModels">
+            <select asp-for="ModelId" class="dropdown_item_select checkout_input" asp-items="@(new SelectList(Model.Models,"Id","Title"))">
+                <option value="0">Выберите</option>
+            </select>  
+        </div>
+        <label asp-for="EngineTypeId">Двигатель:</label>
+        <div>
+            <select asp-for="EngineTypeId" class="dropdown_item_select checkout_input" asp-items="@(new SelectList(Model.Engines,"Id","Title"))">
+                <option value="0">Выберите</option>
+            </select>
+        </div>
+        <label asp-for="TransmissionId">Коробка передач:</label>
+        <div>
+            <select asp-for="TransmissionId" class="dropdown_item_select checkout_input" asp-items="@(new SelectList(Model.Transmissions,"Id","TransmissionType"))">
+                <option value="0">Выберите</option>
+            </select>
+        </div>
+        <label asp-for="ColorId">Цвет:</label>
+        <div>
+            <select asp-for="ColorId" class="dropdown_item_select checkout_input" asp-items="@(new SelectList(Model.Colors,"Id","Title"))">
+                <option value="0">Выберите</option>
+            </select>
+        </div>
+        <div class="row">
+			<div class="col-6 pr-1">
+                <label>Год от:</label>
+                <div>
+                    @Html.DropDownListFor(m=>m.ProduceDateFrom, new SelectList(years),"от", new {@class = "dropdown_item_select checkout_input"})
+                </div>
+            </div>
+            <div class="col-6 pl-1">
+                <label>Год до:</label>
+                <div>
+                    @Html.DropDownListFor(m=>m.ProduceDateTo, new SelectList(years),"до", new {@class = "dropdown_item_select checkout_input"})
+                </div>
+            </div>
+        </div>
+        <div class="row">
+			<div class="col-6 pr-1">
+                <label>Цена от:</label>
+                <div>
+                    @Html.DropDownListFor(m=>m.PriceFrom, new SelectList(years),"от", new {@class = "dropdown_item_select checkout_input"})
+                </div>
+            </div>
+            <div class="col-6 pl-1">
+                <label>Цена до:</label>
+                <div>
+                    @Html.DropDownListFor(m=>m.PriceTo, new SelectList(years),"до", new {@class = "dropdown_item_select checkout_input"})
+                </div>
+            </div>
+        </div>
+        <div class="row">
+			<div class="col-6 pr-1">
+                <label>Пробег от:</label>
+                <div>
+                    @Html.DropDownListFor(m=>m.KilometreFrom, new SelectList(years),"от", new {@class = "dropdown_item_select checkout_input"})
+                </div>
+            </div>
+            <div class="col-6 pl-1">
+                <label>Пробег до:</label>
+                <div>
+                    @Html.DropDownListFor(m=>m.KilometreTo, new SelectList(years),"до", new {@class = "dropdown_item_select checkout_input"})
+                </div>
+            </div>
+        </div>
+        <label class="mt-2">Доп опции:</label>
+        <div class="row">
+			<div class="col-6 pr-0">
+				<ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item settings_item bg-light">
+						<div class="custom-control custom-checkbox">
+							<input asp-for="@Model.Settings.Abs" type="checkbox" class="custom-control-input">
+							<label asp-for="@Model.Settings.Abs" class="custom-control-label"></label>
+						</div>
+					</li>
+                    <li class="list-group-item settings_item bg-light">
+                            <div class="custom-control custom-checkbox">
+                            <input asp-for="@Model.Settings.Esp" type="checkbox" class="custom-control-input"/>
+                            <label asp-for="@Model.Settings.Esp" class="custom-control-label"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item settings_item bg-light">
+                            <div class="custom-control custom-checkbox">
+                            <input asp-for="@Model.Settings.ParkSensors" type="checkbox" class="custom-control-input"/>
+                            <label asp-for="@Model.Settings.ParkSensors" class="custom-control-label"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item settings_item bg-light">
+                            <div class="custom-control custom-checkbox">
+                            <input asp-for="@Model.Settings.Camera" type="checkbox" class="custom-control-input"/>
+                            <label asp-for="@Model.Settings.Camera" class="custom-control-label"></label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 pl-0">
+				<ul class="list-group list-group-flush mb-3 ">
+					<li class="list-group-item settings_item bg-light">
+						<div class="custom-control custom-checkbox">
+							<input asp-for="@Model.Settings.Cruiz" type="checkbox" class="custom-control-input">
+							<label asp-for="@Model.Settings.Cruiz" class="custom-control-label"></label>
+						</div>
+					</li>
+					<li class="list-group-item settings_item bg-light">
+						<div class="custom-control custom-checkbox">
+							<input asp-for="@Model.Settings.AirCondition" type="checkbox" class="custom-control-input">
+							<label asp-for="@Model.Settings.AirCondition" class="custom-control-label"></label>
+						</div>
+					</li>
+					<li class="list-group-item settings_item bg-light">
+						<div class="custom-control custom-checkbox">
+							<input asp-for="@Model.Settings.ClimatControl" type="checkbox" class="custom-control-input">
+							<label asp-for="@Model.Settings.ClimatControl" class="custom-control-label"></label>
+						</div>
+					</li>
+					<li class="list-group-item settings_item bg-light">
+						<div class="custom-control custom-checkbox">
+							<input asp-for="@Model.Settings.Navigation" type="checkbox" class="custom-control-input">
+							<label asp-for="@Model.Settings.Navigation" class="custom-control-label"></label>
+						</div>
+					</li>
+				</ul>			
+			</div>
+        </div>
+        <div class="row justify-content-center mx-2">
+			<input type="submit" value="Поиск" class="btn_search mr-3" />
+			<a  asp-action="ResetSearch" asp-controller="Car" class="btn btn-danger">Сброс</a>
+		</div>
+    </form>
 </div>
 
 <script>
@@ -139,7 +279,7 @@
                 },
                 success: function (data) {
                     $("#SelectModels").html(data);
-                    //$("#ModelId").prop("disabled", false);
+                    $("#ModelId").addClass("dropdown_item_select checkout_input");
                     console.log("ok from partial");
                 },
                 error: function (ex) {

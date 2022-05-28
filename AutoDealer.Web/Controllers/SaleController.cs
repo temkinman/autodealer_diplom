@@ -97,6 +97,7 @@ namespace AutoDealer.Web.Controllers
                 TotalSum = totalSum,
             };
 
+            ViewBag.CurrentTab = "sales";
             //SalesViewModel salesResult = new SalesViewModel()
             //{
             //    TotalCars = viewModelSales.Count,

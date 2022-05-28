@@ -6,7 +6,7 @@
     ViewBag.CurrentPage = 0;
 }
 
-<div class="col-lg-5">
+@*<div class="col-lg-5">
     <div class="single-car-details">
         <div class="single-car-form-wrap">
             <div class="single-car-form mb-20">
@@ -81,13 +81,14 @@
             <img src="assets/images/banner/banner-41.png" alt="">
         </div>
     </div>
-</div>
+</div>*@
 
+@*
 <div id="content">
     <div class="content">
         <div class="breadcrumbs">
             <a href="#">Home</a>
-            @*<img src="images/marker_2.gif" alt="" />*@
+            @*<img src="images/marker_2.gif" alt="" />
             <span>Cars</span>
         </div>
         <div class="main_wrapper">
@@ -129,7 +130,7 @@
                  page-class="btn" page-class-normal="btn-outline-dark"
                  page-class-selected="btn-primary" class="btn-group m-1">
             </div>
-            @*<div class="bottom_catalog_box">
+            <div class="bottom_catalog_box">
                 <div class="pagination">
                 <ul>
                 <li class="active"><a href="#">1</a></li>
@@ -141,12 +142,30 @@
                 </ul>
                 </div>
                 <div class="clear"></div>
-                </div>*@
+                </div>
         </div>
         <div class="clear"></div>
     </div>
+</div>*@
+<h1 class="text-center head-title mx-3">Авто в наличии</h1>
+<div class="row">
+    
+    <div class="search_auto col-3 bg-light p-0">
+        @{
+            await Html.RenderPartialAsync("CarFilterView", @Model?.CarFilter ?? new CarFilter());
+        }
+    </div>
+    <div class="col-9 bg-light">
+        @{
+            await Html.RenderPartialAsync("CarsResult", @Model.Cars);
+        }
+    </div>
+</div>
+<div page-model="@Model" page-classes-enabled="true" action="Index"
+        page-class="btn" page-class-normal="btn-outline-dark"
+        page-class-selected="btn-primary" class="btn-group m-1">
 </div>
 
-@Html.Hidden("CurrentTab", (object)ViewBag.CurrentPage);
+@Html.Hidden("CurrentTab", (object)ViewBag.CurrentPage)
 
 <script src="/js/pagination.js"></script>

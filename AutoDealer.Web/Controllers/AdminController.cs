@@ -14,7 +14,7 @@ namespace AutoDealer.Web.Controllers
                 return Content(User.Identity.Name);
             }
 
-            ViewBag.CurrentTab = "admin_panel";
+            ViewBag.CurrentTab = "admin";
 
             return View();
         }
