@@ -82,6 +82,10 @@ body {
     margin-bottom: 60px;
 }
 
+.container-login {
+    min-height: 650px !important;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -347,9 +351,24 @@ span.img-text {
 
 
 /*adding auto form*/
-#OwnerForm {
+.info-form {
     max-width: 800px;
 }
+
+.head-title {
+    color: #607072 !important;
+    font-size: 30px;
+}
+
+.rounded-10 {
+    border-radius: 10px !important;
+}
+
+/*login form*/
+.head-login-title {
+    color: #607072 !important;
+}
+
 /*.thank-you-pop {
     width: 100%;
     padding: 20px;

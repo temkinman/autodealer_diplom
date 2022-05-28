@@ -4,102 +4,161 @@
     ViewData["Title"] = "Create";
 }
 
-<h4>Оформление покупки авто</h4>
-<p >
-    Оформление автомобиля:
-    <br/>
-    <span>Марка: @Model.Auto.Company?.Title</span>
-    <br/>
-    <span>Модель: @Model.Auto.Model?.Title</span>
-    <br/>
-    <span>Год: @Model.Auto.ProduceDate г.</span>
-    <br/>
-    <span>Объем двигателя: @Model.Auto?.Engine?.Capacity</span>
-    <br/>
-    <span>Тип двигателя: @Model.Auto.Engine?.Type?.Title</span>
-    <br/>
-    <span>Пробег: @Model.Auto.Kilometre км.</span>
-    <br/>
-    <span>Цвет: @Model.Auto.Color?.Title</span>
-    <br/>
-    <span>Коробка передач: @Model.Auto.Transmission?.TransmissionType</span>
-    <br/>
-    <span>Доп.опции: @Model.Auto?.Settings</span>
-    <br/>
-    <span>Цена: @Model.Auto.Price $</span>
-</p>
-<hr />
-<div class="row">
-
-    <div class="col-md-4">
-
-        <form asp-action="Create" method="post" asp-controller="Order">
-            <input type="hidden" asp-for="AutoId" />
-            <div class="form-group">
-                <label asp-for="Client.FirstName" class="control-label"></label>
-                <input asp-for="Client.FirstName" class="form-control" />
-                <span asp-validation-for="Client.FirstName" class="text-danger"/>
+<div class="table-responsive info-form mx-auto mb-3">
+    <h2 class="mt-3 text-center head-title"><i class="ti-car me-15"></i> Информация об автомобиле</h2>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>Марка</td>
+                <td>@Model.Auto.Company?.Title</td>
+            </tr>
+            <tr>
+                <td>Модель</td>
+                <td>@Model.Auto.Model?.Title</td>
+            </tr>
+            <tr>
+                <td>Год</td>
+                <td>@Model.Auto.ProduceDate г.</td>
+            </tr>
+            <tr>
+                <td>Объем двигателя</td>
+                <td>@Model.Auto?.Engine?.Capacity</td>
+            </tr>
+            <tr>
+                <td>Тип двигателя</td>
+                <td>@Model.Auto.Engine?.Type?.Title</td>
+            </tr>
+            <tr>
+                <td>Пробег</td>
+                <td>@Model.Auto.Kilometre км.</td>
+            </tr>
+            <tr>
+                <td>Цвет</td>
+                <td>@Model.Auto.Color?.Title</td>
+            </tr>
+            <tr>
+                <td>Коробка передач</td>
+                <td>@Model.Auto.Transmission?.TransmissionType</td>
+            </tr>
+            <tr>
+                <td>Доп.опции</td>
+                <td>@Model.Auto?.Settings</td>
+            </tr>
+            <tr>
+                <td>Цена</td>
+                <td class="text-danger">@Model.Auto.Price $</td>
+            </tr>
+            <tr class="hide">
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<form class="form mb-3 info-form mx-auto" asp-action="Create" method="post" asp-controller="Order">
+    <input type="hidden" asp-for="AutoId" />
+    <div class="box-body">
+        <h4 class="box-title mb-0 text-center head-title"><i class="ti-user me-15"></i> Персональные данные</h4>
+        <hr class="my-15">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Client.FirstName" class="form-label"></label>
+                    <input asp-for="Client.FirstName" class="form-control" placeholder="Имя" />
+                    <span asp-validation-for="Client.FirstName" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Client.LastName" class="control-label"></label>
-                <input asp-for="Client.LastName" class="form-control" />
-                <span asp-validation-for="Client.LastName" class="text-danger"/>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Client.LastName" class="form-label"></label>
+                    <input asp-for="Client.LastName" class="form-control" placeholder="Фамилия" />
+                    <span asp-validation-for="Client.LastName" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Client.BDay" class="control-label"></label>
-                <input asp-for="Client.BDay" type="date" class="form-control" />
-                <span asp-validation-for="Client.BDay" class="text-danger"/>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Client.BDay" class="form-label"></label>
+                    <input asp-for="Client.BDay" type="date" class="form-control" />
+                    <span asp-validation-for="Client.BDay" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Client.PassportSeries" class="control-label"></label>
-                <input asp-for="Client.PassportSeries" class="form-control" />
-                <span asp-validation-for="Client.PassportSeries" class="text-danger"/>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Client.PassportSeries" class="form-label"></label>
+                    <input asp-for="Client.PassportSeries" class="form-control" placeholder="Пасспорт" />
+                    <span asp-validation-for="Client.PassportSeries" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Client.Phone" class="control-label"></label>
-                <input asp-for="Client.Phone" class="form-control" />
-                <span asp-validation-for="Client.Phone" class="text-danger"/>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Client.Phone" class="form-label"></label>
+                    <input asp-for="Client.Phone" class="form-control" placeholder="Телефон" />
+                    <span asp-validation-for="Client.Phone" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Client.City" class="control-label"></label>
-                <input asp-for="Client.City" class="form-control" />
-                <span asp-validation-for="Client.City" class="text-danger"/>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Client.City" class="form-label"></label>
+                    <input asp-for="Client.City" class="form-control" placeholder="Город" />
+                    <span asp-validation-for="Client.City" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Client.Street" class="control-label"></label>
-                <input asp-for="Client.Street" class="form-control" />
-                <span asp-validation-for="Client.Street" class="text-danger"/>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Client.Street" class="form-label"></label>
+                    <input asp-for="Client.Street" class="form-control" placeholder="Улица" />
+                    <span asp-validation-for="Client.Street" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Client.House" class="control-label"></label>
-                <input asp-for="Client.House" class="form-control" />
-                <span asp-validation-for="Client.House" class="text-danger"/>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Client.House" class="form-label"></label>
+                    <input asp-for="Client.House" class="form-control" placeholder="Дом" />
+                    <span asp-validation-for="Client.House" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Client.Flat" class="control-label"></label>
-                <input asp-for="Client.Flat" class="form-control" />
-                <span asp-validation-for="Client.Flat" class="text-danger"/>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Client.Flat" class="form-label"></label>
+                    <input asp-for="Client.Flat" class="form-control" placeholder="Квартира" />
+                    <span asp-validation-for="Client.Flat" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Client.Email" class="control-label"></label>
-                <input asp-for="Client.Email" class="form-control" />
-                <span asp-validation-for="Client.Email" class="text-danger"/>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Client.Email" class="form-label"></label>
+                    <input asp-for="Client.Email" class="form-control" placeholder="Email" />
+                    <span asp-validation-for="Client.Email" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="@Model.FinalPrice" class="control-label"></label>
-                <input asp-for="@Model.FinalPrice" class="form-control" />
-                <span asp-validation-for="@Model.FinalPrice" class="text-danger"/>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="FinalPrice" class="form-label"></label>
+                    <input asp-for="FinalPrice" type="number" class="form-control" />
+                    <span asp-validation-for="FinalPrice" class="text-danger" />
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Оформить" class="btn btn-primary" />
-                <a asp-action="Index" asp-controller="Car" class="btn btn-danger">Отмена</a>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-<div>
-    <a asp-action="Index" asp-controller="Car">На главную</a>
-</div>
+    <div class="box-footer d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary mr-3">
+            <i class="ti-save-alt"></i> Сохранить
+        </button>
+        <a asp-action="Index" asp-controller="Car" type="button" class="btn btn-warning me-1">
+            <i class="ti-trash"></i> Отменить
+        </a>
+    </div>
+</form>
 
 @section Scripts {
     @{
@@ -108,7 +167,7 @@
 }
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         //$('.datepicker').datepicker({
         //    format: 'mm/dd/yyyy',
         //    startDate: '-3d'

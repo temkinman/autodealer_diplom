@@ -12,13 +12,20 @@
     <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="~/css/owl.theme.default.min.css" />
     <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+    @*<link rel="stylesheet" href="~/css/style_bs_5.css" />*@
+    <link rel="stylesheet" href="~/css/skin_color.css" />
     <link rel="stylesheet" href="~/css/material-design-iconic-font.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-fileinput/css/fileinput.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/bootstrap-datepicker/css/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="~/assets/icons/themify-icons/themify-icons.css" />
 
-    <!-- alternatively you can use the font awesome icon library if using with `fas` theme (or Bootstrap 4.x) by uncommenting below. -->
-    <!-- link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" -->
+
+
+    @*<link rel="stylesheet" href="~/css/plugins/plugins.min.css" />*@
+    <link rel="stylesheet" href="~/css/vendor/vendor.min.css" />
+    @*<link rel="stylesheet" href="~/css/style.dki.min.css" />*@
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
@@ -33,7 +40,7 @@
     <script src="~/bootstrap-datepicker/locales/bootstrap-datepicker.ru.min.js"></script>
 
 </head>
-<body>
+<body class="hold-transition theme-primary bg-img" style="background-image: url(/assets/images/auth-bg/bg-1.jpg)">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
         <div class="container justify-content-center">
             <a class="navbar-brand menu-link-logo d-none d-md-block d-lg-block d-xl-block" asp-area="" asp-controller="car" asp-action="Index">AutoDealer</a>
@@ -159,7 +166,7 @@
 
         }*@
 
-    <div class="container">
+    <div class="container h-p75">
         @*<main role="main" class="pb-3">*@
         @RenderBody()
         @*</main>*@
@@ -265,6 +272,11 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/lightbox.js"></script>
     <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/assets/icons/feather-icons/feather.min.js"></script>
+
+    @*<script src="~/js/vendor/vendor.min.js"></script>
+        <script src="~/js/plugins/plugins.min.js"></script>
+        <script src="~/js/main.js"></script>*@
 
     @await RenderSectionAsync("Scripts", required: false)
 

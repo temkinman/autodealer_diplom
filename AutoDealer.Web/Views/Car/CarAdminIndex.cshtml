@@ -67,10 +67,10 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td class="text-center">
-                        <a class="btn btn-outline-primary" onclick="showCarDetails(@item.Id)">Детали</a>
-                        <a class="btn btn-outline-secondary editCar" id="@item.Id">Изменить</a>
+                        <a class="text-info me-10" onclick="showCarDetails(@item.Id)"><i class="ti-info-alt"></i></a>
+                        <a class="text-info me-10 editCar" id="@item.Id"><i class="ti-marker-alt"></i></a>
                         @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Удалить</a>*@
-                        <a class="btn btn-outline-danger" onclick="onDeleteCar(@item.Id)">Удалить</a>
+                        <a class="text-info me-10" onclick="onDeleteCar(@item.Id)"><i class="ti-trash"></i></a>
                     </td>
                 </tr>
             }

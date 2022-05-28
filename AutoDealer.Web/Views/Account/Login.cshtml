@@ -1,6 +1,46 @@
 ﻿@model AutoDealer.Web.Models.LoginModel
  
-<h2>Вход на сайт</h2>
+<div class="row align-items-center justify-content-md-center container-login">
+    <div class="col-12">
+        <div class="row justify-content-center g-0">
+            <div class="col-lg-5 col-md-5 col-12">
+                <div class="bg-white rounded-10 shadow-lg">
+                    <div class="content-top-agile p-2 pb-0">
+                        <h2 class="head-login-title text-center">Залогиньтесь для работы</h2>
+                    </div>
+                    <div class="p-4">
+                        <form asp-action="Login" asp-controller="Account" method="post" asp-anti-forgery="true">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
+                                    <input asp-for="Email" type="text" class="form-control ps-15 bg-transparent" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text  bg-transparent"><i class="ti-lock"></i></span>
+                                    <input asp-for="Password" type="password" class="form-control ps-15 bg-transparent" placeholder="Пароль">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="basic_checkbox_1">
+                                        <label for="basic_checkbox_1">Remember Me</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-danger mt-1">SIGN IN</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<h2>Вход на сайт</h2>
  
 <a asp-action="Register" asp-controller="Account">Регистрация</a>
  
@@ -21,4 +61,4 @@
             <input type="submit" value="Войти" class="btn btn-outline-dark" />
         </div>
     </div>
-</form>
+</form>*@

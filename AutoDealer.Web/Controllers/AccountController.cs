@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -29,7 +30,16 @@ namespace AutoDealer.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Employee manager = await _employeeRepository.Employees.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+                Employee manager = new();
+                try
+                {
+                    manager = await _employeeRepository.Employees.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+                }
+                catch (System.Exception)
+                {
+
+                }
+                
                 if (manager != null)
                 {
                     await Authenticate(model.Email); // аутентификация
