@@ -6,13 +6,10 @@
     <title>@ViewData["Title"] - AutoDealer</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/css/style980.css" />
     <link rel="stylesheet" href="~/css/lightbox.css" />
     <link rel="stylesheet" href="~/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="~/css/owl.theme.default.min.css" />
     <link rel="stylesheet" href="~/css/font-awesome.min.css" />
-    @*<link rel="stylesheet" href="~/css/style_bs_5.css" />*@
     <link rel="stylesheet" href="~/css/skin_color.css" />
     <link rel="stylesheet" href="~/css/material-design-iconic-font.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-fileinput/css/fileinput.min.css" />
@@ -20,12 +17,9 @@
     <link rel="stylesheet" href="~/bootstrap-datepicker/css/bootstrap-datepicker.css" />
     <link rel="stylesheet" href="~/assets/icons/themify-icons/themify-icons.css" />
 
-
-
     @*<link rel="stylesheet" href="~/css/plugins/plugins.min.css" />*@
-    <link rel="stylesheet" href="~/css/vendor/vendor.min.css" />
+    @*<link rel="stylesheet" href="~/css/vendor/vendor.min.css" />*@
     @*<link rel="stylesheet" href="~/css/style.dki.min.css" />*@
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
@@ -50,66 +44,28 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex ">
                 <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index" tabindex="0">авто</a></li>
-                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Sale" asp-action="Index" tabindex="1">продажи</a></li>
-                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index" tabindex="3">о нас</a></li>
-                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index" tabindex="4">админка</a></li>
-                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Create" tabindex="5">принять авто new</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">авто</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Sale" asp-action="Index">продажи</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index">о нас</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">админка</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Create">принять авто new</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="d-flex align-items-center col-4 account_li">
+							<ul class="navbar-nav flex-grow-1 d-flex justify-content-end align-items-center">
+								<li class="nav-item menu-link"><span>@User.Identity.Name</span></li>
+								<li class="nav-item menu-link"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right"></i></a></li>
+							</ul>
+						</li>
+                    }
+                    else
+                    {
+                        <li class="d-flex align-items-center justify-content-end col-4 account_li"><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" tabindex="5"><i class="bi bi-box-arrow-in-right"></i></a></li>
+                    }
                 </ul>
             </div>
         </div>
     </nav>
-
-    @*<ul class="nav nav-tabs">
-        <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
-        </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-        </ul>*@
-    @*<nav class="navbar navbar-expand-lg navbar-light justify-content-center bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-        <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown link
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-        </li>
-        </ul>
-        </div>
-        </nav>*@
     <header>
         <div id="header">
             <div class="top_info">
@@ -125,143 +81,80 @@
                     <div>Беларусь г.Гомель ул.Советская д.59</div>
                 </div>
             </div>
-            <div class="bg_navigation">
-                <div class="navigation_wrapper">
-                    <div id="navigation">
-                        <span>Home</span>
-                        <ul>
-                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index" tabindex="0">авто</a></li>
-                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Sale" asp-action="Index" tabindex="1">продажи</a></li>
-                            <li><a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index" tabindex="3">о нас</a></li>
-                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index" tabindex="4">админка</a></li>
-                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Create" tabindex="5">принять авто new</a></li>
-
-                            @*<partial name="_LoginPartial" />*@
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li>
-                                    <a>@(User.Identity.Name == "admin@admin.com" ? User.Identity.Name : "")</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout" tabindex="5">выйти</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" tabindex="5">войти</a></li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </header>
-
-    @*@{
-        if(ViewBag.Admin != null)
-        {
-        if(ViewBag.Admin == "admin_panel")
-        {
-        await Html.RenderPartialAsync("AdminPanel");
-        }
-        }
-
-        }*@
-
     <div class="container h-p75">
         @*<main role="main" class="pb-3">*@
         @RenderBody()
         @*</main>*@
     </div>
-    <footer id="footer">
-        <div class="bg_top_footer">
-            <div class="top_footer">
-                <div class="f_widget first">
-                    <h3><strong>About</strong> us</h3>
-                    <a href="#" class="footer_logo">AutoDealer</a>
-                    <p>
-                        Lorem ipsum dolor sit amet, cons ectetur adipisicing elit, sed do eiusmod tempor.
-                        Lorem ipsum dolor sit amet, con sectetur adipisicing elit, sed do eius  mod tempor incididunt ut.
+    <footer class="foot mt-4">
+        <div class="foot_main">
+            <div class="foot_menu pb-2">
+                <ul class="d-flex justify-content-center">
+                    <li class="mr-3">
+                        <a href="#">Комиссия</a>
+                    </li>
+                    <li class="mr-3">
+                        <a href="#">Выкуп</a>
+                    </li>
+                    <li class="mr-3">
+                        <a href="#">Обмен</a>
+                    </li>
+                    <li class="mr-3">
+                        <a href="#">Кредит</a>
+                    </li>
+                    <li class="mr-3">
+                        <a href="#">Лизинг</a>
+                    </li>
+                    <li class="mr-3">
+                        <a href="#">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex justify-content-between pb-4 pt-4">
+                <div class="foot_item">
+                    <h4>Телефоны</h4>
+                    <p>Продажа автомобилей ул. Советская 26</p>
+                    <p><a href="tel:+375 44 777-99-11">+375 44 777-99-11</a> A1</p>
+                    <p><a href="tel:+375 29350-44-55">+375 29 350-44-55</a> МТС</p>
+                </div>
+                <div class="foot_item">
+                    <p>Кредит / Лизинг</p>
+                    <p><a href="tel:+375 29111-99-00">+375 29 111-99-00</a> A1</p>
+                    <p>Cрочный выкуп / Обмен</p>
+                    <p><a href="tel:+375 29344-66-88">+375 29 344-66-88</a> A1</p>
+                    <p><a href="tel:+375 44744-77-77">+375 44 744-77-77</a> A1</p>
+                    <p>Поставить авто на продажу</p>
+                    <p><a href="tel:+37544799-10-20">+37544 799-10-20</a> А1</p>
+                </div>
+
+                <div class="foot_item gr_bl">
+                    <h4>Время работы</h4>
+                    <p>Понедельник: <span>9.00 - 19.00</span></p>
+                    <p>Вторник: <span>9.00 - 19.00</span></p>
+                    <p>Среда: <span>9.00 - 19.00</span></p>
+                    <p>Четверг: <span>9.00 - 19.00</span></p>
+                    <p>Пятница: <span>9.00 - 19.00</span></p>
+                    <p>Суббота: <span>9.00 - 19.00</span></p>
+                    <p>Воскресенье: <span>9.00 - 19.00</span></p>
+                    <p class="graf">
+                        Ежедневно без выходных<br>
+                        с 9.00 до 19.00
                     </p>
                 </div>
-                <div class="f_widget divide second">
-                    <h3><strong>Open</strong> hours</h3>
-                    <ul class="schedule">
-                        <li>
-                            <strong>Monday</strong>
-                            <span>9:30 am - 6:00 pm</span>
-                        </li>
-                        <li>
-                            <strong>Tuesday</strong>
-                            <span>9:30 am - 6:00 pm</span>
-                        </li>
-                        <li>
-                            <strong>Wednesday</strong>
-                            <span>9:30 am - 6:00 pm</span>
-                        </li>
-                        <li>
-                            <strong>Thursday</strong>
-                            <span>9:30 am - 6:00 pm</span>
-                        </li>
-                        <li>
-                            <strong>Friday</strong>
-                            <span>9:30 am - 6:00 pm</span>
-                        </li>
-                        <li>
-                            <strong>Saturday</strong>
-                            <span>9:30 am - 4:00 pm</span>
-                        </li>
-                        <li>
-                            <strong>Sunday</strong>
-                            <span>closed</span>
-                        </li>
-                    </ul>
+
+                <div class="foot_item">
+                    <h4>Наш адрес</h4>
+                    <p>Республика Беларусь, <br><br>г. Гомель, ул. Советская 26<br></p>
+
+                    <a class="foot_a" href="https://4kolesa.by/contact-01/">Смотреть на карте</a>
+                    <div class="social">
+                        <p>Мы в соц.сетях:</p>
+                        <a href="https://www.instagram.com/autodealer.by/"><img src="https://4kolesa.by/wp-content/themes/fourwheels/assets/in_w.svg" data-src="https://4kolesa.by/wp-content/themes/fourwheels/assets/in_w.svg"></a>
+                        <a href="https://www.facebook.com/autodealer.by"><img src="https://4kolesa.by/wp-content/themes/fourwheels/assets/fb_w.svg" data-src="https://4kolesa.by/wp-content/themes/fourwheels/assets/fb_w.svg"></a>
+                    </div>
                 </div>
-                <div class="fwidget_separator"></div>
-                <div class="f_widget third">
-                    <h3><strong>Our</strong> contacts</h3>
-                    <div class="f_contact f_contact_1"><strong>Address Info:<br /></strong>Lorem ipsum Dolor sit amet, 658 Consectetur, Adipisicing 56 D</div>
-                    <div class="f_contact f_contact_2"><strong>Phone:</strong> +1 (234) 567-8901 <br /><strong>FAX:</strong> +1 (234) 567-8902</div>
-                    <div class="f_contact f_contact_3"><strong>Email:</strong> <a href="mailto:#">testmail@sitename.com</a></div>
-                </div>
-                <div class="f_widget divide last frame_wrapper">
-                </div>
-            </div>
-        </div>
-        <div class="bottom_footer">
-            <div class="f_widget ">
-                <h3><strong>About</strong> us</h3>
-                <ul>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Our Partners</a></li>
-                    <li><a href="#">Advertising Online</a></li>
-                    <li><a href="#">Site Map</a></li>
-                </ul>
-            </div>
-            <div class="f_widget divide">
-                <h3><strong>Need</strong> help?</h3>
-                <ul>
-                    <li><a href="#">How do I add an offer?</a></li>
-                    <li><a href="#">How do I find a vehicle</a></li>
-                    <li><a href="#">Price list</a></li>
-                    <li><a href="#">Office for car dealers</a></li>
-                </ul>
-            </div>
-            <div class="fwidget_separator"></div>
-            <div class="f_widget">
-                <h3><strong>User</strong> area</h3>
-                <ul>
-                    <li><a href="#">Add an offer</a></li>
-                    <li><a href="#">Register dealder</a></li>
-                    <li><a href="#">Login Dealer</a></li>
-                    <li><a href="#">News</a></li>
-                </ul>
-            </div>
-            <div class="f_widget divide last">
-                <h3><strong>Find</strong> us here</h3>
-                <ul class="horizontal">
-                    @*<li><a href="#"><img src="images/fb_icon.png" alt=""></a></li>
-                        <li><a href="#"><img src="images/twitter_icon.png" alt=""></a></li>
-                        <li><a href="#"><img src="images/in_icon.png" alt=""></a></li>
-                        </ul>*@
             </div>
         </div>
         <div class="copyright_wrapper">

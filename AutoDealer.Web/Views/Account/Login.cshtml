@@ -10,16 +10,19 @@
                     </div>
                     <div class="p-4">
                         <form asp-action="Login" asp-controller="Account" method="post" asp-anti-forgery="true">
+                            <div class="validation error_login" asp-validation-summary="ModelOnly"></div>
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
                                     <input asp-for="Email" type="text" class="form-control ps-15 bg-transparent" placeholder="Email">
+                                    <span asp-validation-for="Email" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text  bg-transparent"><i class="ti-lock"></i></span>
                                     <input asp-for="Password" type="password" class="form-control ps-15 bg-transparent" placeholder="Пароль">
+                                    <span asp-validation-for="Password" />
                                 </div>
                             </div>
                             <div class="row">
