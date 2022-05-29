@@ -46,7 +46,7 @@
                 <ul class="navbar-nav flex-grow-1 justify-content-around">
                     <li class="nav-item menu-link "><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "cars"?"active":"")" asp-area="" asp-controller="Car" asp-action="Index">авто</a></li>
                     <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "sales"?"active":"")" asp-area="" asp-controller="Sale" asp-action="Index">продажи</a></li>
-                    <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "about"?"active":"")" asp-area="" asp-controller="About" asp-action="Index">о нас</a></li>
+                    <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "about"?"active":"")" asp-area="" asp-controller="About" asp-action="Index">контакты</a></li>
                     <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "admin"?"active":"")" asp-area="" asp-controller="Admin" asp-action="Index">админка</a></li>
                     <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "buyout_car"?"active":"")" asp-area="" asp-controller="Car" asp-action="Create">выкуп авто</a></li>
                     @if (User.Identity.IsAuthenticated)
@@ -177,14 +177,13 @@
 
                 <div class="foot_item">
                     <h4>Наш адрес</h4>
-                    <p>Республика Беларусь, <br><br>г. Гомель, ул. Советская 26<br></p>
-
-                    <a class="foot_a" href="https://4kolesa.by/contact-01/">Смотреть на карте</a>
+                    <p>Республика Беларусь, <br>г. Гомель, ул. Советская 26<br></p>
                     <div class="social">
                         <p>Мы в соц.сетях:</p>
                         <a href="https://www.instagram.com/autodealer.by/"><img src="https://4kolesa.by/wp-content/themes/fourwheels/assets/in_w.svg" data-src="https://4kolesa.by/wp-content/themes/fourwheels/assets/in_w.svg"></a>
                         <a href="https://www.facebook.com/autodealer.by"><img src="https://4kolesa.by/wp-content/themes/fourwheels/assets/fb_w.svg" data-src="https://4kolesa.by/wp-content/themes/fourwheels/assets/fb_w.svg"></a>
                     </div>
+                    <a href="https://yandex.ru/maps/?um=constructor%3Af18f3514c372fd44f772717e7c82cd929e53fbb2823c3c916eb1c3df9c12c55d&amp;source=constructorStatic" target="_blank"><img src="https://api-maps.yandex.ru/services/constructor/1.0/static/?um=constructor%3Af18f3514c372fd44f772717e7c82cd929e53fbb2823c3c916eb1c3df9c12c55d&amp;width=300&amp;height=200&amp;lang=ru_RU" alt="" style="border: 0;" /></a>
                 </div>
             </div>
         </div>

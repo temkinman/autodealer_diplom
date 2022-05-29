@@ -668,3 +668,20 @@ ul li {
     font-size: 18px;
     font-weight: 600;
 }
+
+/*about*/
+.contacts, .contacts a {
+    font-size: 18px;
+    font-weight: 600;
+    color: #65737a;
+}
+
+.header_info a, .header_info a:hover {
+    color: #e2e2e2;
+    text-decoration: none;
+}
+
+.page_title {
+    color: #838487c9;
+}
+/*about end*/
