@@ -149,7 +149,12 @@
 </div>*@
 <h1 class="text-center head-title mx-3">Авто в наличии</h1>
 <div class="row">
-    
+	<div class="col-3 d-flex justify-content-center">
+		<p class="find_auto">Найдено: <span id="count_auto">@Model.PagingInfo.TotalItems</span></p>
+	</div>
+</div>
+@*<span>Всего: @Model.PagingInfo.TotalItems</span>*@
+<div class="row">
     <div class="search_auto col-3 bg-light p-0">
         @{
             await Html.RenderPartialAsync("CarFilterView", @Model?.CarFilter ?? new CarFilter());
@@ -163,7 +168,7 @@
 </div>
 <div page-model="@Model" page-classes-enabled="true" action="Index"
         page-class="btn" page-class-normal="btn-outline-dark"
-        page-class-selected="btn-primary" class="btn-group m-1">
+        page-class-selected="btn-primary" class="btn-group m-1 mb-2">
 </div>
 
 @Html.Hidden("CurrentTab", (object)ViewBag.CurrentPage)

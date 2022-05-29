@@ -18,11 +18,5 @@ namespace AutoDealer.Web.Controllers
 
             return View();
         }
-
-        public IActionResult CarListIndex()
-        {
-
-            return View("~/Views/Car/CarAdminList.cshtml");
-        }
     }
 }

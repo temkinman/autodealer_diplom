@@ -43,7 +43,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex ">
-                <ul class="navbar-nav flex-grow-1">
+                <ul class="navbar-nav flex-grow-1 justify-content-around">
                     <li class="nav-item menu-link "><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "cars"?"active":"")" asp-area="" asp-controller="Car" asp-action="Index">авто</a></li>
                     <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "sales"?"active":"")" asp-area="" asp-controller="Sale" asp-action="Index">продажи</a></li>
                     <li class="nav-item menu-link"><a class="nav-link nav__link @(Html.ViewBag.CurrentTab == "about"?"active":"")" asp-area="" asp-controller="About" asp-action="Index">о нас</a></li>
@@ -67,13 +67,44 @@
         </div>
     </nav>
     <header>
-        <div id="header">
+        <div class="header_info">
+			<div class="container py-4">
+				<div class="row">
+					<div class="col-3 d-flex align-items-center mr-0">
+						<div class="logo">
+							<a asp-controller="Car" asp-action="Index">
+								<img src="~/images/logo.png" id="logo_img" alt="logo">
+							</a>
+						</div>	
+					</div>
+					<div class="col-9 d-flex align-items-center ml-0">
+						<div class="col-8">
+							<div class="d-flex align-items-center justify-content-center flex-column ">
+								<a href="#" id="company_title">Auto<span class="header_title">Dealer</span></a>
+								<p class="slogan">Подберем вам <span id="best_auto">лучший</span> авто</p>
+							</div>
+						</div>
+						<div class="col-4 d-flex flex-grow-1 justify-content-center ">
+							<div>
+								<h4>Адрес:</h4>
+								<p>г.Гомель ул. Советская 26</p>
+								<h5>Телефоны:</h5>
+								<ul class="p-0">
+									<li class="header_phone"><a href="tel:+375 44 777-99-11">+375 44 777-99-11</a><span id="velcom"> A1</span></li>
+									<li class="header_phone"><a href="tel:+375 29350-44-55">+375 29 350-44-55</a><span id="mts"> МТС</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+        @*<div id="header" class="mb-3">
             <div class="top_info">
                 <div class="logo">
                     <a class="navbar-brand" asp-area="" asp-controller="Car" asp-action="Index">
                         <img src="~/images/logo.png" alt="logo">
                     </a>
-
                     <a href="#">Auto<span>Dealer</span></a>
                 </div>
                 <div class="header_contacts">
@@ -81,7 +112,7 @@
                     <div>Беларусь г.Гомель ул.Советская д.59</div>
                 </div>
             </div>
-        </div>
+        </div>*@
     </header>
     <div class="container h-100">
         @*<main role="main" class="pb-3">*@

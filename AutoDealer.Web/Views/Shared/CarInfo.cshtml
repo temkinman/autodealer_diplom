@@ -1,56 +1,20 @@
 ﻿@model AutoDealer.Web.Models.Car
 
-@*<div class="card">
-    <img src="~/images/mercedes.jpg" class="card-img-top" alt="car's' photo">
-    <div class="card-body">
-    <h5 class="card-title">Car title</h5>
-    <p class="card-text">price: @Model.Price</p>
-    <p class="card-text">kilometre: @Model.Kilometre</p>
-    <p class="card-text">vin: @Model.Vin</p>
-    <p class="card-text">description: @Model.Description</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-    <button type="button" class="btn btn-success">Buy</button>
-    ~/images/mercedes.jpg
-    </div>*@
-<li class="row my-2 mx-0">
+<li class="row mb-2 mx-0">
     @{
         string mainPhoto = @Model.GetMainPhoto() == string.Empty ? "/images/car-default.jpg" : $"/CarImages/{@Model.GetMainPhoto()}";
     }
-
     <div class="col-6 p-0 d-flex justify-content-center">
 		<a href="@Url.Action("CarDetails", "Car", new {carId = @Model.Id})">
 			<img src=@mainPhoto alt="car photo" class="car_list_img">
 		</a>
 	</div>
-	<div class="col-6">
+	<div class="col-6 py-2">
 		<span class="car_list_company mr-4">@Model.Company?.Title @Model.Model?.Title </span><span class="car_list_company text-danger">@Model.Price $</span>
 		<p class="car_list_item_details">@Model.ProduceDate г., @Model.Engine?.Capacity л. @Model.Engine?.Type?.Title, @Model.Kilometre км</p>
-		<div class="b-descr_item_dsc mb-3">@Model.Description</div>
+		<div class="b-descr_item_dsc mb-3 description_auto">Описание: @Model.Description</div>
 		<div class="row justify-content-end">
 			<a class="btn btn-primary mr-4" href="@Url.Action("CarDetails", "Car", new {carId = @Model.Id})">детали</a>
 		</div>
 	</div>
-
-
-
-
-
-    @*<a href="@Url.Action("CarDetails", "Car", new {carId = @Model.Id})">
-        <img src=@mainPhoto alt="car's' photo" class="carImgInfo"/>
-    </a>
-    <div class="catalog_desc">
-        <div class="location">Location: Berlin, Germany</div>
-        <div class="title_box">
-            <h4><a href="@Url.Action("CarDetails", "Car", new {carId = @Model.Id})">@Model.Company?.Title @Model.Model?.Title</a></h4>
-            <div class="price">@Model.Price $</div>
-        </div>
-        <div class="clear"></div>
-        <div class="grey_area">
-            <span>Registration @Model.ProduceDate</span>
-            <span>@Model.Engine?.Capacity @Model.Engine?.Type?.Title</span>
-            <span>@Model.Kilometre km</span>
-        </div>
-        <a href="#" class="more markered">View details</a>
-    </div>*@
 </li>

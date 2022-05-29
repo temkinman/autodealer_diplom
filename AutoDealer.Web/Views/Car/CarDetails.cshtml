@@ -6,7 +6,7 @@
 }
 
 <div>
-    <h1 class="text-center">Информация об автомобиле</h1>
+    <h1 class="text-center mx-2">Информация об автомобиле</h1>
     <div class="carousel-wrap carousel-container">
         <div class="owl-carousel owl-theme" id="slider">
             @{
@@ -19,7 +19,7 @@
 
                         <div class="item">
                             <a href=@path data-lightbox="roadtrip" data-title="My caption" id="carImgDetails">
-                                <img class="demo cursor carImg" src=@path alt="Picture">
+                                <img class="demo cursor carImg" id=imgInfo src=@path alt="Picture">
                             </a>
                         </div>
                     }
@@ -35,23 +35,6 @@
             }
         </div>
     </div>
-
-
-
-    @*<div class="cardetailsInfo">
-        <div class="title_box">
-        <h4><a href="#">@Model?.Company?.Title @Model.Model?.Title</a></h4>
-        <div class="price">Цена: @Model.Price $</div>
-        </div>
-        <div>
-        <span>год: @Model.ProduceDate</span>
-        <span>цвет: @Model.Color?.Title</span>
-        <span>@Model.Engine?.Capacity @Model.Engine?.Type?.Title</span>
-        <span>@Model.Kilometre km</span>
-        </div>
-        <p>@Model.Description</p>
-        <p>@Model.Settings</p>
-        </div>*@
 </div>
 <div class="card card-body carDetails-container mt-4 mb-4">
     <p class="card-text"><label>Марка:</label> <span>@Model?.Company?.Title</span></p>
@@ -71,7 +54,7 @@
     @{
         if (ViewBag.Admin == "adminPanel")
         {
-            <a asp-action="CarAdminList" asp-controller="car" class="btn btn-outline-primary">назад</a>
+            <a asp-action="CarAdminIndex" asp-controller="car" class="btn btn-outline-primary">назад</a>
         }
         else
         {

@@ -32,7 +32,7 @@ namespace AutoDealer.Web.Controllers
 
         private IDataSource _datasource;
         private IFilter _filter;
-        private const int PageSize = 3;
+        private const int PageSize = 5;
         public CarController(
                              ILogger<CarController> logger,
                              ICarRepository carRepository,
@@ -62,7 +62,7 @@ namespace AutoDealer.Web.Controllers
             _statusRepository = statusRepository;
         }
 
-        private CarFilter _cf = null;
+        //private CarFilter _cf = null;
 
         [Authorize]
         public IActionResult Index(int currentPage = 1, CarFilter carFilter = null, SortState sortOrder = SortState.ModelAsc)
@@ -93,14 +93,12 @@ namespace AutoDealer.Web.Controllers
             }
 
             carFilter.Colors = _datasource.Colors;
-            //carFilter.Models = _datasource.Models;
-            carFilter.Models = new List<Model>();
+            carFilter.Models = carFilter.CompanyId > 0 ? _datasource.Models.Where(m => m.Company.Id == carFilter.CompanyId) : new List<Model>();
             carFilter.Companies = _datasource.Companies;
             carFilter.Engines = _datasource.EngineTypes;
             carFilter.Transmissions = _datasource.Transmissions;
 
-            IQueryable<Car> cars = _carRepository
-                .GetCarsByFilter(carFilter);
+            IQueryable<Car> cars = _carRepository.GetCarsByFilter(carFilter);
 
             switch (sortOrder)
             {
@@ -137,6 +135,7 @@ namespace AutoDealer.Web.Controllers
             }
 
             IQueryable<Car> splittedByPageCars = cars
+                .Where(c => c.Status.Id != (int)CarStatus.Sold)
                 .Skip((currentPage - 1) * PageSize)
                 .Take(PageSize);
 
@@ -174,43 +173,44 @@ namespace AutoDealer.Web.Controllers
         [HttpGet]
         public IActionResult FilterCar(CarFilter filter, int currentPage = 1)
         {
-            IQueryable<Color> colors = _datasource.Colors;
-            IQueryable<Model> models = _datasource.Models;
-            IQueryable<Company> companies = _datasource.Companies;
-            IQueryable<EngineType> engines = _datasource.EngineTypes;
-            IQueryable<Transmission> transmissions = _datasource.Transmissions;
+            //IQueryable<Color> colors = _datasource.Colors;
+            //IQueryable<Model> models = _datasource.Models;
+            //IQueryable<Company> companies = _datasource.Companies;
+            //IQueryable<EngineType> engines = _datasource.EngineTypes;
+            //IQueryable<Transmission> transmissions = _datasource.Transmissions;
 
-            filter.Colors = colors;
-            filter.Engines = engines;
-            filter.Models = models;
-            filter.Companies = companies;
-            filter.Transmissions = transmissions;
+            //filter.Colors = colors;
+            //filter.Engines = engines;
+            //filter.Models = models;
+            //filter.Companies = companies;
+            //filter.Transmissions = transmissions;
 
-            List<Car> allCars = _carRepository
-                .GetCarsByFilter(filter)
-                .OrderBy(car => car.Id)
-                .ToList();
+            //List<Car> allCars = _carRepository
+            //    .GetCarsByFilter(filter)
+            //    .OrderBy(car => car.Id)
+            //    .ToList();
 
-            List<Car> splittedByPageCars = allCars
-                .Skip((currentPage - 1) * PageSize)
-                .Take(PageSize)
-                .ToList();
+            //List<Car> splittedByPageCars = allCars
+            //    .Skip((currentPage - 1) * PageSize)
+            //    .Take(PageSize)
+            //    .ToList();
 
-            PagingInfo pagingInfo = new PagingInfo
-            {
-                CurrentPage = currentPage,
-                PageSize = PageSize,
-                TotalItems = allCars.Count()
-            };
+            //PagingInfo pagingInfo = new PagingInfo
+            //{
+            //    CurrentPage = currentPage,
+            //    PageSize = PageSize,
+            //    TotalItems = allCars.Count()
+            //};
 
-            CarsListViewModel cars = new CarsListViewModel
-            {
-                PagingInfo = pagingInfo,
-                Cars = splittedByPageCars,
-                CarFilter = filter
-            };
+            //CarsListViewModel cars = new CarsListViewModel
+            //{
+            //    PagingInfo = pagingInfo,
+            //    Cars = splittedByPageCars,
+            //    CarFilter = filter
+            //};
 
-            return View("Index", cars);
+            //return View("Index", cars);
+            return View();
         }
 
         [HttpGet]
@@ -236,6 +236,8 @@ namespace AutoDealer.Web.Controllers
                 return NotFound();
             }
 
+            ViewBag.CurrentTab = "cars";
+
             return View(car);
         }
 
@@ -258,6 +260,9 @@ namespace AutoDealer.Web.Controllers
                                                 .OrderBy(c => c.Id)
                                                 .ToList();
 
+            ViewBag.CurrentTab = "admin";
+            ViewBag.CarAdmin = "car_admin";
+
             return PartialView(cars);
         }
 
@@ -275,14 +280,6 @@ namespace AutoDealer.Web.Controllers
             List<Car> cars = _carRepository.Cars.OrderBy(c => c.Id).ToList();
 
             return PartialView("CarAdminIndex", cars);
-        }
-
-        [HttpGet]
-        public IActionResult CarAdminList()
-        {
-            List<Car> cars = _carRepository.Cars.OrderBy(c => c.Id).ToList();
-
-            return View(cars);
         }
 
         [HttpGet]

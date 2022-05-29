@@ -79,7 +79,7 @@ namespace AutoDealer.Web.Core.DB.Repository
 
         public IQueryable<Car> GetCarsByFilter(CarFilter filter, int status)
         {
-            //List<Car> filtered = new ();
+            List<Car> filtered = new ();
             
             filter = SetFilterIfHasNullProperty(filter);
 
@@ -110,6 +110,16 @@ namespace AutoDealer.Web.Core.DB.Repository
             //List<Car> filteredByTransmission = filteredByEngine.Where(car => filter.TransmissionId != null ? car.Transmission?.Id == filter.TransmissionId : true).ToList();
             //List<Car> filteredBySettings = filtered.Where(car => isIncludeInCarSettings(filterSettings, GetAllTrueCarSettingsProperties(car.Settings))).ToList();
 
+            List<Car> filteredByCompany = Cars.ToList().Where(car => filter.CompanyId != 0 ? car.Company?.Id == filter.CompanyId : true).ToList();
+            List<Car> filteredByModel = filteredByCompany.Where(car => filter.ModelId != 0 ? car.Model?.Id == filter.ModelId : true).ToList();
+            List<Car> filteredByColor = filteredByModel.Where(car => filter.ColorId != 0 ? car.Color?.Id == filter.ColorId : true).ToList();
+            List<Car> filteredByEngine = filteredByColor.Where(car => filter.EngineTypeId != 0 ? car.Engine.Type.Id == filter.EngineTypeId : true).ToList();
+            List<Car> filteredByTransmission = filteredByEngine.Where(car => filter.TransmissionId != 0 ? car.Transmission?.Id == filter.TransmissionId : true).ToList();
+            //List<Car> filteredBySettings = filtered.Where(car => isIncludeInCarSettings(filterSettings, GetAllTrueCarSettingsProperties(car.Settings))).ToList();
+
+
+
+
             IQueryable<Car> result = Cars
                                 .Where(car => car.Status.Id == status)
                                 .Where(car => car.ProduceDate >= filter.ProduceDateFrom && car.ProduceDate <= filter.ProduceDateTo)
@@ -118,7 +128,7 @@ namespace AutoDealer.Web.Core.DB.Repository
                                 .Where(car => filter.CompanyId != 0 ? car.Company.Id == filter.CompanyId : true)
                                 .Where(car => filter.ModelId != 0 ? car.Model.Id == filter.ModelId : true)
                                 .Where(car => filter.ColorId != 0 ? car.Color.Id == filter.ColorId : true)
-                                .Where(car => filter.EngineTypeId != 0 ? car.Engine.Id == filter.EngineTypeId : true)
+                                .Where(car => filter.EngineTypeId != 0 ? car.Engine.Type.Id == filter.EngineTypeId : true)
                                 .Where(car => filter.TransmissionId != 0 ? car.Transmission.Id == filter.TransmissionId : true)
                                 .Where(car => filter.Settings.Abs == true ? filter.Settings.Abs == car.Settings.Abs : true)
                                 .Where(car => filter.Settings.Esp == true ? filter.Settings.Esp == car.Settings.Esp : true)

@@ -32,7 +32,7 @@ html {
 
 /*nav menu*/
 .menu-link-logo {
-    color: #7ccdb2 !important;
+    color: #cc9769 !important;
 }
 
 .menu-link {
@@ -83,62 +83,60 @@ body {
     padding: 0;
 }
 
-/*header*/
-#header {
-    min-width: 980px;
-    width: 100%;
-    margin: 0 auto;
-    text-align: left;
-    background-color: #1d242c; 
-    position: relative;
-    z-index: 100;
+/*header start*/
+.header_info {
+    background-color: #1d242c;
 }
 
-#header .top_info {
-    width: 940px;
-    margin: 0 auto;
-    overflow: hidden;
-    padding: 15px 20px 25px;
+    .header_info a, .header_info a:hover {
+        color: #e2e2e2;
+        text-decoration: none;
+    }
+
+    .header_info a {
+        color: #e2e2e2;
+    }
+
+.header_info {
+    color: #e2e2e2;
 }
 
-#header .top_info .logo {
-    width: 319px;
-    float: left;
-    padding: 0px 0 0 1px;
-}
-
-#header .top_info .logo a {
-    font-family: 'PTSansBold',Arial,sans-serif;
-    font-size: 48px;
-    color: #FFFFFF;
-    line-height: 60px;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-#header .top_info .logo a span {
+.header_title, #best_auto {
     color: #FFB01F;
 }
 
-#header .top_info .header_contacts {
-    width: 455px;
-    float: left;
-    font-family: 'PTSansRegular',Arial,sans-serif;
-    color: #B6BFC9;
-    font-size: 12px;
-    line-height: 18px;
-    padding: 8px 0 0 5px;
+.slogan {
+    font-size: 30px;
+    font-weight: 600;
 }
 
-#header .top_info .header_contacts .phone {
-    font-family: 'PTSansBold',Arial,sans-serif;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 24px;
-    color: #FFFFFF;
-    word-spacing: 1px;
-    padding: 0 0 2px 0;
+#company_title {
+    font-size: 48px;
+    font-weight: 600;
 }
+
+#logo_img {
+    width: 210px;
+}
+
+.header_phone {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+    .header_phone a {
+        color: #c1a778;
+    }
+
+#velcom {
+    color: #f6a30b;
+}
+
+#mts {
+    color: #f62a0b;
+}
+
+/*header end*/
 
 /*nav-menu*/
 nav {
@@ -242,18 +240,30 @@ nav {
     font-size: 14px;
 }
 
+.find_auto {
+    font-size: 18px;
+    font-weight: 600;
+    color: #324248;
+}
+
+#count_auto {
+    color: #f90000c7;
+    font-weight: bold;
+    font-size: 21px;
+}
+
 /*filter end*/
 
 /*car-list*/
 
 .car_list_img {
-    max-width: 400px;
+    max-width: 320px;
     max-height: 250px;
     object-fit: cover;
 }
 
 .car_list_item_details {
-    font-size: 25px;
+    font-size: 18px;
     color: #3A3A3A;
 }
 
@@ -262,14 +272,16 @@ nav {
     font-weight: 500;
 }
 
+.description_auto {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.3em;
+    height: 3.9em;
+}
+
 /*car-list end*/
-
-
-
-
-
-
-
 
 .carInfo {
     display: flex;
@@ -280,6 +292,11 @@ nav {
     max-height: 400px;
     object-fit: cover;
     margin: 0 auto;
+}
+
+#imgInfo {
+    max-height: 250px;
+    object-fit: cover;
 }
 
 .carImgInfo {
@@ -307,6 +324,7 @@ nav {
 
 #slider {
     max-width: 600px;
+    max-height: 300px;
 }
 
 .carousel-container {
@@ -528,7 +546,7 @@ span.img-text:hover {
 
 /*adding auto form*/
 .info-form {
-    max-width: 800px;
+    max-width: 680px;
 }
 
 .head-title {
@@ -643,4 +661,10 @@ ul li {
     src: url("../fonts/fontawesome-webfont.eot") format("embedded-opentype"), url("../fonts/fontawesome-webfont.woff") format("woff"), url("../fonts/fontawesome-webfont.woff2") format("woff2"), url("../fonts/fontawesome-webfont.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
+}
+
+/*info auto form*/
+.inform_auto_price {
+    font-size: 18px;
+    font-weight: 600;
 }
