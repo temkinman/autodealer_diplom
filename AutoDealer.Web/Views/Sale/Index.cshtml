@@ -8,32 +8,72 @@
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th class="text-center">
+            <th class="text-start">
                 <a class="nav-link">@numberHead</a>
             </th>
             <th class="text-start">
                 <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CompanySort)" class="nav-link">
                     @Html.DisplayNameFor(model => model.CompanyTitle)
+                    @if (ViewBag.Desc == "company")
+                    {
+                        <i class="fa fa-fw fa-chevron-down"></i>
+                    }
+                    @if (ViewBag.Asc == "company")
+                    {
+                        <i class="fa fa-fw fa-chevron-up"></i>
+                    }
                 </a>
             </th>
             <th class="text-start">
                 <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.ModelSort)" class="nav-link">
                     @Html.DisplayNameFor(model => model.ModelTitle)
+                    @if (ViewBag.Desc == "model")
+                    {
+                        <i class="fa fa-fw fa-chevron-down"></i>
+                    }
+                    @if (ViewBag.Asc == "model")
+                    {
+                        <i class="fa fa-fw fa-chevron-up"></i>
+                    }
                 </a>
             </th>
             <th class="text-start">
                 <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CustomerSort)" class="nav-link">
                     @Html.DisplayNameFor(model => model.Customer)
+                    @if (ViewBag.Desc == "customer")
+                    {
+                        <i class="fa fa-fw fa-chevron-down"></i>
+                    }
+                    @if (ViewBag.Asc == "customer")
+                    {
+                        <i class="fa fa-fw fa-chevron-up"></i>
+                    }
                 </a>
             </th>
             <th class="text-start">
                 <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)" class="nav-link">
                     @Html.DisplayNameFor(model => model.Price)
+                    @if (ViewBag.Desc == "price")
+                    {
+                        <i class="fa fa-fw fa-chevron-down"></i>
+                    }
+                    @if (ViewBag.Asc == "price")
+                    {
+                        <i class="fa fa-fw fa-chevron-up"></i>
+                    }
                 </a>
             </th>
             <th class="text-start">
                 <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.DateSort)" class="nav-link">
                     @Html.DisplayNameFor(model => model.Date)
+                    @if (ViewBag.Desc == "date")
+                    {
+                        <i class="fa fa-fw fa-chevron-down"></i>
+                    }
+                    @if (ViewBag.Asc == "date")
+                    {
+                        <i class="fa fa-fw fa-chevron-up"></i>
+                    }
                 </a>
             </th>
         </tr>
@@ -44,7 +84,9 @@
             <tr>
                 <td class="text-center">
                     @ind
-                    @{ ind++; }
+                    @{
+                        ind++;
+                    }
                 </td>
                 <td class="text-start">
                     @Html.DisplayFor(modelItem => item.CompanyName)

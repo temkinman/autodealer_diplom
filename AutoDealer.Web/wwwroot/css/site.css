@@ -47,8 +47,6 @@ html {
     font-size: 25px;
 }
 
-
-
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -88,14 +86,14 @@ body {
     background-color: #1d242c;
 }
 
-    .header_info a, .header_info a:hover {
-        color: #e2e2e2;
-        text-decoration: none;
-    }
+.header_info a, .header_info a:hover {
+    color: #e2e2e2;
+    text-decoration: none;
+}
 
-    .header_info a {
-        color: #e2e2e2;
-    }
+.header_info a {
+    color: #e2e2e2;
+}
 
 .header_info {
     color: #e2e2e2;
@@ -124,9 +122,9 @@ body {
     font-weight: 500;
 }
 
-    .header_phone a {
-        color: #c1a778;
-    }
+.header_phone a {
+    color: #c1a778;
+}
 
 #velcom {
     color: #f6a30b;
@@ -180,7 +178,6 @@ nav {
 }
 .nav__link.active {
     color: rgb(238, 158, 38) !important;
-    
 }
 
 .nav_link_icon:hover {
@@ -434,9 +431,9 @@ span.img-text:hover {
     padding: 0;
 }
 
-    .leftSide > a {
-        font-size: 20px;
-    }
+.leftSide > a {
+    font-size: 20px;
+}
 
 
 #resultContent {

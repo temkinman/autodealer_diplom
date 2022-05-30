@@ -32,33 +32,43 @@ namespace AutoDealer.Web.Controllers
             {
                 case SortState.ModelAsc:
                     sales = sales.OrderBy(sale => sale.Car.Model.Title);
+                    ViewBag.Asc = "model";
                     break;
                 case SortState.ModelDesc:
                     sales = sales.OrderByDescending(sale => sale.Car.Model.Title);
+                    ViewBag.Desc = "model";
                     break;
                 case SortState.PriceAsc:
                     sales = sales.OrderBy(sale => sale.FinalPrice);
+                    ViewBag.Asc = "price";
                     break;
                 case SortState.PriceDesc:
                     sales = sales.OrderByDescending(sale => sale.FinalPrice);
+                    ViewBag.Desc = "price";
                     break;
                 case SortState.CompanyAsc:
                     sales = sales.OrderBy(sale => sale.Car.Company.Title);
+                    ViewBag.Asc = "company";
                     break;
                 case SortState.CompanyDesc:
                     sales = sales.OrderByDescending(sale => sale.Car.Company.Title);
+                    ViewBag.Desc = "company";
                     break;
                 case SortState.CustomerAsc:
                     sales = sales.OrderBy(sale => sale.Customer.LastName);
+                    ViewBag.Asc = "customer";
                     break;
                 case SortState.CustomerDesc:
                     sales = sales.OrderByDescending(sale => sale.Customer.LastName);
+                    ViewBag.Desc = "customer";
                     break;
                 case SortState.DateDesc:
                     sales = sales.OrderByDescending(sale => sale.SaledDate);
+                    ViewBag.Desc = "date";
                     break;
                 default:
                     sales = sales.OrderBy(sale => sale.SaledDate);
+                    ViewBag.Asc = "date";
                     break;
             }
 

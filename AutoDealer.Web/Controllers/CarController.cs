@@ -105,6 +105,9 @@ namespace AutoDealer.Web.Controllers
                 case SortState.ModelAsc:
                     cars = cars.OrderBy(car => car.Model.Title);
                     break;
+                case SortState.ModelDesc:
+                    cars = cars.OrderByDescending(car => car.Model.Title);
+                    break;
                 case SortState.PriceAsc:
                     cars = cars.OrderBy(car => car.Price);
                     break;

@@ -37,7 +37,7 @@
 <body class="hold-transition theme-primary bg-light">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
         <div class="container justify-content-center">
-            <a class="navbar-brand menu-link-logo d-none d-md-block d-lg-block d-xl-block" asp-area="" asp-controller="car" asp-action="Index">AutoDealer</a>
+            <a class="navbar-brand menu-link-logo d-none d-sm-none d-md-block d-lg-block d-xl-block" asp-area="" asp-controller="car" asp-action="Index">AutoDealer</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -70,14 +70,14 @@
         <div class="header_info">
 			<div class="container py-4">
 				<div class="row">
-					<div class="col-3 d-flex align-items-center mr-0">
+					<div class="col-3 d-flex align-items-center mr-0 d-none d-sm-none d-md-none d-lg-block d-xl-block">
 						<div class="logo">
 							<a asp-controller="Car" asp-action="Index">
 								<img src="~/images/logo.png" id="logo_img" alt="logo">
 							</a>
 						</div>	
 					</div>
-					<div class="col-9 d-flex align-items-center ml-0">
+					<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 d-flex align-items-center ml-0">
 						<div class="col-8">
 							<div class="d-flex align-items-center justify-content-center flex-column ">
 								<a href="#" id="company_title">Auto<span class="header_title">Dealer</span></a>
