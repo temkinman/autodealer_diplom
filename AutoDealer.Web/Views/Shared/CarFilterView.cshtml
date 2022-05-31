@@ -15,135 +15,41 @@
     string isNavigation = @Model?.Settings?.Navigation == true ? "checked = true" : string.Empty;
     string isBluetooth = @Model?.Settings?.Bluetooth == true ? "checked = true" : string.Empty;
 }
-@*
-<div>
-    <div class="search_auto">
-        <h3><strong>Поиск</strong> авто</h3>
-        <div class="clear"></div>
-        <form asp-action="Index" method="get" asp-controller="Car">
-            <label asp-for="CompanyId"><strong>Марка:</strong></label>
-            <div id="Company" class="select_box_1">
-                <select asp-for="CompanyId" asp-items="@(new SelectList(Model.Companies,"Id","Title"))">  
-                    <option value="0">Выберите</option>
-                </select>
-            </div>
-            <label asp-for="ModelId"><strong>Модель:</strong></label>
-            <div id="SelectModels" class="select_box_1">
-                <select asp-for="ModelId" asp-items="@(new SelectList(Model.Models,"Id","Title"))">
-                    <option value="0">Выберите</option>
-                </select>  
-            </div>
-            <label asp-for="EngineTypeId"><strong>Двигатель:</strong></label>
-            <div class="select_box_1">
-                <select asp-for="EngineTypeId" asp-items="@(new SelectList(Model.Engines,"Id","Title"))">
-                    <option value="0">Выберите</option>
-                </select>
-            </div>
-            <label asp-for="TransmissionId"><strong>Коробка передач:</strong></label>
-            <div class="select_box_1">
-                <select asp-for="TransmissionId" asp-items="@(new SelectList(Model.Transmissions,"Id","TransmissionType"))">
-                    <option value="0">Выберите</option>
-                </select>
-            </div>
-            <label asp-for="ColorId"><strong>Цвет:</strong></label>
-            <div class="select_box_1">
-                <select asp-for="ColorId" asp-items="@(new SelectList(Model.Colors,"Id","Title"))">
-                    <option value="0">Выберите</option>
-                </select>
-            </div>
-            <label><strong>Год:</strong></label>
-            <div class="select_box_2">
-                @Html.DropDownListFor(m=>m.ProduceDateFrom, new SelectList(years),"от", new {@class = "select_4"})
-                @Html.DropDownListFor(m=>m.ProduceDateTo, new SelectList(years),"от", new {@class = "select_4"})
-                <div class="clear"></div>
-            </div>
-            <label><strong>Цена:</strong></label>
-            <div class="select_box_2">
-                @Html.DropDownListFor(m=>m.PriceFrom, new SelectList(prices),"от", new {@class = "select_4"})
-                @Html.DropDownListFor(m=>m.PriceTo, new SelectList(prices),"от", new {@class = "select_4"})
-                <div class="clear"></div>
-            </div>
-            <label><strong>Пробег:</strong></label>
-            <div class="select_box_2">
-                @Html.DropDownListFor(m=>m.KilometreFrom, new SelectList(kilometres),"от", new {@class = "select_4"})
-                @Html.DropDownListFor(m=>m.KilometreTo, new SelectList(kilometres),"от", new {@class = "select_4"})
-                <div class="clear"></div>
-            </div>
-            <div class="chb_wrapper">
-                <input asp-for="@Model.Settings.Abs" type="checkbox" class="check_label" isAbs id="abs"/>
-                <label asp-for="@Model.Settings.Abs" class="check_label"></label>
-            </div>
-            <div class="chb_wrapper">
-                <input asp-for="@Model.Settings.Esp" type="checkbox" class="check_label" isEsp id="esp"/>
-                <label asp-for="@Model.Settings.Esp" class="check_label"></label>
-            </div>
-            <div class="chb_wrapper">
-                <input asp-for="@Model.Settings.ParkSensors" type="checkbox" class="check_label" isParkSensors id="parkSensors"/>
-                <label asp-for="@Model.Settings.ParkSensors" class="check_label"></label>
-            </div>
-            <div class="chb_wrapper">
-                <input asp-for="@Model.Settings.Camera" type="checkbox" class="check_label" isCamera id="camera"/>
-                <label asp-for="@Model.Settings.Camera" class="check_label"></label>
-            </div>
-            <div class="chb_wrapper">
-                <input asp-for="@Model.Settings.Cruiz" type="checkbox" class="check_label" isCruiz id="cruiz"/>
-                <label asp-for="@Model.Settings.Cruiz" class="check_label"></label>
-            </div>
-            <div class="chb_wrapper">
-                <input asp-for="@Model.Settings.AirCondition" type="checkbox" class="check_label" isAirCondition id="airCondition"/>
-                <label asp-for="@Model.Settings.AirCondition" class="check_label"></label>
-            </div>
-            <div class="chb_wrapper">
-                <input asp-for="@Model.Settings.ClimatControl" type="checkbox" class="check_label" isClimatControl id="climat"/>
-                <label asp-for="@Model.Settings.ClimatControl" class="check_label"></label>
-            </div><div class="chb_wrapper">
-                <input asp-for="@Model.Settings.Navigation" type="checkbox" class="check_label" isNavigation id="navigation"/>
-                <label asp-for="@Model.Settings.Navigation" class="check_label"></label>
-            </div>
-            <div class="chb_wrapper">
-                <input asp-for="@Model.Settings.Bluetooth" type="checkbox" class="check_label" isBluetooth id="bluetooth"/>
-                <label asp-for="@Model.Settings.Bluetooth" class="check_label"></label>
-            </div>
-            <input type="submit" value="Search" class="btn_search" />
-            <a asp-action="ResetSearch" asp-controller="Car" class="btn btn-danger">Reset</a>
-            <div class="clear"></div>
-        </form>
-    </div>
-</div>*@
+
 <div class="px-3 py-2 border border-info rounded">
     <h3 class="text-center head-title mt-1 mb-1">Поиск авто</h3>
     <form asp-action="Index" method="get" asp-controller="Car">
         <label asp-for="CompanyId">Марка:</label>
-        <div id="Company" class="select_box_1">
+        <div id="Company" class="select_box_1 mb-2">
             <select asp-for="CompanyId" class="dropdown_item_select checkout_input" asp-items="@(new SelectList(Model.Companies,"Id","Title"))">  
                 <option value="0">Выберите</option>
             </select>
         </div>
         <label asp-for="ModelId">Модель:</label>
-        <div id="SelectModels">
+        <div id="SelectModels" class="mb-2">
             <select asp-for="ModelId" class="dropdown_item_select checkout_input" asp-items="@(new SelectList(Model.Models,"Id","Title"))">
                 <option value="0">Выберите</option>
             </select>  
         </div>
         <label asp-for="EngineTypeId">Двигатель:</label>
-        <div>
+        <div class="mb-2">
             <select asp-for="EngineTypeId" class="dropdown_item_select checkout_input" asp-items="@(new SelectList(Model.Engines,"Id","Title"))">
                 <option value="0">Выберите</option>
             </select>
         </div>
         <label asp-for="TransmissionId">Коробка передач:</label>
-        <div>
+        <div class="mb-2">
             <select asp-for="TransmissionId" class="dropdown_item_select checkout_input" asp-items="@(new SelectList(Model.Transmissions,"Id","TransmissionType"))">
                 <option value="0">Выберите</option>
             </select>
         </div>
         <label asp-for="ColorId">Цвет:</label>
-        <div>
+        <div class="mb-2">
             <select asp-for="ColorId" class="dropdown_item_select checkout_input" asp-items="@(new SelectList(Model.Colors,"Id","Title"))">
                 <option value="0">Выберите</option>
             </select>
         </div>
-        <div class="row">
+        <div class="row mb-2">
 			<div class="col-12 pr-1 col-md-6">
                 <label>Год от:</label>
                 <div>
@@ -157,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
 			<div class="col-12 pr-1 col-md-6">
                 <label>Цена от:</label>
                 <div>
@@ -171,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-2">
 			<div class="col-12 pr-1 col-md-6">
                 <label>Пробег от:</label>
                 <div>
@@ -186,7 +92,7 @@
             </div>
         </div>
         <label class="mt-2">Доп опции:</label>
-        <div class="row">
+        <div class="row mb-2">
 			<div class="col-6 pr-0">
 				<ul class="list-group list-group-flush mb-3">
                     <li class="list-group-item settings_item bg-light">
@@ -251,46 +157,4 @@
     </form>
 </div>
 
-<script>
-    $(document).ready(function(){
-        console.log("doc ready carfilter");
-
-        let companyValue = $("#CompanyId").val();
-
-        if(companyValue > 0) {
-            $("#ModelId").prop("disabled", false);
-        }
-    });
-
-    $("#CompanyId").on("change" , function() {
-        let selection = $(this).find("option:selected").text();
-        let value = $(this).val();
-
-        console.log("value " + value);
-        console.log("selection " + selection);
-
-        if(value > 0) {
-            $.ajax({
-                url: '@Url.Action("getmodelsbycompany", "car")',
-                type: "GET",
-                data: {
-                    companyId: value,
-                    filter: true
-                },
-                success: function (data) {
-                    $("#SelectModels").html(data);
-                    $("#ModelId").addClass("dropdown_item_select checkout_input");
-                    console.log("ok from partial");
-                },
-                error: function (ex) {
-                }
-            });
-        }
-
-        if(value == 0) {
-            $("#ModelId").find('option').remove(); 
-            $("#ModelId").append('<option value="0">Выберите</options>');
-            $("#ModelId").prop("disabled", true);
-        }
-    });
-</script>
+<script type="text/javascript" src="./js/carFilter.js"></script>

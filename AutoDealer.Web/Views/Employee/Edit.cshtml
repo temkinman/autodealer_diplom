@@ -3,9 +3,9 @@
 @{
     List<string> roles = new() { "админ", "менеджер", "директор" };
 }
-<h1 class="text-center">Изменение марки автомобиля</h1>
+<h2 class="text-start my-3">Редактирование записи</h2>
 <div class="row">
-    <form asp-controller="Employee" asp-action="Edit" enctype="multipart/form-data" method="post" class="col-6"
+    <form asp-controller="Employee" asp-action="Edit" enctype="multipart/form-data" method="post" class="col-4"
           data-ajax-method="post" data-ajax-update="#resultContent" data-ajax="true">
         <input asp-for="Id" type="hidden" />
         <div class="form-group">

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AutoDealer.Web.Models.Color>
 
 
-<h1>Автомобильные цвета</h1>
+<h2 class="col-8 text-center my-3">Автомобильные цвета</h2>
 @{
    await Html.PartialAsync("Notification");
 }
@@ -9,13 +9,13 @@
 <div class="col-2 text-end mb-2">
     <a class="btn btn-outline-dark" id="CreateColor">Создать</a>
 </div>
-<table class="table table-bordered table-striped">
+<table class="col-8 table table-bordered table-striped">
     <thead>
         <tr>
-            <th class="text-start">
+            <th class="col-1 text-start">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th class="text-start">
+            <th class="col-3 text-start">
                 @Html.DisplayNameFor(model => model.Title)
             </th>
         </tr>
@@ -24,13 +24,13 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td class="text-start">
+                <td class="col-1 text-start">
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
-                <td class="text-start">
+                <td class="col-3 text-start">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                <td class="text-center">
+                <td class="col-4 text-center">
                     <a class="btn-sm btn-outline-secondary editColor" id=@item.Id>Изменить</a>
                     <a class="btn-sm btn-outline-danger" id=@item.Id onclick="onDeleteColor(@item.Id)">Удалить</a>
                 </td>

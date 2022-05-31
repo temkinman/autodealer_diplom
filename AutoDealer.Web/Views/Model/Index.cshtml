@@ -1,14 +1,14 @@
 ﻿@model AutoDealer.Web.ViewModel.CarModelViewModel
 
-<h1>Админ панель для моделей авто</h1>
+<h2 class="text-start my-3">Модели авто</h2>
 @{
    await Html.PartialAsync("Notification");
 }
 
 <div class="row">
-    <div class=" col-6 d-flex align-items-center justify-content-between">
-        <label>Компания</label>
-        <select asp-for="@Model.CompanyId" class="form-control" asp-items="@(new SelectList(@Model.Companies,"Id","Title"))">
+    <div class=" col-6 d-flex align-items-center justify-content-between mb-2">
+        <label class="mr-3">Компания</label>
+        <select asp-for="@Model.CompanyId" class="form-control mr-3" asp-items="@(new SelectList(@Model.Companies,"Id","Title"))">
             <option value="0">Выберите</option>
         </select>
         <button id="filterBtn" class="btn btn-outline-secondary">Применить</button>

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<AutoDealer.Web.Models.Company>
 
-<h1>Админ панель для марок авто</h1>
+<h2 class="col-8 text-center my-3">Марки авто</h2>
 @{
    await Html.PartialAsync("Notification");
 }
@@ -8,16 +8,16 @@
 <div class="col-2 text-end mb-2">
     <a class="btn btn-outline-dark" id="CreateCompany">Создать</a>
 </div>
-<table class="table table-bordered table-striped">
+<table class="col-8 table table-bordered table-striped">
     <thead>
-        <tr>
-            <th class="text-start">
+        <tr class="d-flex">
+            <th class="text-start col-1">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th class="text-start">
+            <th class="text-start col-3">
                 @Html.DisplayNameFor(model => model.Title)
             </th>
-            <th class="text-start">
+            <th class="text-start col-3">
                 @Html.DisplayNameFor(model => model.Country)
             </th>
         </tr>
@@ -25,17 +25,17 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td class="text-start">
+            <tr class="d-flex">
+                <td class="text-start col-1">
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
-                <td class="text-start">
+                <td class="text-start col-3">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                <td class="text-start">
+                <td class="text-start col-3">
                     @Html.DisplayFor(modelItem => item.Country)
                 </td>
-                <td class="text-center">
+                <td class="text-center col-5">
                     <a class="btn btn-outline-secondary editCompany" id=@item.Id>Изменить</a>
                     <a class="btn btn-outline-danger delCompany" id=@item.Id onclick="onDeleteCompany(@item.Id)">Удалить</a>
                 </td>

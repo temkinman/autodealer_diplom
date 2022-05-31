@@ -67,10 +67,10 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td class="d-flex flex-grow-1 control_table_btns">
-                        <a class="text-info me-10 mr-2" onclick="showCarDetails(@item.Id)"><span class="badge badge-info"><i class="ti-info-alt"></i>инфо</span></a>
-                        <a class="text-info me-10 editCar mr-2" id="@item.Id"><span class="badge badge-secondary"><i class="ti-marker-alt"></i>изменить</span></a>
+                        <a class="text-info me-10 mr-2" onclick="showCarDetails(@item.Id)"><span class="badge badge-info"><i class="ti-info-alt"></i> инфо</span></a>
+                        <a class="text-info me-10 editCar mr-2" id="@item.Id"><span class="badge badge-secondary"><i class="ti-marker-alt"></i> изменить</span></a>
                         @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Удалить</a>*@
-                        <a class="text-info me-10 mr-2" onclick="onDeleteCar(@item.Id)"><span class="badge badge-danger"><i class="ti-trash"></i>удалить</span></a>
+                        <a class="text-info me-10 mr-2" onclick="onDeleteCar(@item.Id)"><span class="badge badge-danger"><i class="ti-trash"></i> удалить</span></a>
                     </td>
                 </tr>
             }
