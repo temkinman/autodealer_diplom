@@ -49,7 +49,7 @@ namespace AutoDealer.Web.Models
         public DateTime ArrivalDate { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "Укажите год выпуска")]
-        [Display(Name = "Год выпуска")]
+        [Display(Name = "Год")]
         public int ProduceDate { get; set; }
 
         public virtual Company Company { get; set; }

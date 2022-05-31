@@ -421,22 +421,9 @@ span.img-text:hover {
 
 /*left side navigation panel*/
 
-#adminPanel {
-    min-height: 500px;
+.leftSide > a {
+    font-size: 20px;
 }
-
-#sideBar {
-    background-color: #bababd40;
-    padding: 10px 0;
-}
-
-.leftSide {
-    padding: 0;
-}
-
-    .leftSide > a {
-        font-size: 20px;
-    }
 
 
 #resultContent {
@@ -618,7 +605,6 @@ ul li {
     color: #e2e2e2;
     display: inline-block;
     text-decoration: none;
-    margin-right: 10px;
     font-weight: 600;
 }
 
@@ -640,12 +626,8 @@ ul li {
     float: left;
     position: relative;
     top: -1px;
-    margin-right: 20px;
+    margin-right: 5px;
     font-size: 14px;
-}
-
-.social a {
-    margin-right: 4px;
 }
 
 .social a img {
@@ -685,3 +667,36 @@ ul li {
     color: #838487c9;
 }
 /*about end*/
+
+/*car_admin*/
+.control_table_btns {
+    border: 0 !important;
+    border-top: 1px solid #dee2e6 !important;
+}
+
+.control_table_btns a:hover {
+    cursor: pointer !important;
+}
+
+
+/*admin_panel*/
+.admin_panel {
+  background-color: #dee2e59c;
+  border: 1px solid #65737a;
+  color: #3A3A3A;
+}
+
+.admin_panel a, .admin_panel a:hover {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 40px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.admin_panel li:hover, .admin_panel_active {
+  color: #ffff;
+  background-color: #2d2e2e;;
+  cursor: pointer;
+}
+/*admin_panel end*/

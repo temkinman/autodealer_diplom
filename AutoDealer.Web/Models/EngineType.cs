@@ -7,7 +7,7 @@ namespace AutoDealer.Web.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Тип двигателя")]
+        [Display(Name = "Двигатель")]
         public string Title { get; set; }
     }
 }

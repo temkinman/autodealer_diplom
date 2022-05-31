@@ -35,14 +35,7 @@ namespace AutoDealer.Web.Controllers
         {
             IQueryable<Company> companies = _companyRepository.Companies;
 
-            List<string> tabs = new() { "admin_panel" };
-            //ViewBag.Tabs = tabs;
-            //ViewData["company"] = "company";
-            //ViewData["admin_panel"] = "admin_panel";
-            //ViewBag.Admin = "admin_panel";
-            
             ViewBag.CurrentTab = "company";
-            //TempData["currentSubTab"] = "company";
 
             return PartialView(companies);
         }

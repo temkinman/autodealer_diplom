@@ -5,57 +5,57 @@
     IEnumerable<float> capacities = Enumerable.Range(5, 56).Select(number => number / 10f);
 }
 
-<h1 class="mb-2 mt-2 text-center">Добавление автомобиля</h1>
+<h1 class="mb-2 mt-2 text-center head-title">Добавление автомобиля</h1>
 
-<form id="OwnerForm" asp-action="Create" asp-controller="Car" method="post" class="row mt-3 mb-3 mx-auto">
+<form id="OwnerForm" asp-action="Create" asp-controller="Car" method="post" class="row mt-3 mb-3 mx-auto info-form">
     <div class="col-6 form-group">
-        <label asp-for="CompanyId" class="control-label font-weight-bold"><strong>Марка:</strong></label>
+        <label asp-for="CompanyId" class="control-label">Марка:</label>
         @Html.DropDownListFor(m=>m.CompanyId, new SelectList(Model.Companies, "Id","Title"), new { @class="form-control", @id="CompanyId" })
     </div>
     <div class="col-6 form-group" id="SelectModels">
-        <label asp-for="ModelId" class="control-label font-weight-bold"><strong>Модель:</strong></label>
+        <label asp-for="ModelId" class="control-label">Модель:</label>
         @Html.DropDownListFor(m=>m.ModelId, new SelectList(Model.Models, "Id","Title"), new { @class="form-control", @id="ModelId" })
     </div>
     <div class="col-6 form-group">
-        <label asp-for="EngineTypeId" class="control-label font-weight-bold"><strong>Двигатель:</strong></label>
+        <label asp-for="EngineTypeId" class="control-label">Двигатель:</label>
         <select asp-for="EngineTypeId" class="form-control" asp-items="@(new SelectList(Model.EngineTypes,"Id","Title"))">
             <option value="0">Выберите</option>
         </select>
     </div>
     <div class="col-6 form-group">
-        <label asp-for="Car.Engine.Capacity" class="control-label font-weight-bold"><strong>Объем двигателя:</strong></label>
+        <label asp-for="Car.Engine.Capacity" class="control-label">Объем двигателя:</label>
         @Html.DropDownListFor(m=>m.Car.Engine.Capacity, new SelectList(capacities),"выберите", new {@class="form-control"})
         <span asp-validation-for="Car.Engine.Capacity" class="text-danger" />
     </div>
     <div class="col-6 form-group">
-        <label asp-for="Car.ProduceDate" class="control-label font-weight-bold"></label>
+        <label asp-for="Car.ProduceDate" class="control-label"></label>
         @Html.DropDownListFor(m=>m.Car.ProduceDate, new SelectList(years),"выберите", new {@class="form-control"})
         <span asp-validation-for="Car.ProduceDate" class="text-danger" />
     </div>
     <div class="col-6 form-group">
-        <label asp-for="TransmissionId" class="control-label font-weight-bold"><strong>Коробка передач:</strong></label>
+        <label asp-for="TransmissionId" class="control-label">Коробка передач:</label>
         <select asp-for="TransmissionId" class="form-control" asp-items="@(new SelectList(Model.Transmissions,"Id","TransmissionType"))">
             <option value="0">Выберите</option>
         </select>
     </div>
     <div class="col-6 form-group">
-        <label asp-for="ColorId" class="control-label font-weight-bold"><strong>Цвет:</strong></label>
+        <label asp-for="ColorId" class="control-label">Цвет:</label>
         <select asp-for="ColorId" class="form-control" asp-items="@(new SelectList(Model.Colors,"Id","Title"))">
             <option value="0">Выберите</option>
         </select>
     </div>
     <div class="col-6 form-group">
-        <label asp-for="Car.Vin" class="control-label font-weight-bold"></label>
+        <label asp-for="Car.Vin" class="control-label"></label>
         <input asp-for="Car.Vin" class="form-control" />
         <span asp-validation-for="Car.Vin" class="text-danger" />
     </div>
     <div class="col-6 form-group">
-        <label asp-for="Car.Kilometre" class="control-label font-weight-bold"></label>
+        <label asp-for="Car.Kilometre" class="control-label"></label>
         <input asp-for="Car.Kilometre" class="form-control" />
         <span asp-validation-for="Car.Kilometre" class="text-danger" />
     </div>
     <div class="col-6 form-group">
-        <label asp-for="Car.Price" class="control-label font-weight-bold"></label>
+        <label asp-for="Car.Price" class="control-label"></label>
         <input asp-for="Car.Price" class="form-control" />
         <span asp-validation-for="Car.Price" class="text-danger" />
     </div>
@@ -64,25 +64,25 @@
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
                     <input asp-for="Car.Settings.Abs" type="checkbox" class="custom-control-input">
-                    <label asp-for="Car.Settings.Abs" class="custom-control-label font-weight-bold"></label>
+                    <label asp-for="Car.Settings.Abs" class="custom-control-label "></label>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
                     <input asp-for="Car.Settings.Esp" type="checkbox" class="custom-control-input">
-                    <label asp-for="Car.Settings.Esp" class="custom-control-label font-weight-bold"></label>
+                    <label asp-for="Car.Settings.Esp" class="custom-control-label "></label>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
                     <input asp-for="Car.Settings.ParkSensors" type="checkbox" class="custom-control-input">
-                    <label asp-for="Car.Settings.ParkSensors" class="custom-control-label font-weight-bold"></label>
+                    <label asp-for="Car.Settings.ParkSensors" class="custom-control-label "></label>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
                     <input asp-for="Car.Settings.Camera" type="checkbox" class="custom-control-input">
-                    <label asp-for="Car.Settings.Camera" class="custom-control-label font-weight-bold"></label>
+                    <label asp-for="Car.Settings.Camera" class="custom-control-label "></label>
                 </div>
             </li>
             <li class="list-group-item d-none">
@@ -101,31 +101,31 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
-                    <input asp-for="Car.Settings.Cruiz" type="checkbox" class="custom-control-input font-weight-bold">
+                    <input asp-for="Car.Settings.Cruiz" type="checkbox" class="custom-control-input ">
                     <label asp-for="Car.Settings.Cruiz" class="custom-control-label"></label>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
-                    <input asp-for="Car.Settings.AirCondition" type="checkbox" class="custom-control-input font-weight-bold">
+                    <input asp-for="Car.Settings.AirCondition" type="checkbox" class="custom-control-input ">
                     <label asp-for="Car.Settings.AirCondition" class="custom-control-label"></label>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
-                    <input asp-for="Car.Settings.ClimatControl" type="checkbox" class="custom-control-input font-weight-bold">
+                    <input asp-for="Car.Settings.ClimatControl" type="checkbox" class="custom-control-input ">
                     <label asp-for="Car.Settings.ClimatControl" class="custom-control-label"></label>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
-                    <input asp-for="Car.Settings.Navigation" type="checkbox" class="custom-control-input font-weight-bold">
+                    <input asp-for="Car.Settings.Navigation" type="checkbox" class="custom-control-input ">
                     <label asp-for="Car.Settings.Navigation" class="custom-control-label"></label>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="custom-control custom-checkbox">
-                    <input asp-for="Car.Settings.Bluetooth" type="checkbox" class="custom-control-input font-weight-bold">
+                    <input asp-for="Car.Settings.Bluetooth" type="checkbox" class="custom-control-input ">
                     <label asp-for="Car.Settings.Bluetooth" class="custom-control-label"></label>
                 </div>
             </li>
@@ -142,7 +142,7 @@
         </ul>
     </div>
     <div class="col-12 form-group">
-        <label asp-for="Car.Description" class="form-label font-weight-bold"></label>
+        <label asp-for="Car.Description" class="form-label"></label>
         <textarea class="form-control" asp-for="Car.Description" rows="5"></textarea>
     </div>
     <input asp-for="Car.Photos" type="hidden" id="photos" />
@@ -176,17 +176,3 @@
 }
 
 <script src="/js/carIncome.js"></script>
-
-<script>
-    $(function () {
-             $('#datetimepicker2').datetimepicker({
-                 locale: 'ru'
-             });
-         });
-    //$('#sandbox-container .input-group.date').datepicker({
-    //    startDate: -6570,
-    //    clearBtn: true,
-    //    language: "ru",
-    //    calendarWeeks: true
-    //});
-</script>

@@ -1,4 +1,7 @@
 ﻿$("#companies").click(function () {
+    unsetAllActiveItems();
+    $(this).addClass('admin_panel_active');
+
     $.ajax({
         url: 'company/index',
         type: "GET",
@@ -12,6 +15,9 @@
 });
 
 $("#models").click(function () {
+    unsetAllActiveItems();
+    $(this).addClass('admin_panel_active');
+
     $.ajax({
         url: 'model/index',
         type: "GET",
@@ -26,6 +32,9 @@ $("#models").click(function () {
 });
 
 $("#colors").click(function () {
+    unsetAllActiveItems();
+    $(this).addClass('admin_panel_active');
+
     $.ajax({
         url: 'color/index',
         type: "GET",
@@ -40,6 +49,9 @@ $("#colors").click(function () {
 });
 
 $("#employees").click(function () {
+    unsetAllActiveItems();
+    $(this).addClass('admin_panel_active');
+
     $.ajax({
         url: 'employee/index',
         type: "GET",
@@ -54,6 +66,9 @@ $("#employees").click(function () {
 });
 
 $("#cars").click(function () {
+    unsetAllActiveItems();
+    $(this).addClass('admin_panel_active');
+
     $.ajax({
         url: 'car/CarAdminIndex',
         type: "GET",
@@ -66,3 +81,7 @@ $("#cars").click(function () {
         }
     });
 });
+
+function unsetAllActiveItems() {
+    $('.admin_item').removeClass('admin_panel_active');
+}

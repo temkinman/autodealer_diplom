@@ -6,7 +6,7 @@
 
 @if (ViewBag.Filter == false)
 {
-    <label asp-for="ModelId" class="control-label"><strong>Модель:</strong></label>
+    <label asp-for="ModelId" class="control-label">Модель:</label>
 }
 
 <select asp-for="ModelId" class=@selectClass id="ModelId" asp-items="@(new SelectList(Model.Models,"Id","Title"))">

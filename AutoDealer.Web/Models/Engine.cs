@@ -8,11 +8,11 @@ namespace AutoDealer.Web.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Тип двигателя")]
+        [Display(Name = "Двигатель")]
         public virtual EngineType Type { get; set; }
 
         [Column(TypeName = "float(3,2)")]
-        [Display(Name = "Объем двигателя")]
+        [Display(Name = "Объем")]
         public float Capacity { get; set; }
     }
 }

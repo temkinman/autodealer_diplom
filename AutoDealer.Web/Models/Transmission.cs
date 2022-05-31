@@ -9,6 +9,8 @@ namespace AutoDealer.Web.Models
         [Key]
         public int Id { get; set; }
         public TransmissionType Type { get; set; }
+
+        [Display(Name = "Коробка")]
         public string TransmissionType { get; set; }
     }
 }
