@@ -313,7 +313,9 @@ namespace AutoDealer.Web.Controllers
         public IActionResult Edit(CarViewModel model)
         {
             Company сompany = _companyRepository.GetById(model.Car.Company.Id);
-            Model carModel = _modelRepository.GetById(model.Car.Model.Id);
+
+            int carModelId = model.ModelId != 0 ? model.ModelId : model.Car.Model.Id;
+            Model carModel = _modelRepository.GetById(carModelId);
             Color color = _colorRepository.GetById(model.Car.Color.Id);
             Status status = _statusRepository.GetById(3);
             EngineType engineType = _engineTypeRepository.GetById(model.Car.Engine.Type.Id);
