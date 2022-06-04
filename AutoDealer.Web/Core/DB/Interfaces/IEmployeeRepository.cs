@@ -9,6 +9,7 @@ namespace AutoDealer.Web.Core.DB.Interfaces
     {
         IQueryable<Employee> Employees { get; }
         Employee GetEmployeeByFullName(string fullName);
+        Employee GetEmployeeByEmail(string email);
         List<Employee> GetEmployeesByFilter(EmployeeFilter filter);
     }
 }

@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<AutoDealer.Web.Models.Color>
 
-
 <h2 class="col-8 text-center my-3">Автомобильные цвета</h2>
 @{
    await Html.PartialAsync("Notification");
@@ -30,9 +29,9 @@
                 <td class="col-3 text-start">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                <td class="col-4 text-center">
-                    <a class="btn-sm btn-outline-secondary editColor" id=@item.Id>Изменить</a>
-                    <a class="btn-sm btn-outline-danger" id=@item.Id onclick="onDeleteColor(@item.Id)">Удалить</a>
+                <td class="col-3 text-center control_table_btns">
+                    <a class="text-info me-10 editColor mr-2" id="@item.Id"><span class="badge badge-secondary p-2"><i class="ti-marker-alt mr-1"></i> изменить</span></a>
+                    <a class="text-info me-10" onclick="onDeleteColor(@item.Id)"><span class="badge badge-danger p-2"><i class="ti-trash mr-1"></i> удалить</span></a>
                 </td>
             </tr>
         }

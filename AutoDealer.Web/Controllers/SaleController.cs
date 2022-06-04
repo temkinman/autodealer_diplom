@@ -3,6 +3,7 @@ using AutoDealer.Web.Core.DB.Repository;
 using AutoDealer.Web.Enums;
 using AutoDealer.Web.Models;
 using AutoDealer.Web.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace AutoDealer.Web.Controllers
     {
         private readonly ICarRepository _carRepository;
         private readonly ISaleRepository _saleRepository;
-        private const int pageSize = 2;
+        private const int pageSize = 5;
 
         public SaleController(ICarRepository carRepository, ISaleRepository saleRepository)
         {
@@ -22,6 +23,7 @@ namespace AutoDealer.Web.Controllers
             _saleRepository = saleRepository;
         }
 
+        [Authorize]
         public IActionResult Index(DateTime? dateFrom = null, DateTime? dateTo = null, string selectedCompany = "", int currentPage = 1, SortState sortOrder = SortState.DateAsc)
         {
             //Car car = _carRepository.GetById(carId);
@@ -108,12 +110,6 @@ namespace AutoDealer.Web.Controllers
             };
 
             ViewBag.CurrentTab = "sales";
-            //SalesViewModel salesResult = new SalesViewModel()
-            //{
-            //    TotalCars = viewModelSales.Count,
-            //    TotalSum = totalSum,
-            //    Sales = viewModelSales
-            //};
 
             return View(viewModels);
         }

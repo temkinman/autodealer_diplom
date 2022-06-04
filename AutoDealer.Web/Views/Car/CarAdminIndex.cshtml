@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AutoDealer.Web.Models.Car>
 
 <div>
-    <h1>Авто на складе</h1>
+    <h1 class="text-center">Авто на складе</h1>
     @{
         await Html.PartialAsync("Notification");
     }
@@ -66,11 +66,10 @@
                     <td class="text-start">
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
-                    <td class="d-flex flex-grow-1 control_table_btns">
-                        <a class="text-info me-10 mr-2" onclick="showCarDetails(@item.Id)"><span class="badge badge-info"><i class="ti-info-alt"></i> инфо</span></a>
-                        <a class="text-info me-10 editCar mr-2" id="@item.Id"><span class="badge badge-secondary"><i class="ti-marker-alt"></i> изменить</span></a>
-                        @*<a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Удалить</a>*@
-                        <a class="text-info me-10 mr-2" onclick="onDeleteCar(@item.Id)"><span class="badge badge-danger"><i class="ti-trash"></i> удалить</span></a>
+                    <td class="d-flex flex-grow-1 text-center control_table_btns">
+                        <a class="text-info me-10 mr-2" onclick="showCarDetails(@item.Id)"><span class="badge badge-info p-2"><i class="ti-info-alt mr-1"></i> инфо</span></a>
+                        <a class="text-info me-10 editCar mr-2" id="@item.Id"><span class="badge badge-secondary p-2"><i class="ti-marker-alt mr-1"></i> изменить</span></a>
+                        <a class="text-info me-10" onclick="onDeleteCar(@item.Id)"><span class="badge badge-danger p-2"><i class="ti-trash"></i> удалить</span></a>
                     </td>
                 </tr>
             }

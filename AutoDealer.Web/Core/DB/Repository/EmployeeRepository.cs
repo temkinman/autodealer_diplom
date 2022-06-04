@@ -74,5 +74,7 @@ namespace AutoDealer.Web.Core.DB.Repository
         {
             return employee.BDay >= filter.BDayFrom && employee.BDay <= filter.BDayTo;
         }
+
+        public Employee GetEmployeeByEmail(string email) => _dbContext.Employees.FirstOrDefault(emp => emp.Email == email);
     }
 }

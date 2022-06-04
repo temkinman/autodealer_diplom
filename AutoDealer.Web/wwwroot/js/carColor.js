@@ -2,12 +2,7 @@
     let idColor = 0;
 
     $("#modal-btn-yes").on("click", function () {
-        $("#my-modal").modal('hide');
         deleteColor();
-    });
-
-    $("#modal-btn-no").on("click", function () {
-        $("#my-modal").modal('hide');
     });
 
     $(".editColor").click(function () {

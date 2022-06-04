@@ -53,9 +53,9 @@
                 <td class="text-start">
                     @Html.DisplayFor(modelItem => item.StartWorkDay)
                 </td>
-                <td class="text-center">
-                    <a class="btn btn-outline-secondary editEmployee" id=@item.Id>Изменить</a>
-                    <a class="btn btn-outline-danger delEmployee" id=@item.Id onclick="onDeleteEmployee(@item.Id)">Удалить</a>
+                <td class="d-flex text-center flex-grow-1 control_table_btns">
+                    <a class="text-info me-10 editEmployee mr-2 editEmployee" id="@item.Id"><span class="badge badge-secondary p-2"><i class="ti-marker-alt mr-1"></i> изменить</span></a>
+                    <a class="text-info me-10 delEmployee" id=@item.Id onclick="onDeleteEmployee(@item.Id)"><span class="badge badge-danger p-2"><i class="ti-trash mr-1"></i> удалить</span></a>
                 </td>
             </tr>
         }

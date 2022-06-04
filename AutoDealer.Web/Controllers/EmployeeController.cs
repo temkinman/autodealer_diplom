@@ -1,10 +1,12 @@
 ﻿using AutoDealer.Web.Core.DB.Interfaces;
 using AutoDealer.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace AutoDealer.Web.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         private IEmployeeRepository _employeeRepository;

@@ -114,7 +114,7 @@ body {
 }
 
 #logo_img {
-    width: 210px;
+    width: 160px;
 }
 
 .header_phone {
@@ -278,6 +278,11 @@ nav {
     height: 3.9em;
 }
 
+.sort {
+    color: #5a5a6880;
+    font-weight: 600;
+}
+
 /*car-list end*/
 
 .carInfo {
@@ -423,7 +428,7 @@ span.img-text:hover {
 }
 
 #resultContent {
-    padding: 15px;
+    min-height: 570px;
 }
 
 /*upload files modal success*/
@@ -695,4 +700,11 @@ ul li {
   background-color: #2d2e2e;;
   cursor: pointer;
 }
+
 /*admin_panel end*/
+
+/*sale_success*/
+.sale_info {
+    font-size: 20px;
+    color: #5C5C5C;
+}

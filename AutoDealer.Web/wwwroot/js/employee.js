@@ -1,25 +1,4 @@
 ﻿$(document).ready(function () {
-    //$("#filterBtn").on("click", function () {
-    //    let employeeId = $("#EmployeeId").val();
-
-    //    if (employeeId > 0) {
-    //        $.ajax({
-    //            url: 'employee/index',
-    //            type: "GET",
-    //            data: {
-    //                companyId: employeeId
-    //            },
-    //            success: function (data) {
-    //                $('#modelContent').html(data);
-    //            },
-    //            error: function (ex) {
-    //            }
-    //        });
-    //    }
-    //});
-
-    console.log('Doc ready emplyee...');
-
     $("#createEmployee").click(function () {
         $.ajax({
             url: '/employee/create',
@@ -34,7 +13,6 @@
     });
 
     $("#cancelBtn").click(function () {
-        console.log('canceling...');
         $.ajax({
             url: '/employee/index',
             type: "GET",
@@ -50,7 +28,7 @@
     let idEmployee = 0;
     $("#modal-btn-yes").on("click", function () {
         $("#my-modal").modal('hide');
-        deleteModel(idEmployee);
+        deleteEmployee(idEmployee);
     });
 
     $("#modal-btn-no").on("click", function () {
@@ -58,7 +36,6 @@
     });
 
     $(".editEmployee").click(function () {
-        console.log('editEmployee...');
         let id = $(this).attr('id');
 
         if (id > 0) {
@@ -87,7 +64,7 @@ function onDeleteEmployee(id) {
 
 function deleteEmployee() {
     $.ajax({
-        url: '/model/delete',
+        url: '/employee/delete',
         type: "POST",
         data: {
             employeeId: idEmployee

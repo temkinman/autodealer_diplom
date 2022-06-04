@@ -1,11 +1,18 @@
 ﻿@model AutoDealer.Web.Models.Sale
 
-@if(ViewBag.SaleSuccess == "ok")
+<div id="resultContent">
+
+    @if (ViewBag.SaleSuccess == "ok")
     {
-        <div class="alert alert-success" role="alert">
-            Продажа оформлена и сохранена успешно.
+        <div class="row text-center">
+            <div class="col-sm-6 mx-auto">
+                <h2 class="my-3 bg-success p-3 rounded" style="color:#fff">Сделка завершена успешно</h2>
+                <div>
+                    <h3>покупатель: @Model.Customer.FullName!</h3>
+                    <p class="sale_info">Автомобиль: @Model.Car.Company.Title @Model.Car.Model.Title, @Model.Car.ProduceDate г., @Model.Car.Engine.Capacity  @Model.Car.Engine?.Type?.Title, цена: @Model.FinalPrice $</p>
+                    <p class="sale_info">оформил менеджер @Model.Employee.FullName</p>
+                </div>
+            </div>
         </div>
     }
-<div>
-    finish sale
 </div>

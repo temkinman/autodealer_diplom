@@ -6,29 +6,55 @@
 }
 
 <h1 class="text-center head-title mx-3">Авто в наличии</h1>
-<div class="row">
-	<div class="col-3 d-flex justify-content-center">
-		<p class="find_auto">Найдено: <span id="count_auto">@Model.PagingInfo.TotalItems</span></p>
-	</div>
+<div class="d-flex">
+    <div class="col-3 d-flex justify-content-center">
+        <p class="find_auto">Найдено: <span id="count_auto">@Model.PagingInfo.TotalItems</span></p>
+    </div>
     <div class="col-9 d-flex justify-content-end mr-4">
         <ul class="nav">
-                <li class="nav-item">
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortViewModel.KilometreSort)" class="nav-link">пробег</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortViewModel.PriceSort)" class="nav-link">цена</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortViewModel.YearSort)" class="nav-link">год</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortViewModel.DateSort)" class="nav-link">дата</a>
-                </li>
-            </ul>
+            <li class="nav-item">
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.PriceSort)" class="nav-link sort">
+                    цена
+                    @if (ViewBag.Desc == "price")
+                    {
+                        <i class="fa fa-fw fa-chevron-down"></i>
+                    }
+                    @if (ViewBag.Asc == "price")
+                    {
+                        <i class="fa fa-fw fa-chevron-up"></i>
+                    }
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.YearSort)" class="nav-link sort">
+                    год
+                    @if (ViewBag.Desc == "year")
+                    {
+                        <i class="fa fa-fw fa-chevron-down"></i>
+                    }
+                    @if (ViewBag.Asc == "year")
+                    {
+                        <i class="fa fa-fw fa-chevron-up"></i>
+                    }
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="Index"
+                   asp-route-sortOrder="@(Model.SortViewModel.DateSort)" class="nav-link sort">
+                    дата
+                    @if (ViewBag.Desc == "date")
+                    {
+                        <i class="fa fa-fw fa-chevron-down"></i>
+                    }
+                    @if (ViewBag.Asc == "date")
+                    {
+                        <i class="fa fa-fw fa-chevron-up"></i>
+                    }
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
 <div class="row">
@@ -44,8 +70,8 @@
     </div>
 </div>
 <div page-model="@Model" page-classes-enabled="true" action="Index"
-        page-class="btn" page-class-normal="btn-outline-dark"
-        page-class-selected="btn-primary" class="btn-group m-1 mb-2">
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" class="btn-group m-1 mb-2">
 </div>
 
 @Html.Hidden("CurrentTab", (object)ViewBag.CurrentPage)

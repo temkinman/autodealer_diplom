@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AutoDealer.Web.Controllers
 {
+    [Authorize]
     public class CarController : Controller
     {
         private readonly ILogger<CarController> _logger;
@@ -64,20 +65,18 @@ namespace AutoDealer.Web.Controllers
 
         //private CarFilter _cf = null;
 
-        [Authorize]
+        
         public IActionResult Index(int currentPage = 1, CarFilter carFilter = null, SortState sortOrder = SortState.ModelAsc)
         {
 
             if (!User.Identity.IsAuthenticated)
             {
                 return Content(User.Identity.Name);
-                //return View("~/views/account/login.cshtml");
             }
 
             if (currentPage < 1)
             {
                 return NotFound();
-                //throw new ArgumentException("Page cannot be less than 1.", nameof(currentPage));
             }
 
             carFilter.Settings ??= new();
@@ -102,35 +101,29 @@ namespace AutoDealer.Web.Controllers
 
             switch (sortOrder)
             {
-                case SortState.ModelAsc:
-                    cars = cars.OrderBy(car => car.Model.Title);
-                    break;
-                case SortState.ModelDesc:
-                    cars = cars.OrderByDescending(car => car.Model.Title);
-                    break;
                 case SortState.PriceAsc:
                     cars = cars.OrderBy(car => car.Price);
+                    ViewBag.Asc = "price";
                     break;
                 case SortState.PriceDesc:
                     cars = cars.OrderByDescending(car => car.Price);
+                    ViewBag.Desc = "price";
                     break;
                 case SortState.YearAsc:
                     cars = cars.OrderBy(car => car.ProduceDate);
+                    ViewBag.Asc = "year";
                     break;
                 case SortState.YearDesc:
                     cars = cars.OrderByDescending(car => car.ProduceDate);
-                    break;
-                case SortState.KilometreAsc:
-                    cars = cars.OrderBy(car => car.Kilometre);
-                    break;
-                case SortState.KilometreDesc:
-                    cars = cars.OrderByDescending(car => car.Kilometre);
+                    ViewBag.Desc = "year";
                     break;
                 case SortState.DateAsc:
                     cars = cars.OrderBy(car => car.ArrivalDate);
+                    ViewBag.Asc = "date";
                     break;
                 case SortState.DateDesc:
                     cars = cars.OrderByDescending(car => car.ArrivalDate);
+                    ViewBag.Desc = "date";
                     break;
                 default:
                     cars = cars.OrderBy(car => car.Model.Title);
@@ -174,49 +167,6 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult FilterCar(CarFilter filter, int currentPage = 1)
-        {
-            //IQueryable<Color> colors = _datasource.Colors;
-            //IQueryable<Model> models = _datasource.Models;
-            //IQueryable<Company> companies = _datasource.Companies;
-            //IQueryable<EngineType> engines = _datasource.EngineTypes;
-            //IQueryable<Transmission> transmissions = _datasource.Transmissions;
-
-            //filter.Colors = colors;
-            //filter.Engines = engines;
-            //filter.Models = models;
-            //filter.Companies = companies;
-            //filter.Transmissions = transmissions;
-
-            //List<Car> allCars = _carRepository
-            //    .GetCarsByFilter(filter)
-            //    .OrderBy(car => car.Id)
-            //    .ToList();
-
-            //List<Car> splittedByPageCars = allCars
-            //    .Skip((currentPage - 1) * PageSize)
-            //    .Take(PageSize)
-            //    .ToList();
-
-            //PagingInfo pagingInfo = new PagingInfo
-            //{
-            //    CurrentPage = currentPage,
-            //    PageSize = PageSize,
-            //    TotalItems = allCars.Count()
-            //};
-
-            //CarsListViewModel cars = new CarsListViewModel
-            //{
-            //    PagingInfo = pagingInfo,
-            //    Cars = splittedByPageCars,
-            //    CarFilter = filter
-            //};
-
-            //return View("Index", cars);
-            return View();
-        }
-
-        [HttpGet]
         public RedirectToActionResult ResetSearch()
         {
             _filter.Reset();
@@ -245,9 +195,10 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetModelsByCompany(int companyId, bool filter = false)
+        public IActionResult GetModelsByCompany(int companyId, bool filter = false, bool editCar = false)
         {
             ViewBag.Filter = filter;
+            ViewBag.EditCar = editCar;
 
             IQueryable<Model> models = _datasource.Models.Where(m => m.Company.Id == companyId);
 
@@ -403,83 +354,5 @@ namespace AutoDealer.Web.Controllers
 
             return View("CarDetails", car);
         }
-
-
-        //[HttpGet]
-        //public IActionResult CompanyIndex()
-        //{
-        //    IQueryable<Company> companies = _datasource.Companies;
-        //    ViewBag.Company = "company";
-
-        //    return PartialView("CompanyIndex", companies);
-        //}
-
-        //[HttpGet]
-        //public IActionResult CreateCompany()
-        //{
-        //    return PartialView("CompanyCreate");
-        //}
-
-        //[HttpPost]
-        //public IActionResult CreateCompany(Company company)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _companyRepository.Create(company);
-        //        IQueryable<Company> companies = _datasource.Companies.OrderBy(car => car.Id);
-
-        //        ViewBag.Success = "created";
-
-        //        return PartialView("CompanyIndex", companies);
-        //    }
-
-        //    return PartialView("CompanyCreate", company);
-        //}
-
-        //[HttpGet]
-        //public IActionResult EditCompany(int companyId)
-        //{
-        //    Company companyUpdated = _datasource.Companies.Where(c => c.Id == companyId).FirstOrDefault();
-
-        //    if(companyUpdated == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return PartialView("CompanyEdit", companyUpdated);
-        //}
-
-        //[HttpPost]
-        //public IActionResult EditCompany(Company company)
-        //{
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        _companyRepository.Update(company);
-
-        //        IQueryable<Company> companies = _datasource.Companies.OrderBy(car => car.Id);
-        //        ViewBag.Success = "edited";
-
-        //        return PartialView("CompanyIndex", companies);
-        //    }
-
-        //    return PartialView("CompanyEdit", company);
-        //}
-
-        //[HttpPost]
-        //public IActionResult DeleteCompany(int companyId)
-        //{
-        //    Company company = _companyRepository.GetById(companyId);
-
-        //    if (company != null)
-        //    {
-        //        _companyRepository.Delete(company);
-        //    }
-
-        //    List<Company> companies = _datasource.Companies.OrderBy(car => car.Id).ToList();
-        //    ViewBag.Success = "deleted";
-
-        //    return PartialView("CompanyIndex", companies);
-        //}
     }
 }

@@ -1,6 +1,8 @@
 ﻿@model AutoDealer.Web.ViewModel.CarModelViewModel
 
-@Html.Partial("Notification")
+@{
+    await Html.RenderPartialAsync("Notification");
+}
 
 <div class="col-2 text-end mb-3">
     <input type="hidden" asp-for="CompanyId"/>
@@ -24,12 +26,12 @@
                 <td class="col-1 text-start">
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
-                <td class="col-3 text-start w-25">
+                <td class="col-3 text-start">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                <td class="col-4 text-center w-25">
-                    <a href="#" class="btn-sm btn-outline-secondary editModel" id=@item.Id>Изменить</a>
-                    <a href="#" class="btn-sm btn-outline-danger delModel" id=@item.Id onclick="onDeleteModel(@item.Id)">Удалить</a>
+                <td class="col-4 text-center control_table_btns">
+                    <a class="text-info me-10 mr-2 editModel" id="@item.Id"><span class="badge badge-secondary p-2"><i class="ti-marker-alt mr-1"></i> изменить</span></a>
+                    <a class="text-info me-10 delModel" id=@item.Id onclick="onDeleteModel(@item.Id)"><span class="badge badge-danger p-2"><i class="ti-trash mr-1"></i> удалить</span></a>
                 </td>
             </tr>
         }

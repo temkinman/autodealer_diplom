@@ -1,10 +1,12 @@
 ﻿using AutoDealer.Web.Core.DB.Interfaces;
 using AutoDealer.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace AutoDealer.Web.Controllers
 {
+    [Authorize]
     public class ColorController : Controller
     {
         private IColorRepository _colorRepository;
@@ -16,7 +18,7 @@ namespace AutoDealer.Web.Controllers
 
         public IActionResult Index()
         {
-            IQueryable<Color> colors = _colorRepository.Colors.OrderBy(c => c.Title);
+            IQueryable<Color> colors = _colorRepository.Colors.OrderBy(c => c.Id);
 
             return PartialView(colors);
         }

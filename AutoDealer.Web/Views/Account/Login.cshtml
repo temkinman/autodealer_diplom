@@ -5,8 +5,13 @@
         <div class="row justify-content-center g-0">
             <div class="col-lg-5 col-md-5 col-12">
                 <div class="bg-white rounded-10 shadow-lg">
-                    <div class="content-top-agile p-2 pb-0">
-                        <h2 class="head-login-title text-center">Залогиньтесь для работы</h2>
+                    <div class="content-top-agile p-2 pb-0 text-center">
+                        <h2 class="head-login-title">Залогиньтесь для работы</h2>
+                        @{
+                            if(@ViewBag.NeedToBeAdmin == "true") { 
+                               <span class="text-danger">@ViewBag.AdminLoginMessage</span>
+                            }
+                        }
                     </div>
                     <div class="p-4">
                         <form asp-action="Login" asp-controller="Account" method="post" asp-anti-forgery="true">
@@ -43,25 +48,3 @@
         </div>
     </div>
 </div>
-@*<h2>Вход на сайт</h2>
- 
-<a asp-action="Register" asp-controller="Account">Регистрация</a>
- 
-<form asp-action="Login" asp-controller="Account" asp-anti-forgery="true">
-    <div class="validation" asp-validation-summary="ModelOnly"></div>
-    <div>
-        <div class="form-group">
-            <label asp-for="Email">Введите Email</label>
-            <input type="text" asp-for="Email" />
-            <span asp-validation-for="Email" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Password">Введите пароль</label>
-            <input asp-for="Password" />
-            <span asp-validation-for="Password" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Войти" class="btn btn-outline-dark" />
-        </div>
-    </div>
-</form>*@

@@ -9,9 +9,11 @@ namespace AutoDealer.Web.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated || User.Identity.Name != "admin@dealer.com")
             {
-                return Content(User.Identity.Name);
+                ViewBag.NeedToBeAdmin = "true";
+                ViewBag.AdminLoginMessage = "Необходимы права администратора";
+                return View("~/Views/Account/Login.cshtml");
             }
 
             ViewBag.CurrentTab = "admin";

@@ -1,12 +1,14 @@
 ﻿using AutoDealer.Web.Core.DB.Interfaces;
 using AutoDealer.Web.Models;
 using AutoDealer.Web.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace AutoDealer.Web.Controllers
 {
+    [Authorize]
     public class CompanyController : Controller
     {
         private ICompanyRepository _companyRepository;

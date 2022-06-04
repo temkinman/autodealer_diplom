@@ -1,6 +1,4 @@
 ﻿$(document).ready(function () {
-    
-
     $("#cancelBtn").click(function () {
         $("#my-modal").modal('hide');
     });
@@ -38,8 +36,6 @@
 });
 
 function showCarDetails(id) {
-    console.log("carId: " + id);
-
     if (id > 0) {
         $.ajax({
             url: '/car/CarDetails',
@@ -66,8 +62,6 @@ function onDeleteCar(id) {
 }
 
 function deleteCar() {
-    console.log("carId: " + carId);
-
     $.ajax({
         url: 'car/delete',
         type: "POST",

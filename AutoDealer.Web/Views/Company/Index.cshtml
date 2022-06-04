@@ -35,9 +35,9 @@
                 <td class="text-start col-3">
                     @Html.DisplayFor(modelItem => item.Country)
                 </td>
-                <td class="text-center col-5">
-                    <a class="btn btn-outline-secondary editCompany" id=@item.Id>Изменить</a>
-                    <a class="btn btn-outline-danger delCompany" id=@item.Id onclick="onDeleteCompany(@item.Id)">Удалить</a>
+                <td class="d-flex flex-grow-1 justify-content-center control_table_btns col-5">
+                    <a class="text-info me-10 editCar mr-2 editCompany" id="@item.Id"><span class="badge badge-secondary p-2"><i class="ti-marker-alt mr-1"></i> изменить</span></a>
+                    <a class="text-info me-10 delCompany" id=@item.Id onclick="onDeleteCompany(@item.Id)"><span class="badge badge-danger p-2"><i class="ti-trash mr-1"></i> удалить</span></a>
                 </td>
             </tr>
         }

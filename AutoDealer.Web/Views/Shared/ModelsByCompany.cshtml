@@ -10,5 +10,10 @@
 }
 
 <select asp-for="ModelId" class=@selectClass id="ModelId" asp-items="@(new SelectList(Model.Models,"Id","Title"))">
-    <option value="0">Выберите</option>
+    @{
+        if (ViewBag.EditCar == false)
+        {
+            <option value="0">Выберите</option>        
+        }
+    }
 </select>

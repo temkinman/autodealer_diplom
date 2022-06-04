@@ -7,12 +7,12 @@
 });
 
 $("#CompanyId").on("change", function () {
-    let selection = $(this).find("option:selected").text();
+    //let selection = $(this).find("option:selected").text();
     let value = $(this).val();
 
     if (value > 0) {
         $.ajax({
-            url: '@Url.Action("getmodelsbycompany", "car")',
+            url: '/car/getmodelsbycompany',
             type: "GET",
             data: {
                 companyId: value,

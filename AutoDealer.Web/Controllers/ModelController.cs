@@ -1,11 +1,13 @@
 ﻿using AutoDealer.Web.Core.DB.Interfaces;
 using AutoDealer.Web.Models;
 using AutoDealer.Web.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace AutoDealer.Web.Controllers
 {
+    [Authorize]
     public class ModelController : Controller
     {
         private readonly IModelRepository _modelRepository;
