@@ -15,9 +15,10 @@ namespace AutoDealer.Web.ViewModel
         public string ModelName { get; set; }
 
         [Display(Name = "Цена")]
+        [DisplayFormat(DataFormatString = "{0:0}")]
         public decimal Price { get; set; }
 
-        [Display(Name = "Дата Продажи")]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime Date { get; set; }
 
         [Display(Name = "Покупатель")]

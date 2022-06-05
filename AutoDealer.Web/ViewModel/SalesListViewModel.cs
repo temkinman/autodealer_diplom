@@ -24,7 +24,7 @@ namespace AutoDealer.Web.ViewModel
         [Display(Name = "Цена")]
         public decimal Price { get; set; }
 
-        [Display(Name = "Дата Продажи")]
+        [Display(Name = "Дата")]
         public DateTime Date { get; set; }
 
         [Display(Name = "Покупатель")]

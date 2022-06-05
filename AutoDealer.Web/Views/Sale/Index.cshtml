@@ -5,14 +5,29 @@
     string numberHead = "Номер";
 }
 <h1 class="text-center head-title mx-3">Продажи</h1>
+<form asp-action="index" method="get" class="col-6 row mx-auto">
+    <ul class="d-flex p-0">
+        <li class="mr-2">
+            <span class="mr-1">от</span>
+            <input asp-for="DateFrom" type="date" value="@(Model.DateFrom?.ToString("yyyy-MM-dd"))" class="filter_date px-2" />
+        </li>
+        <li class="mr-2">
+            <span class="mr-1">до</span>
+            <input asp-for="DateTo" type="date" value="@(Model.DateTo?.ToString("yyyy-MM-dd"))" class="filter_date px-2" />
+        </li>
+        <li>
+            <input type="submit" value="Фильтр" class="btn btn-outline-dark" />
+        </li>
+    </ul>
+</form>
 <table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
-            <th class="text-start">
-                <a class="nav-link">@numberHead</a>
+            <th class="p-1">
+                <a>@numberHead</a>
             </th>
-            <th class="text-start">
-                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CompanySort)" class="nav-link">
+            <th class="text-start p-1">
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CompanySort)" asp-route-dateFrom="@(Model.DateFrom?.ToString("yyyy-MM-dd"))" asp-route-dateTo="@(Model.DateTo?.ToString("yyyy-MM-dd"))" class="sort">
                     @Html.DisplayNameFor(model => model.CompanyTitle)
                     @if (ViewBag.Desc == "company")
                     {
@@ -24,8 +39,8 @@
                     }
                 </a>
             </th>
-            <th class="text-start">
-                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.ModelSort)" class="nav-link">
+            <th class="text-start p-1">
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.ModelSort)" asp-route-dateFrom="@(Model.DateFrom?.ToString("yyyy-MM-dd"))" asp-route-dateTo="@(Model.DateTo?.ToString("yyyy-MM-dd"))" class="sort">
                     @Html.DisplayNameFor(model => model.ModelTitle)
                     @if (ViewBag.Desc == "model")
                     {
@@ -37,8 +52,8 @@
                     }
                 </a>
             </th>
-            <th class="text-start">
-                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CustomerSort)" class="nav-link">
+            <th class="text-start p-1">
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CustomerSort)" asp-route-dateFrom="@(Model.DateFrom?.ToString("yyyy-MM-dd"))" asp-route-dateTo="@(Model.DateTo?.ToString("yyyy-MM-dd"))" class="sort">
                     @Html.DisplayNameFor(model => model.Customer)
                     @if (ViewBag.Desc == "customer")
                     {
@@ -50,8 +65,8 @@
                     }
                 </a>
             </th>
-            <th class="text-start">
-                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)" class="nav-link">
+            <th class="text-start p-1">
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceSort)" asp-route-dateFrom="@(Model.DateFrom?.ToString("yyyy-MM-dd"))" asp-route-dateTo="@(Model.DateTo?.ToString("yyyy-MM-dd"))" class="sort">
                     @Html.DisplayNameFor(model => model.Price)
                     @if (ViewBag.Desc == "price")
                     {
@@ -63,8 +78,8 @@
                     }
                 </a>
             </th>
-            <th class="text-start">
-                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.DateSort)" class="nav-link">
+            <th class="text-start p-1">
+                <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.DateSort)" asp-route-dateFrom="@(Model.DateFrom?.ToString("yyyy-MM-dd"))" asp-route-dateTo="@(Model.DateTo?.ToString("yyyy-MM-dd"))" class="sort">
                     @Html.DisplayNameFor(model => model.Date)
                     @if (ViewBag.Desc == "date")
                     {
@@ -76,32 +91,43 @@
                     }
                 </a>
             </th>
+            <th class="text-start p-1">
+                <a asp-action="Index" class="nav-link sort">
+                    @Html.DisplayNameFor(model => model.Employee)
+                </a>
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Sales)
         {
             <tr>
-                <td class="text-center">
+                <td class="p-1">
                     @ind
                     @{
                         ind++;
                     }
                 </td>
-                <td class="text-start">
+                <td class="text-start p-1">
                     @Html.DisplayFor(modelItem => item.CompanyName)
                 </td>
-                <td class="text-start">
+                <td class="text-start p-1">
                     @Html.DisplayFor(modelItem => item.ModelName)
                 </td>
-                <td class="text-start">
+                <td class="text-start p-1">
                     @Html.DisplayFor(modelItem => item.CustomerFullName)
                 </td>
-                <td class="text-start">
+                <td class="text-start p-1">
                     @Html.DisplayFor(modelItem => item.Price) $
                 </td>
-                <td class="text-start">
+                <td class="text-start p-1">
                     @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td class="text-start p-1">
+                    @Html.DisplayFor(modelItem => item.EmployeeFullName)
+                </td>
+                <td class="p-1 text-center control_table_btns">
+                    <a class="text-info me-10" onclick="showSaleDetails(@item.Id)"><span class="badge badge-info p-2"><i class="ti-info-alt mr-1"></i> детали</span></a>
                 </td>
             </tr>
         }
@@ -112,10 +138,24 @@
             <td class="text-end font-weight-bold">@Model.TotalSum $</td>
             <td />
         </tr>
+        <tr>
+            <td colspan="4" class="text-end font-weight-bold">Количество авто:</td>
+            <td class="text-end font-weight-bold">@Model.TotalCars шт.</td>
+            <td />
+        </tr>
     </tfoot>
 </table>
 
 <div page-model="@Model" page-classes-enabled="true" action="Index"
      page-class="btn" page-class-normal="btn-outline-dark"
-     page-class-selected="btn-primary" class="btn-group m-1">
+     page-class-selected="btn-primary" class="btn-group m-1"
+     page-url-sortorder="@(Model.SortViewModel.Current)"
+     page-url-DateFrom="@(Model.DateFrom)"
+     page-url-DateTo="@(Model.DateTo)">
 </div>
+
+@{
+    await Html.RenderPartialAsync("ModalSaleDetails");
+}
+
+<script src="./js/sales.js"></script>

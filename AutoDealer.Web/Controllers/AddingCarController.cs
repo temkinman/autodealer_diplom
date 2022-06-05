@@ -1,4 +1,5 @@
 ﻿using AutoDealer.Web.Core.DB.Interfaces;
+using AutoDealer.Web.Enums;
 using AutoDealer.Web.Models;
 using AutoDealer.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -165,7 +166,7 @@ namespace AutoDealer.Web.Controllers
             Company сompany = _companyRepository.GetById(model.CompanyId);
             Model carModel = _modelRepository.GetById(model.ModelId);
             Color color = _colorRepository.GetById(model.ColorId);
-            Status status = _statusRepository.GetById(3);
+            Status status = _statusRepository.GetById((int)CarStatus.Opened);
             EngineType engineType = _engineTypeRepository.GetById(model.EngineTypeId);
             Transmission transmission = _transmissionRepository.GetById(model.TransmissionId);
 

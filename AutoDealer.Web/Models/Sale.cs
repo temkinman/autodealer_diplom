@@ -10,14 +10,14 @@ namespace AutoDealer.Web.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Укажите цену")]
-        [Display(Name = "Цена продажи")]
-        [RegularExpression("^\\d*\\.?\\d*$", ErrorMessage = "Введите число")]
-        [Column(TypeName = "decimal(8,2)")]
+        [Display(Name = "Цена")]
+        //[RegularExpression("^\\d*\\.?\\d*$", ErrorMessage = "Введите число")]
+        [Column(TypeName = "decimal(8,0)")]
         public decimal FinalPrice { get; set; }
 
         [Required(ErrorMessage = "Укажите дату продажи")]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Дата продажи")]
+        [Display(Name = "Дата")]
         public DateTime SaledDate { get; set; } = DateTime.Now;
 
         public virtual Car Car { get; set; }

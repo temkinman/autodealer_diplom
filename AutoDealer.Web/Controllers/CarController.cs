@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AutoDealer.Web.Controllers
 {
-    [Authorize]
     public class CarController : Controller
     {
         private readonly ILogger<CarController> _logger;
@@ -68,12 +67,6 @@ namespace AutoDealer.Web.Controllers
         
         public IActionResult Index(int currentPage = 1, CarFilter carFilter = null, SortState sortOrder = SortState.ModelAsc)
         {
-
-            if (!User.Identity.IsAuthenticated)
-            {
-                return Content(User.Identity.Name);
-            }
-
             if (currentPage < 1)
             {
                 return NotFound();
@@ -208,6 +201,7 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult CarAdminIndex()
         {
             List<Car> cars = _carRepository.Cars.Where(c => c.Status.Id != (int)CarStatus.Sold)
@@ -221,6 +215,7 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Delete(int carId)
         {
             Car car = _carRepository.GetById(carId);
@@ -237,6 +232,7 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Edit(int carId)
         {
             Car car = _carRepository.GetById(carId);
@@ -261,6 +257,7 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(CarViewModel model)
         {
             Company сompany = _companyRepository.GetById(model.Car.Company.Id);
@@ -268,7 +265,7 @@ namespace AutoDealer.Web.Controllers
             int carModelId = model.ModelId != 0 ? model.ModelId : model.Car.Model.Id;
             Model carModel = _modelRepository.GetById(carModelId);
             Color color = _colorRepository.GetById(model.Car.Color.Id);
-            Status status = _statusRepository.GetById(3);
+            Status status = _statusRepository.GetById((int)CarStatus.Opened);
             EngineType engineType = _engineTypeRepository.GetById(model.Car.Engine.Type.Id);
             Transmission transmission = _transmissionRepository.GetById(model.Car.Transmission.Id);
 
@@ -299,6 +296,7 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             Company defaultSelectedCompany = _datasource.Companies.FirstOrDefault();
@@ -322,6 +320,7 @@ namespace AutoDealer.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(CarViewModel model)
         {
             Company сompany = _companyRepository.GetById(model.CompanyId);

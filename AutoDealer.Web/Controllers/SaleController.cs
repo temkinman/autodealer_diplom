@@ -11,24 +11,35 @@ using System.Linq;
 
 namespace AutoDealer.Web.Controllers
 {
+    [Authorize]
     public class SaleController : Controller
     {
         private readonly ICarRepository _carRepository;
         private readonly ISaleRepository _saleRepository;
+        private readonly IEmployeeRepository _employeeRepository;
         private const int pageSize = 5;
 
-        public SaleController(ICarRepository carRepository, ISaleRepository saleRepository)
+        public SaleController(ICarRepository carRepository,
+                                ISaleRepository saleRepository,
+                                IEmployeeRepository employeeRepository)
         {
             _carRepository = carRepository;
             _saleRepository = saleRepository;
+            _employeeRepository = employeeRepository;
         }
 
-        [Authorize]
-        public IActionResult Index(DateTime? dateFrom = null, DateTime? dateTo = null, string selectedCompany = "", int currentPage = 1, SortState sortOrder = SortState.DateAsc)
+        public IActionResult Index(DateTime? dateFrom = null, DateTime? dateTo = null, int currentPage = 1, SortState sortOrder = SortState.DateAsc)
         {
-            //Car car = _carRepository.GetById(carId);
+            IQueryable<Sale> sales = null;
 
-            IQueryable<Sale> sales = _saleRepository.Sales;
+            if(dateFrom != null || dateTo != null)
+            {
+                sales = _saleRepository.GetSalesByDate(dateFrom, dateTo);
+            }
+            else
+            {
+                sales = _saleRepository.Sales;
+            }
 
             switch (sortOrder)
             {
@@ -92,7 +103,8 @@ namespace AutoDealer.Web.Controllers
                 ModelName = sale.Car.Model.Title,
                 CustomerFullName = sale.Customer.FullName,
                 Price = sale.FinalPrice,
-                Date = sale.SaledDate
+                Date = sale.SaledDate,
+                EmployeeFullName = sale.Employee.FullName
             }).ToList();
 
             decimal totalSum = viewModelSales.Sum(s => s.Price);
@@ -102,16 +114,31 @@ namespace AutoDealer.Web.Controllers
                 PagingInfo = pagingInfo,
                 Sales = viewModelSales,
                 SortViewModel = new SortViewModel(sortOrder),
-                DateFrom = dateFrom ?? DateTime.MinValue,
-                DateTo = dateTo ?? DateTime.MaxValue,
-                SelectedCompany = selectedCompany,
                 TotalCars = sales.Count(),
                 TotalSum = totalSum,
+                DateFrom = dateFrom,
+                DateTo = dateTo
             };
 
             ViewBag.CurrentTab = "sales";
 
             return View(viewModels);
+        }
+
+        [HttpGet]
+        public IActionResult Details(int saleId)
+        {
+            Sale sale = _saleRepository.GetById(saleId);
+            
+
+            if (sale == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.CurrentTab = "sales";
+
+            return PartialView("Details", sale);
         }
     }
 }

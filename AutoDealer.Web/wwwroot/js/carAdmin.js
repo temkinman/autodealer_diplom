@@ -1,8 +1,4 @@
 ﻿$(document).ready(function () {
-    $("#cancelBtn").click(function () {
-        $("#my-modal").modal('hide');
-    });
-
     let carId = 0;
     $("#modal-btn-yes").on("click", function () {
         $("#my-modal").modal('hide');

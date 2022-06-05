@@ -4,6 +4,7 @@ using AutoDealer.Web.Models;
 using System.Collections.Generic;
 using System.Linq;
 using AutoDealer.Web.Core.DB.Interfaces;
+using System;
 
 namespace AutoDealer.Web.Core.DB.Repository
 {
@@ -85,6 +86,14 @@ namespace AutoDealer.Web.Core.DB.Repository
         private bool IsSalePriceInRange(Sale sale, SaleFilter filter)
         {
             return sale.FinalPrice >= filter.PriceFrom && sale.FinalPrice <= filter.PriceTo;
+        }
+
+        public IQueryable<Sale> GetSalesByDate(DateTime? dateFrom, DateTime? dateTo)
+        {
+            dateFrom ??= DateTime.MinValue;
+            dateTo = dateTo == null ? DateTime.MaxValue : dateTo.Value.AddDays(1);
+
+            return _dbContext.Sales.Where(s => dateFrom <= s.SaledDate && s.SaledDate <= dateTo);
         }
     }
 }

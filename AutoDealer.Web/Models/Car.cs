@@ -38,7 +38,7 @@ namespace AutoDealer.Web.Models
         [Display(Name = "Описание")]
         public string Description { get; set; }
 
-        [Column(TypeName = "decimal(8,2)")]
+        [Column(TypeName = "decimal(8,0)")]
         [Required(ErrorMessage = "Укажите цену")]
         [Display(Name = "Цена")]
         [RegularExpression("^\\d*\\.?\\d*$", ErrorMessage = "Введите число")]

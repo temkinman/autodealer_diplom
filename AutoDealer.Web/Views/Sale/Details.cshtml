@@ -1,0 +1,10 @@
+﻿@model AutoDealer.Web.Models.Sale
+
+<div class="card card-body">
+    <p class="card-text"><span>@Model.Car.Company?.Title @Model.Car.Model?.Title, @Model.Car.ProduceDate г., @Model.Car.Engine?.Capacity л. @Model.Car.Engine.Type.Title</span></p>
+    <p class="card-text"><span>@Model.Car.Transmission?.TransmissionType, @Model.Car.Color?.Title, @Model.Car.Kilometre км</span></p>
+    <p class="card-text"><label>Комплектация:</label> <span>@Model.Car.Settings</span></p>
+    <p class="card-text">
+        <label>Описание:</label> <span>@Model.Car.Description</span>
+    </p>
+</div>
