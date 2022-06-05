@@ -96,7 +96,7 @@
                     </td>
                     <td class="text-center">
                         <a class="btn btn-outline-primary" asp-controller="Car" asp-action="CarDetails"
-                       asp-all-route-data=@(new Dictionary<string, string> { { "admin", "adminPanel" },{"carId", @item.Id.ToString()} })>Детали</a>
+                       asp-all-route-data=@(new Dictionary<string, string> { { "admin", "adminPanel" },{"carId", @item.Id.ToString()} })>Подробнее</a>
                         <a class="btn btn-outline-secondary" asp-controller="Car" asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
                         <a class="btn btn-outline-danger" onclick="onDeleteCar(@item.Id)">Удалить</a>
                     </td>

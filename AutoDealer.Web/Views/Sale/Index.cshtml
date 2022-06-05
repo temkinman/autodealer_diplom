@@ -5,7 +5,7 @@
     string numberHead = "Номер";
 }
 <h1 class="text-center head-title mx-3">Продажи</h1>
-<form asp-action="index" method="get" class="col-6 row mx-auto">
+<form asp-action="index" method="get" class="col-6 row mx-auto mb-2">
     <ul class="d-flex p-0">
         <li class="mr-2">
             <span class="mr-1">от</span>
@@ -24,7 +24,7 @@
     <thead>
         <tr>
             <th class="p-1">
-                <a>@numberHead</a>
+                <a class="sort">@numberHead</a>
             </th>
             <th class="text-start p-1">
                 <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CompanySort)" asp-route-dateFrom="@(Model.DateFrom?.ToString("yyyy-MM-dd"))" asp-route-dateTo="@(Model.DateTo?.ToString("yyyy-MM-dd"))" class="sort">
@@ -92,7 +92,7 @@
                 </a>
             </th>
             <th class="text-start p-1">
-                <a asp-action="Index" class="nav-link sort">
+                <a asp-action="Index" class="sort">
                     @Html.DisplayNameFor(model => model.Employee)
                 </a>
             </th>
@@ -102,7 +102,7 @@
         @foreach (var item in Model.Sales)
         {
             <tr>
-                <td class="p-1">
+                <td class="text-start p-1">
                     @ind
                     @{
                         ind++;
@@ -127,7 +127,7 @@
                     @Html.DisplayFor(modelItem => item.EmployeeFullName)
                 </td>
                 <td class="p-1 text-center control_table_btns">
-                    <a class="text-info me-10" onclick="showSaleDetails(@item.Id)"><span class="badge badge-info p-2"><i class="ti-info-alt mr-1"></i> детали</span></a>
+                    <a class="text-info me-10" onclick="showSaleDetails(@item.Id)"><span class="badge badge-info p-2"><i class="ti-info-alt mr-1"></i> подробнее</span></a>
                 </td>
             </tr>
         }

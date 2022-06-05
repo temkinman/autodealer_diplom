@@ -54,7 +54,7 @@ namespace AutoDealer.Web.Models
 
         public string FullName
         {
-            get => FirstName + " " + LastName;
+            get => LastName + " " + FirstName;
         }
 
         public override bool Equals(object obj)
