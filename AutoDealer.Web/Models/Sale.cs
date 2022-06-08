@@ -11,7 +11,6 @@ namespace AutoDealer.Web.Models
 
         [Required(ErrorMessage = "Укажите цену")]
         [Display(Name = "Цена")]
-        //[RegularExpression("^\\d*\\.?\\d*$", ErrorMessage = "Введите число")]
         [Column(TypeName = "decimal(8,0)")]
         public decimal FinalPrice { get; set; }
 
